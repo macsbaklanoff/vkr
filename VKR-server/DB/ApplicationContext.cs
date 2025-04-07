@@ -6,7 +6,10 @@ namespace VKR_server.DB
     public class ApplicationContext : DbContext
     {
 
-        public DbSet<User> User { get; set; }
+        public DbSet<User> Users { get; set; }
+
+        public ApplicationContext(DbContextOptions<ApplicationContext> options) 
+            : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -14,7 +17,13 @@ namespace VKR_server.DB
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().Property(user => user.Id).UseIdentityAlwaysColumn();
+            //маппинг модели User
+            modelBuilder.Entity<User>().Property(u => u.Id).HasColumnName("user_id");
+            modelBuilder.Entity<User>().Property(u => u.FirstName).HasColumnName("first_name");
+            modelBuilder.Entity<User>().Property(u => u.LastName).HasColumnName("last_name");
+            modelBuilder.Entity<User>().Property(u => u.Password).HasColumnName("password_hash");
+            modelBuilder.Entity<User>().Property(u => u.CreationDate).HasColumnName("created_at");
+            modelBuilder.Entity<User>().Property(u => u.Role).HasColumnName("role_name");
         }
     }
 }

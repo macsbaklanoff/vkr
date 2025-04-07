@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DB\Entities\Enums\**" />
+    <Content Remove="DB\Entities\Enums\**" />
+    <EmbeddedResource Remove="DB\Entities\Enums\**" />
+    <None Remove="DB\Entities\Enums\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
