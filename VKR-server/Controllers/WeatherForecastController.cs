@@ -48,6 +48,7 @@ namespace VKR_server.Controllers
                 Password = user.Password,
                 RoleId = user.RoleId,
                 CreationDate = DateTime.UtcNow
+                
             };
             _context.Users.Add(new_user);
             _context.SaveChanges();

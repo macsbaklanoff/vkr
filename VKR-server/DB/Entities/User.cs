@@ -28,7 +28,6 @@ namespace VKR_server.DB.Entities
 
         public int RoleId { get; set; }
 
-        //[ValidateNever] //исключить из сериализации для предотвращения циклических ссылок
         public Role Role { get; set; } = null!;//навигационное свойство
 
         [Column("created_at")]
