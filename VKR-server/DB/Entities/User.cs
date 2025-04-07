@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
@@ -25,14 +26,17 @@ namespace VKR_server.DB.Entities
         [MinLength(8)]
         public string Password { get; set; } = string.Empty;
 
-        [Column("role_id")]
+        [Column("role_name")]
         [Required]
         [MaxLength(50)]
-        [JsonIgnore] //исключить из сериализации для предотвращения циклических ссылок
-        public Role Role { get; set; }
+        public string RoleName { get; set; }
+
+        [ValidateNever] //исключить из сериализации для предотвращения циклических ссылок
+        public Role Role { get; set; } //навигационное свойство
 
         [Column("created_at")]
         [Required]
         public DateTime CreationDate { get; set; } = DateTime.UtcNow;
+
     }
 }

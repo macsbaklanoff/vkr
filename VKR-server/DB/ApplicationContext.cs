@@ -7,7 +7,7 @@ namespace VKR_server.DB
     {
 
         public DbSet<User> Users { get; set; }
-
+        public DbSet<Role> Roles { get; set; }
         public ApplicationContext(DbContextOptions<ApplicationContext> options) 
             : base(options) { }
 
@@ -23,7 +23,11 @@ namespace VKR_server.DB
             modelBuilder.Entity<User>().Property(u => u.LastName).HasColumnName("last_name");
             modelBuilder.Entity<User>().Property(u => u.Password).HasColumnName("password_hash");
             modelBuilder.Entity<User>().Property(u => u.CreationDate).HasColumnName("created_at");
-            modelBuilder.Entity<User>().Property(u => u.Role).HasColumnName("role_name");
+            modelBuilder.Entity<User>().Property(u => u.RoleName).HasColumnName("role_name");
+
+            //маппинг модели Roles
+            modelBuilder.Entity<Role>().Property(r => r.RoleName).HasColumnName("role_name");
+
         }
     }
 }
