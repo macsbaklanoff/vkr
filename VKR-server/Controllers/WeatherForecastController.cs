@@ -40,7 +40,7 @@ namespace VKR_server.Controllers
         [HttpPost("add", Name = "AddUser")]
         public IActionResult Add(User user)
         {
-            Console.WriteLine(user.RoleName);
+            Console.WriteLine(user);
 
             try
             {
