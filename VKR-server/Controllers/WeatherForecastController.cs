@@ -40,17 +40,25 @@ namespace VKR_server.Controllers
         [HttpPost("add", Name = "AddUser")]
         public IActionResult Add(User user)
         {
-            Console.WriteLine(user);
-
-            try
+            var new_user = new User()
             {
-                _context.Users.Add(user);
-                _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Password = user.Password,
+                RoleName = user.RoleName,
+                CreationDate = DateTime.UtcNow
+            };
+            var users = _context.Users.ToList();
+            //try
+            //{
+            //    _context.Users.Add(new_user);
+            //    _context.SaveChanges();
+            //}
+            //catch (Exception ex)
+            //{
+            //    return BadRequest(ex.Message);
+            //}
             return Ok();
         }
     }
