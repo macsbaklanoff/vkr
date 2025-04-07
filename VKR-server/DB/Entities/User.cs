@@ -26,13 +26,10 @@ namespace VKR_server.DB.Entities
         [MinLength(8)]
         public string Password { get; set; } = string.Empty;
 
-        [Column("role_name")]
-        [Required]
-        [MaxLength(50)]
-        public string RoleName { get; set; }
+        public int RoleId { get; set; }
 
-        [ValidateNever] //исключить из сериализации для предотвращения циклических ссылок
-        public Role Role { get; set; } //навигационное свойство
+        //[ValidateNever] //исключить из сериализации для предотвращения циклических ссылок
+        public Role Role { get; set; } = null!;//навигационное свойство
 
         [Column("created_at")]
         [Required]

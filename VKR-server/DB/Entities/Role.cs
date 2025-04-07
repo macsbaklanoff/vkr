@@ -8,11 +8,11 @@ namespace VKR_server.DB.Entities
     [Table("roles")]
     public class Role
     {
-        [Key]
         [Column("role_name")]
         public string RoleName { get; set; }
+        public int Id { get; set; }
 
-        [ValidateNever]
-        List<User> Users { get; set; }
+        //[ValidateNever]
+        ICollection<User> Users { get; set; } = new List<User>();
     }
 }

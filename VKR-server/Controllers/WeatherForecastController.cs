@@ -3,6 +3,7 @@ using Microsoft.OpenApi.Validations;
 using System.ComponentModel.DataAnnotations;
 using VKR_server.DB;
 using VKR_server.DB.Entities;
+using VKR_server.Dto;
 
 namespace VKR_server.Controllers
 {
@@ -38,28 +39,19 @@ namespace VKR_server.Controllers
             .ToArray();
         }
         [HttpPost("add", Name = "AddUser")]
-        public IActionResult Add(User user)
+        public IActionResult Add(UserDto user)
         {
             var new_user = new User()
             {
-                Id = user.Id,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Password = user.Password,
-                RoleName = user.RoleName,
+                RoleId = user.RoleId,
                 CreationDate = DateTime.UtcNow
             };
-            var users = _context.Users.ToList();
-            //try
-            //{
-            //    _context.Users.Add(new_user);
-            //    _context.SaveChanges();
-            //}
-            //catch (Exception ex)
-            //{
-            //    return BadRequest(ex.Message);
-            //}
-            return Ok();
+            _context.Users.Add(new_user);
+            _context.SaveChanges();
+            return CreatedAtAction(nameof(Add), new_user);
         }
     }
 }
