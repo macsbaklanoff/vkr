@@ -21,6 +21,11 @@ namespace VKR_server.DB.Entities
         [MaxLength(50)]
         public string LastName { get; set; } = string.Empty;
 
+        [Column("email")]
+        [Required]
+        [MaxLength(50)]
+        public string Email { get; set; } = string.Empty;
+
         [Column("password_hash")]
         [Required]
         [MinLength(8)]
