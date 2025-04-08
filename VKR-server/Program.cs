@@ -1,17 +1,20 @@
 using VKR_server.DB;
 using VKR_server.DB.Entities;
 using Microsoft.EntityFrameworkCore;
+using VKR_server.JWT;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddCors(options =>
+builder.Services.AddCors(options => //cors
 {
     options.AddPolicy("AllowAll", builder =>
     {
@@ -21,8 +24,30 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddDbContext<ApplicationContext>(options =>
+builder.Services.AddDbContext<ApplicationContext>(options => //context
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
+//jwt
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.RequireHttpsMetadata = false;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true, //валидация издателя
+            ValidIssuer = AuthOptions.ISSUER,
+
+            ValidateAudience = true, //валидация потребителя
+            ValidAudience = AuthOptions.AUDIENCE,
+
+            ValidateLifetime = true, //валидация времени существования
+
+            IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(), //получение ключа 
+             
+            ValidateIssuerSigningKey = true //валидация ключа безопасности
+        };
+    });
 
 
 var app = builder.Build();
@@ -36,6 +61,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
