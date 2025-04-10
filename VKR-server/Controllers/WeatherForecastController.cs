@@ -10,7 +10,7 @@ namespace VKR_server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AuthController : ControllerBase
+    public class AController : ControllerBase
     {
 
         private readonly ApplicationContext _context;
@@ -22,7 +22,7 @@ namespace VKR_server.Controllers
 
         private readonly ILogger<AuthController> _logger;
 
-        public AuthController(ILogger<AuthController> logger, ApplicationContext context)
+        public AController(ILogger<AuthController> logger, ApplicationContext context)
         {
             _logger = logger;
             _context = context;

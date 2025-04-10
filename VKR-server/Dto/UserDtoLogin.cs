@@ -1,8 +1,8 @@
-﻿namespace VKR_server.Dto
+﻿
+namespace VKR_server.Dto
 {
-    public class UserDtoLogin
+    public class UserDtoLogin : BaseUserDto
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
+
     }
 }

@@ -11,15 +11,15 @@ using VKR_server.JWT;
 
 namespace VKR_server.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class AccountController : ControllerBase
+    [Route("api/[controller]")]
+    public class AuthController : ControllerBase
     {
-        private readonly ILogger<AccountController> _logger;
+        private readonly ILogger<AuthController> _logger;
 
         private readonly ApplicationContext _context;
 
-        public AccountController(ILogger<AccountController> logger, ApplicationContext context)
+        public AuthController(ILogger<AuthController> logger, ApplicationContext context)
         {
             _logger = logger;
             _context = context;
