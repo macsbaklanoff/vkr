@@ -1,6 +1,6 @@
-﻿namespace VKR_server.Dto
+﻿namespace VKR_server.Interfaces
 {
-    public abstract class BaseUserDto
+    public interface IUserAuth
     {
         public string Email { get; set; }
         public string Password { get; set; }

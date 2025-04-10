@@ -1,7 +1,11 @@
-﻿namespace VKR_server.Dto
+﻿using VKR_server.Interfaces;
+
+namespace VKR_server.Dto
 {
-    public class UserDto : BaseUserDto
+    public class UserDto : IUser
     {
+        public string Email { get; set; }
+        public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int RoleId { get; set; }
