@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
 using VKR_server.DB;
 using VKR_server.Dto;
 
@@ -23,8 +25,18 @@ namespace VKR_server.Controllers
 
         [HttpGet("users", Name = "GetUsers")]
         [Authorize]
-        public IEnumerable<UserDto> Get()
+        public IActionResult Get()
         {
+            Console.WriteLine(HttpContext.Request.Headers.Authorization);
+
+            var stream = HttpContext.Request.Headers.Authorization.ToString().Split()[1];
+            var handler = new JwtSecurityTokenHandler();
+            var jsonToken = handler.ReadJwtToken(stream);
+            var role = jsonToken.Claims.FirstOrDefault(claim => claim.Type == "RoleName")?.Value.ToString();
+
+            if (role != "Admin") return BadRequest("Invalide role");
+
+
             var users = _context.Users.ToList();
             var users_dto = users.Select(u => new UserDto()
             {
@@ -34,7 +46,7 @@ namespace VKR_server.Controllers
                 Password = u.Password,
                 RoleId = u.RoleId,
             });
-            return users_dto;
+            return Ok(users_dto);
         }
     }
 }

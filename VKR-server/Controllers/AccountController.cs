@@ -113,9 +113,9 @@ namespace VKR_server.Controllers
             var userRole = _context.Roles.FirstOrDefault(uR => uR.Id == user.RoleId);
             var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Name, $"{user.FirstName} + {user.LastName}"),
-                    new Claim(ClaimTypes.Role, userRole.RoleName)
+                    new Claim("Email", user.Email),
+                    new Claim("Name", $"{user.FirstName} + {user.LastName}"),
+                    new Claim("RoleName", userRole.RoleName)
                 };
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
                 ClaimsIdentity.DefaultRoleClaimType);
