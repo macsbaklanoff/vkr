@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 using VKR_server.DB;
+using VKR_server.DB.Entities;
 using VKR_server.Dto;
 using VKR_server.JWT;
 
@@ -75,6 +76,40 @@ namespace VKR_server.Controllers
             return Ok(students);
         }
 
+        [HttpPut("update-role/{id}/{idNewRole}", Name = "UpdateRoleUser")]
+        [Authorize]
+        public IActionResult UpdateRoleUser(int id, int roleId)
+        {
+            var jwt = GetJwtData(HttpContext.Request.Headers.Authorization.ToString().Split()[1]);
+            
+            if (jwt.RoleName != "Admin") return BadRequest("Invalide role");
+
+            var user = _context.Users.Find(id);
+            if (user == null) return BadRequest("Not-existent user");
+            
+            user.RoleId = roleId;
+
+            _context.Users.Update(user);
+            _context.SaveChanges();
+            return Ok(id);
+        }
+
+        [HttpDelete("delete-user/{id}", Name = "DeleteUser")]
+        [Authorize]
+        public IActionResult DeleteUser(int id)
+        {
+            var jwt = GetJwtData(HttpContext.Request.Headers.Authorization.ToString().Split()[1]);
+
+            if (jwt.RoleName != "Admin") return BadRequest("Invalide role");
+
+            var user = _context.Users.Find(id);
+            if (user == null) return BadRequest("Not-existent user");
+
+            _context.Users.Remove(user);
+            _context.SaveChanges();
+
+            return Ok(id);
+        }
 
         private JwtData GetJwtData(string token)
         {
