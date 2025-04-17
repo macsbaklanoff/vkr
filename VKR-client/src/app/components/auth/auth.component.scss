@@ -1,10 +1,26 @@
 .auth {
-  height: 100dvh;
-  width: 100dvw;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  &__left {
-    background-color: lightsalmon;
+  height: 100vh;
+  &__left  {
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr;
+    background-color: var(--mat-sys-secondary);
+    color: var(--mat-sys-on-secondary);
+    font: var(--mat-sys-headline-large);
+  }
+  &__right {
+    background-color: var(--mat-sys-secondary-container);
+  }
+}
+@media (max-width: 824px) {
+  .auth {
+    display: grid;
+    grid-template-columns: 1fr;
+    &__left  {
+      font: var(--mat-sys-headline-medium)
+    }
   }
 }
 

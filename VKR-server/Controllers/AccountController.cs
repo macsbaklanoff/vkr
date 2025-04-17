@@ -114,7 +114,8 @@ namespace VKR_server.Controllers
             var claims = new List<Claim>
                 {
                     new Claim("Email", user.Email),
-                    new Claim("Name", $"{user.FirstName} + {user.LastName}"),
+                    new Claim("FirstName", $"{user.FirstName}"),
+                    new Claim("LastName", $"{user.LastName}"),
                     new Claim("RoleName", userRole.RoleName)
                 };
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,

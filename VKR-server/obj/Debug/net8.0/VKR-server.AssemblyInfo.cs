@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VKR-server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eb74d784e0eeef565aa4a3bbab332fbadf8863be")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+35ab32f42c28e5322b65b3b6b0c50038af2c85a7")]
 [assembly: System.Reflection.AssemblyProductAttribute("VKR-server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VKR-server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

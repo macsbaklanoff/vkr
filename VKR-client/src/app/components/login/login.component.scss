@@ -1,0 +1,49 @@
+.app {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  &__login {
+    display: grid;
+    grid-template-columns: minmax(50px, 500px);
+    border: 2px solid var(--mat-sys-on-secondary-container);
+    border-radius: 16px;
+
+    &__header {
+      display: flex;
+      align-items: center;
+      background-color: var(--mat-sys-secondary);
+      color: var(--mat-sys-on-secondary);
+      border-radius: 12px 12px 0 0;
+      height: 64px;
+      padding-left: 24px;
+    }
+
+    &__body {
+      padding: 24px;
+
+      &__inputs {
+        display: grid;
+      }
+    }
+
+    &__footer {
+      padding: 24px;
+      display: flex;
+      justify-content: space-between;
+
+      &__right {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+    }
+  }
+}
+
+@media (width < 400px) {
+  .login {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content 1fr;
+  }
+}

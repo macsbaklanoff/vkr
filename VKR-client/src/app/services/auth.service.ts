@@ -1,0 +1,56 @@
+import {computed, effect, inject, Injectable, signal} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {IAuthData} from '../interfaces/auth-data';
+import {Observable} from 'rxjs';
+import {IAuthResponse} from '../interfaces/auth-response';
+import {ILoginRequest} from '../interfaces/login-request';
+import {map} from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+  private readonly _httpClient = inject(HttpClient);
+  private readonly _apiPath = 'https://localhost:7274/api/auth';
+
+  private headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+  private _accessToken = signal<string>(localStorage.getItem('accessToken') ?? '');
+
+  private readonly _accessTokenPayload = computed(() => {
+    const base64Url = this._accessToken().split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
+    const json = window.atob(base64)
+    return JSON.parse(json);
+  })
+
+  private readonly _authData = computed<IAuthData | undefined>(() => {
+    if (!this._accessTokenPayload) return undefined;
+    return {
+      email: this._accessTokenPayload().Email,
+      firstName: this._accessTokenPayload().FirstName,
+      lastName: this._accessTokenPayload().LastName,
+      roleName: this._accessTokenPayload().RoleName,
+    }
+  })
+
+  public authData = computed(() => {
+    return this._authData();
+  })
+
+  public login(user: ILoginRequest): Observable<void> {
+    console.log(user);
+    return this._httpClient.post<IAuthResponse>(`${this._apiPath}/sign-in`, JSON.stringify(user), {headers: this.headers})
+      .pipe(
+        map(authResponse => {
+          this._accessToken.set(authResponse.accessToken);
+        })
+      );
+  }
+
+  constructor() {
+    effect (() => {
+      localStorage.setItem('accessToken', this._accessToken());
+    })
+  }
+}

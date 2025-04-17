@@ -1,1 +1,35 @@
-<p>login works!</p>
+<div class="app">
+  <form class="app__login" [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="app__login__header">
+      <span>Sign in</span>
+    </div>
+    <div class="app__login__body">
+      <div class="app__login__body__inputs">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email"/>
+          @if (email.hasError('required')) {
+            <mat-error>Email is <strong>required</strong></mat-error>
+          }
+          @if (email.hasError('email')) {
+            <mat-error>Email is not valid</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password"/>
+          @if (password.hasError('required')) {
+            <mat-error>Password is <strong>required</strong></mat-error>
+          }
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="app__login__footer">
+      <div class="app__login__footer__left"></div>
+      <div class="app__login__footer__right">
+        <button mat-button routerLink="/auth/sign-up">Sign-up</button>
+        <button mat-flat-button (click)="login()">Sign-in</button>
+      </div>
+    </div>
+  </form>
+</div>

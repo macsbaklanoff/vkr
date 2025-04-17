@@ -5,11 +5,13 @@ import {ChekingWorksComponent} from './components/cheking-works/cheking-works.co
 import {AuthComponent} from './components/auth/auth.component';
 import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
+import {authGuard} from './guards/auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
     component: SecuredAreaComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: 'users',

@@ -1,1 +1,57 @@
-<p>register works!</p>
+<div class="app">
+  <form class="app__register" [formGroup]="registerForm" (ngSubmit)="login()">
+    <div class="app__register__header">
+      <span>Sign up</span>
+    </div>
+    <div class="app__register__body">
+      <div class="app__register__body__inputs">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email"/>
+          @if (email.hasError('required')) {
+            <mat-error>Email is <strong>required</strong></mat-error>
+          }
+          @if (email.hasError('email')) {
+            <mat-error>Email is not valid</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>FirstName</mat-label>
+          <input matInput formControlName="password"/>
+          @if (password.hasError('required')) {
+            <mat-error>FirstName is <strong>required</strong></mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>LastName</mat-label>
+          <input matInput formControlName="password"/>
+          @if (password.hasError('required')) {
+            <mat-error>LastName is <strong>required</strong></mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>GroupNumber</mat-label>
+          <input matInput formControlName="password"/>
+          @if (password.hasError('required')) {
+            <mat-error>LastName is <strong>required</strong></mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password"/>
+          @if (password.hasError('required')) {
+            <mat-error>Password is <strong>required</strong></mat-error>
+          }
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="app__register__footer">
+      <div class="app__register__footer__left"></div>
+      <div class="app__register__footer__right">
+        <button mat-button routerLink="/auth/sign-in">Sign-in</button>
+        <button mat-flat-button>Sign-up</button>
+      </div>
+    </div>
+  </form>
+</div>
+
