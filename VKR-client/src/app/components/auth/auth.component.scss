@@ -1,0 +1,10 @@
+.auth {
+  height: 100dvh;
+  width: 100dvw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  &__left {
+    background-color: lightsalmon;
+  }
+}
+
