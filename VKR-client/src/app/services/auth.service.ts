@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {IAuthResponse} from '../interfaces/auth-response';
 import {ILoginRequest} from '../interfaces/login-request';
 import {map} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,12 @@ export class AuthService {
 
   private _accessToken = signal<string>(localStorage.getItem('accessToken') ?? '');
 
+  constructor(private router: Router) {
+    effect(() => {
+      localStorage.setItem('accessToken', this._accessToken());
+    })
+  }
+
   private readonly _accessTokenPayload = computed(() => {
     const base64Url = this._accessToken().split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
@@ -25,7 +32,7 @@ export class AuthService {
   })
 
   private readonly _authData = computed<IAuthData | undefined>(() => {
-    if (!this._accessTokenPayload) return undefined;
+    if (!this._accessTokenPayload()) return undefined;
     return {
       email: this._accessTokenPayload().Email,
       firstName: this._accessTokenPayload().FirstName,
@@ -44,13 +51,12 @@ export class AuthService {
       .pipe(
         map(authResponse => {
           this._accessToken.set(authResponse.accessToken);
+          this.router.navigate(['/']).then(() =>{
+          });
         })
       );
   }
-
-  constructor() {
-    effect (() => {
-      localStorage.setItem('accessToken', this._accessToken());
-    })
-  }
+  public isAuthorized = computed(() => {
+    return !!this._authData();
+  })
 }

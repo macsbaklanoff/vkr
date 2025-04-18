@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {Router, RouterLink, RouterOutlet} from '@angular/router';
 import {MatButton} from '@angular/material/button';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -13,7 +14,7 @@ import {MatButton} from '@angular/material/button';
   styleUrl: './auth.component.scss'
 })
 export class AuthComponent {
-  constructor(public router: Router) {
+  private readonly _authService = inject(AuthService);
 
-  }
+  constructor(public router: Router) {}
 }
