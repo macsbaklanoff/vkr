@@ -9,6 +9,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-navigation',
@@ -28,6 +29,9 @@ import {MatIconModule} from '@angular/material/icon';
 export class NavigationComponent {
 
   private breakpointObserver = inject(BreakpointObserver);
+  private readonly _authService = inject(AuthService);
+
+  public authData = this._authService.authData();
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe('(max-width: 900px)')
     .pipe(

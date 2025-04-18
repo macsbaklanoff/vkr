@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import {SecuredAreaComponent} from './components/secured-area/secured-area.component';
 import {UsersComponent} from './components/users/users.component';
-import {ChekingWorksComponent} from './components/cheking-works/cheking-works.component';
+import {CheckWorkComponent} from './components/check-work/check-work.component';
 import {AuthComponent} from './components/auth/auth.component';
 import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
@@ -18,8 +18,8 @@ export const routes: Routes = [
         component: UsersComponent
       },
       {
-        path: 'checking-works',
-        component: ChekingWorksComponent
+        path: 'check-work',
+        component: CheckWorkComponent
       }
     ]
   },

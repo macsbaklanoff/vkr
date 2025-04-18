@@ -6,19 +6,27 @@
     <mat-toolbar class="sidenav__text">Menu</mat-toolbar>
     <mat-nav-list>
       <span class="nav-list-desktop__item__text">Main</span>
-      <a mat-list-item routerLink="/projects">
+      <a mat-list-item routerLink="/check-work">
         <span class="nav-list-desktop__item">
           <mat-icon>home</mat-icon>
-          <span class="nav-list-desktop__item__text">Projects</span>
+          <span class="nav-list-desktop__item__text">Check work</span>
         </span>
       </a>
-      <a mat-list-item routerLink="/issues">
+      @if (authData?.roleName == "Admin") {
+        <a mat-list-item routerLink="/users">
         <span class="nav-list-desktop__item">
-          <mat-icon>sync_problem</mat-icon>
-          <span class="nav-list-desktop__item__text">Issues</span>
+          <mat-icon>group</mat-icon>
+          <span class="nav-list-desktop__item__text">Users</span>
+        </span>
+        </a>
+      }
+      <span class="nav-list-desktop__item__text">Account</span>
+      <a mat-list-item routerLink="/profile">
+        <span class="nav-list-desktop__item">
+          <mat-icon>person</mat-icon>
+          <span class="nav-list-desktop__item__text">Profile</span>
         </span>
       </a>
-      <span class="nav-list-desktop__item__text">Account</span>
       <a mat-list-item routerLink="/sign-out">
         <span class="nav-list-desktop__item">
           <mat-icon>logout</mat-icon>
