@@ -6,6 +6,7 @@ import {AuthComponent} from './components/auth/auth.component';
 import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
 import {authGuard} from './guards/auth.guard';
+import {ProfileComponent} from './components/profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -20,6 +21,10 @@ export const routes: Routes = [
       {
         path: 'check-work',
         component: CheckWorkComponent
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent
       }
     ]
   },

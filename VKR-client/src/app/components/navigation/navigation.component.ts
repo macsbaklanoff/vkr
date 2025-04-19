@@ -10,6 +10,14 @@ import {MatListModule} from '@angular/material/list';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {AuthService} from '../../services/auth.service';
+import {SignOutDialogComponent} from '../dialogs/sign-out-dialog/sign-out-dialog.component';
+import {
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogTitle,
+} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-navigation',
@@ -32,6 +40,16 @@ export class NavigationComponent {
   private readonly _authService = inject(AuthService);
 
   public authData = this._authService.authData();
+
+  private readonly dialog = inject(MatDialog);
+
+  public openDialog(enterAnimationDuration?: string, exitAnimationDuration?: string): void {
+    this.dialog.open(SignOutDialogComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe('(max-width: 900px)')
     .pipe(
