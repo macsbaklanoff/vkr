@@ -12,6 +12,7 @@ import {
   MatTable
 } from '@angular/material/table';
 import {NgIf} from '@angular/common';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-users',
@@ -22,11 +23,11 @@ import {NgIf} from '@angular/common';
     MatCell,
     MatHeaderRow,
     MatRow,
-    MatRowDef,
+    MatIcon,
+    MatHeaderRowDef,
     MatCellDef,
     MatHeaderCellDef,
-    MatHeaderRowDef,
-    NgIf
+    MatRowDef
   ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
@@ -35,7 +36,7 @@ export class UsersComponent {
   private readonly _userService = inject(UserService);
 
   public users = signal<IUserResponse[]>([]);
-  public displayedColumns: string[] = ['Number', 'FirstName', 'LastName', 'Email', 'RoleName'];
+  public displayedColumns: string[] = ['Number', 'FirstName', 'LastName', 'Email', 'RoleName', 'Options'];
 
   clickedRows = new Set<IUserResponse>();
 
@@ -53,5 +54,9 @@ export class UsersComponent {
       return;
     }
     this.clickedRows.add(row);
+  }
+
+  public delete() {
+    console.log('delete');
   }
 }
