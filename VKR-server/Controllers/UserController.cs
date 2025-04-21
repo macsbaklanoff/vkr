@@ -120,7 +120,8 @@ namespace VKR_server.Controllers
             return new JwtData()
             {
                 Email = jsonToken.Claims.FirstOrDefault(claim => claim.Type == "Email")!.Value.ToString(),
-                Name = jsonToken.Claims.FirstOrDefault(claim => claim.Type == "Name")!.Value.ToString(),
+                FirstName = jsonToken.Claims.FirstOrDefault(claim => claim.Type == "FirstName")!.Value.ToString(),
+                LastName = jsonToken.Claims.FirstOrDefault(claim => claim.Type == "LastName")!.Value.ToString(),
                 RoleName = jsonToken.Claims.FirstOrDefault(claim => claim.Type == "RoleName")!.Value.ToString()
             };
         }

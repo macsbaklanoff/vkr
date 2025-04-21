@@ -1,7 +1,6 @@
 :host {
   display: grid;
   height: 100%;
-  row-gap: 64px;
   grid-template-columns: [navigation-start] 200px [navigation-end main-start] 1fr [main-end];
   grid-template-rows: [navigation-start header-start] min-content [header-end content-start]
   1fr [content-end];

@@ -75,6 +75,8 @@ $typography-map: (
 }
 
 .mat-toolbar.mat-primary {
+
+  background-color: var(--mat-sys-secondary-container);
   position: sticky;
   top: 0;
   z-index: 1;
