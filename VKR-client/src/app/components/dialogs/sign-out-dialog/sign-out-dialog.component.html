@@ -1,8 +1,8 @@
-<h2 mat-dialog-title>Delete file</h2>
+<h2 mat-dialog-title>Sign-out?</h2>
 <mat-dialog-content>
-  Would you like to delete cat.jpeg?
+  <p>Are you sure you want to get out?</p>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>No</button>
-  <button mat-button mat-dialog-close cdkFocusInitial>Ok</button>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="signOut()">Ok</button>
 </mat-dialog-actions>

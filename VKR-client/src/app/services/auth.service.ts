@@ -25,6 +25,7 @@ export class AuthService {
   }
 
   private readonly _accessTokenPayload = computed(() => {
+    if (!this._accessToken()) return undefined;
     const base64Url = this._accessToken().split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
     const json = window.atob(base64)
@@ -45,6 +46,10 @@ export class AuthService {
     return this._authData();
   })
 
+  public isAuthorized = computed(() => {
+    return !!this._authData();
+  })
+
   public login(user: ILoginRequest): Observable<void> {
     console.log(user);
     return this._httpClient.post<IAuthResponse>(`${this._apiPath}/sign-in`, JSON.stringify(user), {headers: this.headers})
@@ -56,7 +61,8 @@ export class AuthService {
         })
       );
   }
-  public isAuthorized = computed(() => {
-    return !!this._authData();
-  })
+  public signOut() : void {
+    this._accessToken.set('');
+    this.router.navigate(['auth','sign-in']).then(()=>{});
+  }
 }
