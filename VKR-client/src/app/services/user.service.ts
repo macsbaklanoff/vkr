@@ -22,4 +22,7 @@ export class UserService {
   public getUsers(): Observable<IUserResponse[]> {
     return this._httpClient.get<IUserResponse[]>(`${this._apiPath}/users`, {headers: this.headers});
   }
+  public deleteUser() : Observable<number> {
+    return this._httpClient.delete<number>(`${this._apiPath}/delete-user`, {headers: this.headers});
+  }
 }

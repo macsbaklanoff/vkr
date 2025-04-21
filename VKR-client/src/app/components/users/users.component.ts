@@ -13,6 +13,9 @@ import {
 } from '@angular/material/table';
 import {NgIf} from '@angular/common';
 import {MatIcon} from '@angular/material/icon';
+import {MatDialog} from '@angular/material/dialog';
+import {SignOutDialogComponent} from '../dialogs/sign-out-dialog/sign-out-dialog.component';
+import {DeleteDialogComponent} from '../dialogs/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-users',
@@ -38,8 +41,6 @@ export class UsersComponent {
   public users = signal<IUserResponse[]>([]);
   public displayedColumns: string[] = ['Number', 'FirstName', 'LastName', 'Email', 'RoleName', 'Options'];
 
-  clickedRows = new Set<IUserResponse>();
-
   constructor() {
     this._userService.getUsers().subscribe({
       next: users => this.users.set(users),
@@ -48,15 +49,13 @@ export class UsersComponent {
     })
   }
 
-  public add(row: IUserResponse) {
-    if (this.clickedRows.has(row)) {
-      this.clickedRows.delete(row);
-      return;
-    }
-    this.clickedRows.add(row);
-  }
+  private readonly dialog = inject(MatDialog);
 
-  public delete() {
-    console.log('delete');
+  public delete(enterAnimationDuration?: string, exitAnimationDuration?: string): void {
+    this.dialog.open(DeleteDialogComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
   }
 }
