@@ -33,11 +33,11 @@ namespace VKR_server.DB.Entities
 
         public int RoleId { get; set; }
 
-        public int GroupId { get; set; }
+        public int? GroupId { get; set; }
 
         public Role Role { get; set; } = null!;//навигационное свойство
 
-        public Group Group { get; set; } = null!;//навигационное свойство
+        public Group? Group { get; set; }//навигационное свойство
 
         [Column("created_at")]
         [Required]

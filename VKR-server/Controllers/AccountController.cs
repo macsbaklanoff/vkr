@@ -57,27 +57,52 @@ namespace VKR_server.Controllers
                 return BadRequest("User with this email exist");
             }
 
-            var group = _context.Groups.FirstOrDefault(g => g.GroupName == (userDto.GroupName ?? string.Empty));
+            User new_user = new User();
 
-            if (group == null)
+            if (userDto.GroupName == null)
             {
-                _context.Groups.Add(new Group { GroupName = userDto.GroupName});
+                new_user = new User
+                {
+                    Email = userDto.Email,
+                    FirstName = userDto.FirstName,
+                    LastName = userDto.LastName,
+                    Password = userDto.Password,
+                    RoleId = 1,
+                };
+                _context.Users.Add(new_user);
                 _context.SaveChanges();
-                group = _context.Groups.FirstOrDefault(g => g.GroupName == userDto.GroupName);
             }
-            
-            var new_user = new User
-            {
-                Email = userDto.Email,
-                FirstName = userDto.FirstName,
-                LastName = userDto.LastName,
-                Password = userDto.Password,
-                RoleId = 1,
-                GroupId = group.Id
-            };
 
-            _context.Users.Add(new_user);
-            _context.SaveChanges();
+            if (userDto.GroupName != null)
+            {
+                var group = _context.Groups.FirstOrDefault(g => g.GroupName == userDto.GroupName);
+                if (group == null)
+                {
+                    _context.Groups.Add(new Group { GroupName = userDto.GroupName });
+                    _context.SaveChanges();
+                    group = _context.Groups.FirstOrDefault(g => g.GroupName == userDto.GroupName);
+                }
+                new_user = new User
+                {
+                    Email = userDto.Email,
+                    FirstName = userDto.FirstName,
+                    LastName = userDto.LastName,
+                    Password = userDto.Password,
+                    RoleId = 1,
+                    GroupId = group!.Id
+                };
+                _context.Users.Add(new_user);
+                _context.SaveChanges();
+            }
+            //new_user = new User
+            //{
+            //    Email = userDto.Email,
+            //    FirstName = userDto.FirstName,
+            //    LastName = userDto.LastName,
+            //    Password = userDto.Password,
+            //    RoleId = 1,
+            //    GroupId = group.Id
+            //};
 
             ClaimsIdentity claimsIdentity = GetClaims(new_user);
             var jwt = GetToken(claimsIdentity);
