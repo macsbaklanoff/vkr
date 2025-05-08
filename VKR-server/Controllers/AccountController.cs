@@ -57,13 +57,23 @@ namespace VKR_server.Controllers
                 return BadRequest("User with this email exist");
             }
 
+            var group = _context.Groups.FirstOrDefault(g => g.GroupName == (userDto.GroupName ?? string.Empty));
+
+            if (group == null)
+            {
+                _context.Groups.Add(new Group { GroupName = userDto.GroupName});
+                _context.SaveChanges();
+                group = _context.Groups.FirstOrDefault(g => g.GroupName == userDto.GroupName);
+            }
+            
             var new_user = new User
             {
                 Email = userDto.Email,
                 FirstName = userDto.FirstName,
                 LastName = userDto.LastName,
                 Password = userDto.Password,
-                RoleId = 3
+                RoleId = 1,
+                GroupId = group.Id
             };
 
             _context.Users.Add(new_user);
