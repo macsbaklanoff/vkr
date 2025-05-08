@@ -63,7 +63,7 @@ namespace VKR_server.Controllers
                 FirstName = userDto.FirstName,
                 LastName = userDto.LastName,
                 Password = userDto.Password,
-                RoleId = 2
+                RoleId = 3
             };
 
             _context.Users.Add(new_user);
@@ -100,7 +100,6 @@ namespace VKR_server.Controllers
         {
             User? user = _context.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
 
-
             if (user != null)
             {
                 return GetClaims(user);
@@ -113,6 +112,7 @@ namespace VKR_server.Controllers
             var userRole = _context.Roles.FirstOrDefault(uR => uR.Id == user.RoleId);
             var claims = new List<Claim>
                 {
+                    new Claim("UserId",$"{user.Id}"),
                     new Claim("Email", user.Email),
                     new Claim("FirstName", $"{user.FirstName}"),
                     new Claim("LastName", $"{user.LastName}"),

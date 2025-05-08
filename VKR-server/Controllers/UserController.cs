@@ -130,6 +130,7 @@ namespace VKR_server.Controllers
             var users = _context.Users.ToList();
             var new_users = users.Select(u => new UserDto()
             {
+                UserId = u.Id,
                 FirstName = u.FirstName,
                 LastName = u.LastName,
                 Email = u.Email,

@@ -1,6 +1,12 @@
 import {Component, inject} from '@angular/core';
 import {MatButton} from "@angular/material/button";
-import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
+import {
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle
+} from "@angular/material/dialog";
 import {UserService} from '../../../services/user.service';
 
 @Component({
@@ -17,11 +23,12 @@ import {UserService} from '../../../services/user.service';
 })
 export class DeleteDialogComponent {
 
-  private readonly _userService = inject(UserService);
+  private readonly _dialogRef = inject(MatDialogRef<DeleteDialogComponent>);
 
   delete() {
-    this._userService.deleteUser().subscribe({
-      next: success => {console.log(success)}
-    })
+    this._dialogRef.close(true);
+  }
+  cancel() {
+    this._dialogRef.close(false);
   }
 }

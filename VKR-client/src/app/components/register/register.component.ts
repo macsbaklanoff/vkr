@@ -33,6 +33,8 @@ export class RegisterComponent {
   public registerForm: FormGroup = new FormGroup({
     email: new FormControl<string>("", [Validators.required, Validators.email]),
     password: new FormControl<string>("", [Validators.required]),
+    firstName: new FormControl<string>("", [Validators.required]),
+    lastName: new FormControl<string>("", [Validators.required]),
   });
 
   public formStatusChange = toSignal(this.registerForm.statusChanges)
@@ -50,11 +52,9 @@ export class RegisterComponent {
     return this.registerForm.controls['lastName'] as FormControl;
   }
 
-  public login(): void {
-    if(this.isInvalidState()) return;
-
-    // this._authService.login(this.loginForm.value).subscribe({
-    //   error: err => {alert(err.error.detail)}
-    // })
+  public register() {
+    this._authService.register(this.registerForm.value).subscribe({
+      error: err => {alert(err.error.detail)}
+    })
   }
 }

@@ -16,6 +16,8 @@ import {MatIcon} from '@angular/material/icon';
 import {MatDialog} from '@angular/material/dialog';
 import {SignOutDialogComponent} from '../dialogs/sign-out-dialog/sign-out-dialog.component';
 import {DeleteDialogComponent} from '../dialogs/delete-dialog/delete-dialog.component';
+import {Observable} from 'rxjs';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-users',
@@ -38,24 +40,34 @@ import {DeleteDialogComponent} from '../dialogs/delete-dialog/delete-dialog.comp
 export class UsersComponent {
   private readonly _userService = inject(UserService);
 
+  private readonly _matDialogRef = inject(MatDialog);
+
+  public readonly _authService = inject(AuthService);
+
   public users = signal<IUserResponse[]>([]);
   public displayedColumns: string[] = ['Number', 'FirstName', 'LastName', 'Email', 'RoleName', 'Options'];
 
   constructor() {
+    this.load();
+  }
+
+  private load() : void {
     this._userService.getUsers().subscribe({
       next: users => this.users.set(users),
-      error: err => {},
-      complete: () => {}
     })
   }
 
-  private readonly dialog = inject(MatDialog);
+  public delete(userId: number): void {
+    const dialogRef = this._matDialogRef.open(DeleteDialogComponent)
 
-  public delete(enterAnimationDuration?: string, exitAnimationDuration?: string): void {
-    this.dialog.open(DeleteDialogComponent, {
-      width: '250px',
-      enterAnimationDuration,
-      exitAnimationDuration,
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!result) return;
+      this._userService.deleteUser(userId).subscribe({
+        next: user => {
+          this.load();
+        },
+        error: err => {alert(err.error.detail)}
+      });
     });
   }
 }

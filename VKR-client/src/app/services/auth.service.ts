@@ -6,6 +6,7 @@ import {IAuthResponse} from '../interfaces/auth-response';
 import {ILoginRequest} from '../interfaces/login-request';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {IRegisterRequest} from '../interfaces/register-request';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,9 @@ export class AuthService {
 
   private readonly _authData = computed<IAuthData | undefined>(() => {
     if (!this._accessTokenPayload()) return undefined;
+    console.log(this._accessTokenPayload());
     return {
+      userId: this._accessTokenPayload().UserId,
       email: this._accessTokenPayload().Email,
       firstName: this._accessTokenPayload().FirstName,
       lastName: this._accessTokenPayload().LastName,
@@ -51,7 +54,6 @@ export class AuthService {
   })
 
   public login(user: ILoginRequest): Observable<void> {
-    console.log(user);
     return this._httpClient.post<IAuthResponse>(`${this._apiPath}/sign-in`, JSON.stringify(user), {headers: this.headers})
       .pipe(
         map(authResponse => {
@@ -61,6 +63,16 @@ export class AuthService {
         })
       );
   }
+  public register(user: IRegisterRequest): Observable<void> {
+    return this._httpClient.post<IAuthResponse>(`${this._apiPath}/sign-up`, JSON.stringify(user), {headers: this.headers})
+      .pipe(
+        map(authResponse => {
+          this._accessToken.set(authResponse.accessToken);
+          this.router.navigate(['/']).then(() =>{});
+        })
+      )
+  }
+
   public signOut() : void {
     this._accessToken.set('');
     this.router.navigate(['auth','sign-in']).then(()=>{});

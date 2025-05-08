@@ -4,6 +4,7 @@
   grid-template-columns: [navigation-start] 200px [navigation-end main-start] 1fr [main-end];
   grid-template-rows: [navigation-start header-start] min-content [header-end content-start]
   1fr [content-end];
+  row-gap: 50px;
 }
 
 .nav {
@@ -39,6 +40,7 @@
 .content {
   grid-column: main;
   grid-row: content;
+  padding-inline: 50px;
 }
 
 @media (width < 901px) {
