@@ -10,7 +10,7 @@ namespace VKR_server.DB.Entities
     {
         [Column("role_name")]
         public string RoleName { get; set; }
-        public int Id { get; set; }
+        public int RoleId { get; set; }
 
         //[ValidateNever]
         ICollection<User> Users { get; set; } = new List<User>();

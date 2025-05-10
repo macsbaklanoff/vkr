@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Change role user?</h2>
+<mat-dialog-content>
+  <p>Are you sure you want to change role user?</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="cancel()">No</button>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="changeRoleUser()">Yes</button>
+</mat-dialog-actions>

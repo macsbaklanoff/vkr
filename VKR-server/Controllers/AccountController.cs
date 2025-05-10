@@ -67,7 +67,7 @@ namespace VKR_server.Controllers
                     FirstName = userDto.FirstName,
                     LastName = userDto.LastName,
                     Password = userDto.Password,
-                    RoleId = 1,
+                    RoleId = 3,
                 };
                 _context.Users.Add(new_user);
                 _context.SaveChanges();
@@ -89,20 +89,11 @@ namespace VKR_server.Controllers
                     LastName = userDto.LastName,
                     Password = userDto.Password,
                     RoleId = 1,
-                    GroupId = group!.Id
+                    GroupId = group!.GroupId
                 };
                 _context.Users.Add(new_user);
                 _context.SaveChanges();
             }
-            //new_user = new User
-            //{
-            //    Email = userDto.Email,
-            //    FirstName = userDto.FirstName,
-            //    LastName = userDto.LastName,
-            //    Password = userDto.Password,
-            //    RoleId = 1,
-            //    GroupId = group.Id
-            //};
 
             ClaimsIdentity claimsIdentity = GetClaims(new_user);
             var jwt = GetToken(claimsIdentity);
@@ -144,7 +135,7 @@ namespace VKR_server.Controllers
 
         private ClaimsIdentity GetClaims(User user)
         {
-            var userRole = _context.Roles.FirstOrDefault(uR => uR.Id == user.RoleId);
+            var userRole = _context.Roles.FirstOrDefault(uR => uR.RoleId == user.RoleId);
             var claims = new List<Claim>
                 {
                     new Claim("UserId",$"{user.Id}"),

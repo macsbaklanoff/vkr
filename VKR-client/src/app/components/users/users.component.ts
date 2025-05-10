@@ -18,6 +18,9 @@ import {SignOutDialogComponent} from '../dialogs/sign-out-dialog/sign-out-dialog
 import {DeleteDialogComponent} from '../dialogs/delete-dialog/delete-dialog.component';
 import {Observable} from 'rxjs';
 import {AuthService} from '../../services/auth.service';
+import {MatIconButton} from '@angular/material/button';
+import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
+import {ChangeRoleDialogComponent} from '../dialogs/change-role-dialog/change-role-dialog.component';
 
 @Component({
   selector: 'app-users',
@@ -32,7 +35,11 @@ import {AuthService} from '../../services/auth.service';
     MatHeaderRowDef,
     MatCellDef,
     MatHeaderCellDef,
-    MatRowDef
+    MatRowDef,
+    MatIconButton,
+    MatMenu,
+    MatMenuItem,
+    MatMenuTrigger
   ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
@@ -64,6 +71,20 @@ export class UsersComponent {
       if (!result) return;
       this._userService.deleteUser(userId).subscribe({
         next: user => {
+          this.load();
+        },
+        error: err => {alert(err.error.detail)}
+      });
+    });
+  }
+
+  public changeRoleUser(userId: number, roleId: number) {
+    const dialogRef = this._matDialogRef.open(ChangeRoleDialogComponent)
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!result) return;
+      this._userService.changeRoleUser(userId, roleId).subscribe({
+        next: userId => {
           this.load();
         },
         error: err => {alert(err.error.detail)}

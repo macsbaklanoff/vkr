@@ -78,7 +78,7 @@ namespace VKR_server.Controllers
 
         [HttpPut("update-role/{id}/{idNewRole}", Name = "UpdateRoleUser")]
         [Authorize]
-        public IActionResult UpdateRoleUser(int id, int roleId)
+        public IActionResult UpdateRoleUser(int id, int idNewRole)
         {
             var jwt = GetJwtData(HttpContext.Request.Headers.Authorization.ToString().Split()[1]);
             
@@ -87,8 +87,7 @@ namespace VKR_server.Controllers
             var user = _context.Users.Find(id);
             if (user == null) return BadRequest("Not-existent user");
             
-            user.RoleId = roleId;
-
+            user.RoleId = idNewRole;
             _context.Users.Update(user);
             _context.SaveChanges();
             return Ok(id);
@@ -136,7 +135,7 @@ namespace VKR_server.Controllers
                 Email = u.Email,
                 Password = u.Password,
                 RoleId = u.RoleId,
-                RoleName = _context.Roles.ToList().FirstOrDefault(r => r.Id == u.RoleId)?.RoleName.ToString()
+                RoleName = _context.Roles.ToList().FirstOrDefault(r => r.RoleId == u.RoleId)?.RoleName.ToString()
             }).Where(u => u.RoleName.Contains(roleName));
 
             return new_users;

@@ -30,6 +30,10 @@
           }
         </mat-form-field>
         <mat-form-field>
+          <mat-label>Group (required if you are student)</mat-label>
+          <input matInput formControlName="group"/>
+        </mat-form-field>
+        <mat-form-field>
           <mat-label>Password</mat-label>
           <input matInput formControlName="password"/>
           @if (password.hasError('required')) {
