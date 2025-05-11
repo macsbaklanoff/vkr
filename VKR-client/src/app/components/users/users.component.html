@@ -55,6 +55,10 @@
                 <mat-icon>manage_accounts</mat-icon>
                 <span>Admin</span>
               </button>
+              <button mat-menu-item (click)="changeRoleUser(user.userId, 3)">
+                <mat-icon>school</mat-icon>
+                <span>Student</span>
+              </button>
             }@else {
               <p>not actions</p>
             }

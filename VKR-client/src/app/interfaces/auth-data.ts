@@ -4,4 +4,5 @@ export interface IAuthData {
   firstName: string,
   lastName: string,
   roleName: string,
+  groupName?: string,
 }

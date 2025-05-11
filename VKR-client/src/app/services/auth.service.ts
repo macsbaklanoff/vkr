@@ -35,17 +35,19 @@ export class AuthService {
 
   private readonly _authData = computed<IAuthData | undefined>(() => {
     if (!this._accessTokenPayload()) return undefined;
-    console.log(this._accessTokenPayload());
+    // console.log(this._accessTokenPayload());
     return {
       userId: this._accessTokenPayload().UserId,
       email: this._accessTokenPayload().Email,
       firstName: this._accessTokenPayload().FirstName,
       lastName: this._accessTokenPayload().LastName,
       roleName: this._accessTokenPayload().RoleName,
+      groupName: this._accessTokenPayload().GroupName,
     }
   })
 
   public authData = computed(() => {
+    console.log(this._authData());
     return this._authData();
   })
 

@@ -88,7 +88,7 @@ namespace VKR_server.Controllers
                     FirstName = userDto.FirstName,
                     LastName = userDto.LastName,
                     Password = userDto.Password,
-                    RoleId = 1,
+                    RoleId = 3,
                     GroupId = group!.GroupId
                 };
                 _context.Users.Add(new_user);
@@ -136,14 +136,19 @@ namespace VKR_server.Controllers
         private ClaimsIdentity GetClaims(User user)
         {
             var userRole = _context.Roles.FirstOrDefault(uR => uR.RoleId == user.RoleId);
+            var userGroup = _context.Groups.FirstOrDefault(uG => uG.GroupId == user.GroupId);
             var claims = new List<Claim>
                 {
                     new Claim("UserId",$"{user.Id}"),
                     new Claim("Email", user.Email),
                     new Claim("FirstName", $"{user.FirstName}"),
                     new Claim("LastName", $"{user.LastName}"),
-                    new Claim("RoleName", userRole.RoleName)
+                    new Claim("RoleName", userRole.RoleName),
                 };
+            if (userGroup != null)
+            {
+                claims.Add(new Claim("GroupName", userGroup.GroupName));
+            }
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
                 ClaimsIdentity.DefaultRoleClaimType);
             return claimsIdentity;

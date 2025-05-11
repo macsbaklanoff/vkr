@@ -35,7 +35,7 @@ export class RegisterComponent {
     password: new FormControl<string>("", [Validators.required]),
     firstName: new FormControl<string>("", [Validators.required]),
     lastName: new FormControl<string>("", [Validators.required]),
-    group: new FormControl<string>(""),
+    groupName: new FormControl<string>(""),
   });
 
   public formStatusChange = toSignal(this.registerForm.statusChanges)
@@ -52,11 +52,12 @@ export class RegisterComponent {
   public get lastName(): FormControl {
     return this.registerForm.controls['lastName'] as FormControl;
   }
-  public get group(): FormControl {
-    return this.registerForm.controls['group'] as FormControl;
+  public get groupName(): FormControl {
+    return this.registerForm.controls['groupName'] as FormControl;
   }
 
   public register() {
+    console.log(this.registerForm.value);
     this._authService.register(this.registerForm.value).subscribe({
       error: err => {alert(err.error.detail)}
     })

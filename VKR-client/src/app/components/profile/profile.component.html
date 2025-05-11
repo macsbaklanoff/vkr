@@ -1,16 +1,64 @@
 <div class="profile">
   <div class="profile__main">
     <div class="profile__main__main-info-user">
-        <img class="image" src="assets/logo_profile_user.svg">
-      <p class="profile__main__main-info-user__text">Maksim Baklanov</p>
-      <p class="profile__main__main-info-user__text">baklanov689gmail.com</p>
-      <p class="profile__main__main-info-user__text">Admin</p>
+      <img class="image" src="assets/logo_profile_user.svg">
+      <div class='profile__main__main-info-user__block'>
+        <div class="profile__main__main-info-user__block__left">
+          <p class="profile__main__main-info-user__block__left__text">Name:</p>
+          <p class="profile__main__main-info-user__block__left__text">Email:</p>
+          <p class="profile__main__main-info-user__block__left__text">Role:</p>
+          <p class="profile__main__main-info-user__block__left__text">Group:</p>
+        </div>
+        <div class="profile__main__main-info-user__block__right">
+          <p class="profile__main__main-info-user__block__right__text">{{authData?.firstName}} {{authData?.lastName}}</p>
+          <p class="profile__main__main-info-user__block__right__text">{{authData?.email}}</p>
+          <p class="profile__main__main-info-user__block__right__text">{{authData?.roleName}}</p>
+          @if (authData?.groupName != null) {
+            <p class="profile__main__main-info-user__block__right__text">{{ authData?.groupName }}</p>
+          }@else {
+            <p class="profile__main__main-info-user__block__right__text">...</p>
+          }
+        </div>
+      </div>
     </div>
+    <div class="profile__main__line"></div>
     <div class="profile__main__works-info-user">
-
+      <h4>Works:</h4>
+      <div class="profile__main__works-info-user__block">
+        <div class="profile__main__works-info-user__block__left">
+          <p class="profile__main__works-info-user__block__left__text">Number of sent files:</p>
+          <p class="profile__main__works-info-user__block__left__text">Rated excellent:</p>
+          <p class="profile__main__works-info-user__block__left__text">Rated good:</p>
+          <p class="profile__main__works-info-user__block__left__text">Rated as satisfactory:</p>
+          <p class="profile__main__works-info-user__block__left__text">Rated as unsatisfactory:</p>
+        </div>
+        <div class="profile__main__works-info-user__block__right">
+          <p class="profile__main__works-info-user__block__left__text">0</p>
+          <p class="profile__main__works-info-user__block__left__text">0</p>
+          <p class="profile__main__works-info-user__block__left__text">0</p>
+          <p class="profile__main__works-info-user__block__left__text">0</p>
+          <p class="profile__main__works-info-user__block__left__text">0</p>
+        </div>
+      </div>
     </div>
+    <button mat-flat-button>View More</button>
   </div>
   <div class="profile__info">
-
+    <div class="profile__info__header">
+      <h3>Account Settings</h3>
+    </div>
+    <div class="profile__info__main">
+      <div class="profile__info__main__inputs">
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="firstName"
+          [disabled]="!isEditable"
+        >
+      </div>
+      <div class="profile__info__main__buttons">
+        <button mat-flat-button (click)="editInput()">Edit</button>
+      </div>
+    </div>
   </div>
 </div>

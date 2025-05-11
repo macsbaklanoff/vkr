@@ -4,6 +4,7 @@ export interface IUserResponse {
   password: string;
   firstName: string;
   lastName: string;
-  roleId: number;
+  roleId?: number;
   roleName: string;
+  groupName?: string;
 }
