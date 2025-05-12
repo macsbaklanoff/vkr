@@ -112,7 +112,7 @@
               "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
               "ToolTip": "D:\\vkr\\VKR-server\\Controllers\\AccountController.cs",
               "RelativeToolTip": "Controllers\\AccountController.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAgwB0AAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAA1wCYAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-08T17:37:27.351Z",
               "EditorCaption": ""
@@ -163,8 +163,7 @@
               "RelativeToolTip": "DB\\Entities\\User.cs",
               "ViewState": "AgIAABEAAAAAAAAAAAAgwCsAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-07T12:11:47.906Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-07T12:11:47.906Z"
             },
             {
               "$type": "Document",
@@ -176,8 +175,7 @@
               "RelativeToolTip": "DB\\Entities\\Group.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-08T13:24:02.051Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-08T13:24:02.051Z"
             },
             {
               "$type": "Document",
@@ -213,8 +211,7 @@
               "RelativeToolTip": "Controllers\\UserController.cs",
               "ViewState": "AgIAABEAAAAAAAAAAAAQwH0AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T19:15:18.602Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-10T19:15:18.602Z"
             },
             {
               "$type": "Document",
@@ -226,8 +223,7 @@
               "RelativeToolTip": "DB\\ApplicationContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-07T12:05:09.619Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-07T12:05:09.619Z"
             },
             {
               "$type": "Document",
@@ -239,8 +235,7 @@
               "RelativeToolTip": "JWT\\AuthOptions.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T17:09:28.099Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-08T17:09:28.099Z"
             },
             {
               "$type": "Document",

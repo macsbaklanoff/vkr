@@ -10,12 +10,13 @@
           <p class="profile__main__main-info-user__block__left__text">Group:</p>
         </div>
         <div class="profile__main__main-info-user__block__right">
-          <p class="profile__main__main-info-user__block__right__text">{{authData?.firstName}} {{authData?.lastName}}</p>
-          <p class="profile__main__main-info-user__block__right__text">{{authData?.email}}</p>
-          <p class="profile__main__main-info-user__block__right__text">{{authData?.roleName}}</p>
+          <p
+            class="profile__main__main-info-user__block__right__text">{{ authData?.firstName }} {{ authData?.lastName }}</p>
+          <p class="profile__main__main-info-user__block__right__text">{{ authData?.email }}</p>
+          <p class="profile__main__main-info-user__block__right__text">{{ authData?.roleName }}</p>
           @if (authData?.groupName != null) {
             <p class="profile__main__main-info-user__block__right__text">{{ authData?.groupName }}</p>
-          }@else {
+          } @else {
             <p class="profile__main__main-info-user__block__right__text">...</p>
           }
         </div>
@@ -47,17 +48,89 @@
     <div class="profile__info__header">
       <h3>Account Settings</h3>
     </div>
+    <div class="profile__info__line"></div>
     <div class="profile__info__main">
-      <div class="profile__info__main__inputs">
-        <input
-          matInput
-          type="text"
-          [(ngModel)]="firstName"
-          [disabled]="!isEditable"
-        >
+      <div class="profile__info__main__labels">
+        <p class="profile__info__main__labels__text">First name:</p>
+        <p class="profile__info__main__labels__text">Last name:</p>
+        <p class="profile__info__main__labels__text">Email:</p>
       </div>
-      <div class="profile__info__main__buttons">
-        <button mat-flat-button (click)="editInput()">Edit</button>
+      <div class="profile__info__main__inputs">
+        <div class="profile__info__main__inputs__item">
+          <input
+            class="profile__info__main__inputs__item__input"
+            matInput
+            type="text"
+            [(ngModel)]="firstName"
+            [disabled]="!isEditableFirstName"
+          >
+        </div>
+        <div class="profile__info__main__inputs__item">
+          <input
+            class="profile__info__main__inputs__item__input"
+            matInput
+            type="text"
+            [(ngModel)]="lastName"
+            [disabled]="!isEditableLastName"
+          >
+        </div>
+        <div class="profile__info__main__inputs__item">
+          <input
+            class="profile__info__main__inputs__item__input"
+            matInput
+            type="text"
+            [(ngModel)]="email"
+            [disabled]="!isEditableEmail"
+          >
+        </div>
+      </div>
+    </div>
+    <div class="profile__info__options">
+      <div></div>
+      <div class="profile__info__options__buttons">
+        <button mat-flat-button>Reset</button>
+        <button mat-flat-button>Edit</button>
+        <button mat-flat-button>Update</button>
+      </div>
+    </div>
+    <div class="profile__info__line"></div>
+    <div class="profile__info__header">
+      <h3>Change password</h3>
+    </div>
+    <div class="profile__info__main">
+      <div class="profile__info__main__labels">
+        <p class="profile__info__main__labels__text">Old password:</p>
+        <p class="profile__info__main__labels__text">New password:</p>
+        <p class="profile__info__main__labels__text">Repeat new password:</p>
+      </div>
+      <div class="profile__info__main__inputs">
+        <div class="profile__info__main__inputs__item">
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="firstName"
+            [disabled]="!isEditableEmail"
+          >
+          <button mat-flat-button (click)="editInputEmail()">Edit</button>
+        </div>
+        <div class="profile__info__main__inputs__item">
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="firstName"
+            [disabled]="!isEditableEmail"
+          >
+          <button mat-flat-button (click)="editInputEmail()">Edit</button>
+        </div>
+        <div class="profile__info__main__inputs__item">
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="firstName"
+            [disabled]="!isEditableEmail"
+          >
+          <button mat-flat-button (click)="editInputEmail()">Edit</button>
+        </div>
       </div>
     </div>
   </div>
