@@ -121,6 +121,7 @@ namespace VKR_server.Controllers
             }
             if (user.Email != updateUser.Email) //условия на обновления email
             {
+                if (updateUser.Email == string.Empty) return BadRequest("Email is empty!");
                 var users = _context.Users.ToList();
                 if (!FindCountEmail(users, updateUser.Email))
                 {
@@ -142,6 +143,7 @@ namespace VKR_server.Controllers
                 if (group == null)
                 {
                     _context.Groups.Add(new Group { GroupName = updateUser.GroupName });
+                    _context.SaveChanges();
                     group = _context.Groups.FirstOrDefault(u => u.GroupName == updateUser.GroupName);
                 }
                 user.GroupId = group.GroupId;

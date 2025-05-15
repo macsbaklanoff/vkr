@@ -7,6 +7,9 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {toSignal} from '@angular/core/rxjs-interop';
 import {IUpdateUserData} from '../../interfaces/update-user-data';
 import {UserService} from '../../services/user.service';
+import {MatDialog} from '@angular/material/dialog';
+import {SignOutDialogComponent} from '../dialogs/sign-out-dialog/sign-out-dialog.component';
+import {UpdateUserDataComponent} from '../dialogs/update-user-data/update-user-data.component';
 
 @Component({
   selector: 'app-profile',
@@ -33,13 +36,14 @@ export class ProfileComponent {
   public email: string | undefined = this.authData?.email;
   public groupName: string | undefined = this.authData?.groupName;
 
-
+  private readonly dialog = inject(MatDialog);
 
   public isEditable: boolean = false;
 
-  public changeStateEdit() : void {
+  public changeStateEdit(): void {
     this.isEditable = !this.isEditable;
   }
+
   public updateUserData(): void {
     let user: IUpdateUserData = {
       userId: this.authData?.userId,
@@ -50,10 +54,29 @@ export class ProfileComponent {
     }
     this._authService.updateUserData(user).subscribe({
       next: result => {
-        this.authData = this._authService.authData();
         this.isEditable = !this.isEditable;
+        this.dialog.open(UpdateUserDataComponent, {
+          width: '250px',
+          data: {
+            success: true,
+            message: 'Данные успешно обновлены!'
+          }
+        });
       },
-      error: err => {alert(err.error)},
+      error: err => {
+        this.dialog.open(UpdateUserDataComponent, {
+          width: '250px',
+          data: {
+            success: false,
+            message: `${err.error}`
+          }
+        });
+      this.firstName = this.authData?.firstName;
+      this.lastName = this.authData?.lastName;
+      this.email= this.authData?.email;
+      this.groupName = this.authData?.groupName;
+      this.changeStateEdit();
+      },
       complete: () => {},
     })
   }
