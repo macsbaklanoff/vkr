@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -108,6 +109,64 @@ namespace VKR_server.Controllers
 
             return Ok(response);
         }
+
+        [HttpPut("update-user-data", Name = "UpdateUserData")]
+        [Authorize]
+        public IActionResult UpdateUserData(UpdateUserDto updateUser)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Id == updateUser.UserId);
+            if (user == null)
+            {
+                return BadRequest("User doesnt exists");
+            }
+            if (user.Email != updateUser.Email) //условия на обновления email
+            {
+                var users = _context.Users.ToList();
+                if (!FindCountEmail(users, updateUser.Email))
+                {
+                    return BadRequest("Email already exists!");
+                }
+                user.Email = updateUser.Email;
+            }
+
+            if (updateUser.FirstName == "" || updateUser.LastName == "") //условия на обновления имен
+            {
+                return BadRequest("FirstName or LastName is empty");
+            }
+            user.FirstName = updateUser.FirstName;
+            user.LastName = updateUser.LastName;
+
+            if (updateUser.GroupName != null) //условия на обновления группы
+            {
+                var group = _context.Groups.FirstOrDefault(u => u.GroupName == updateUser.GroupName);
+                if (group == null)
+                {
+                    _context.Groups.Add(new Group { GroupName = updateUser.GroupName });
+                    group = _context.Groups.FirstOrDefault(u => u.GroupName == updateUser.GroupName);
+                }
+                user.GroupId = group.GroupId;
+            }
+            if (updateUser.GroupName == null) user.GroupId = null;
+
+            _context.SaveChanges();
+            ClaimsIdentity claimsIdentity = GetClaims(user);
+            var jwt = GetToken(claimsIdentity);
+
+            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+
+            var response = new
+            {
+                accessToken = encodedJwt,
+                userEmail = user.Email,
+            };
+
+            return Ok(response);
+        }
+        private bool FindCountEmail(List<User> users, string newEmail)
+        {
+            return users.All(user => user.Email != newEmail);
+        }
+
 
         private JwtSecurityToken GetToken(ClaimsIdentity user)
         {

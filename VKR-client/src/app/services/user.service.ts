@@ -3,6 +3,9 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IUserResponse} from '../interfaces/user-response';
 import {AuthService} from './auth.service';
+import {IUpdateUserData} from '../interfaces/update-user-data';
+import {IAuthData} from '../interfaces/auth-data';
+import {IAuthResponse} from '../interfaces/auth-response';
 
 @Injectable({
   providedIn: 'root'
@@ -30,4 +33,8 @@ export class UserService {
   public changeRoleUser(userId: number, roleId: number) : Observable<number> {
     return this._httpClient.put<number>(`${this._apiPath}/update-role/${userId}/${roleId}`, {}, {headers: this.headers});
   }
+  // public updateUserData(newUserData: IUpdateUserData) : Observable<IAuthResponse> {
+  //   console.log(newUserData);
+  //   return this._httpClient.put<IAuthResponse>(`${this._apiPath}/update-user-data`, JSON.stringify(newUserData), {headers: this.headers});
+  // }
 }

@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Cryptography.X509Certificates;
 using VKR_server.DB;
 using VKR_server.DB.Entities;
 using VKR_server.Dto;
@@ -124,7 +127,7 @@ namespace VKR_server.Controllers
                 RoleName = jsonToken.Claims.FirstOrDefault(claim => claim.Type == "RoleName")!.Value.ToString()
             };
         }
-        private IEnumerable<UserDto> GetUserByRole(string roleName) 
+        private IEnumerable<UserDto> GetUserByRole(string roleName)
         {
             var users = _context.Users.ToList();
             var new_users = users.Select(u => new UserDto()

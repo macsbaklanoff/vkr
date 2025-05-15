@@ -54,6 +54,7 @@
         <p class="profile__info__main__labels__text">First name:</p>
         <p class="profile__info__main__labels__text">Last name:</p>
         <p class="profile__info__main__labels__text">Email:</p>
+        <p class="profile__info__main__labels__text">Group:</p>
       </div>
       <div class="profile__info__main__inputs">
         <div class="profile__info__main__inputs__item">
@@ -62,7 +63,7 @@
             matInput
             type="text"
             [(ngModel)]="firstName"
-            [disabled]="!isEditableFirstName"
+            [disabled]="!isEditable"
           >
         </div>
         <div class="profile__info__main__inputs__item">
@@ -71,7 +72,7 @@
             matInput
             type="text"
             [(ngModel)]="lastName"
-            [disabled]="!isEditableLastName"
+            [disabled]="!isEditable"
           >
         </div>
         <div class="profile__info__main__inputs__item">
@@ -80,7 +81,16 @@
             matInput
             type="text"
             [(ngModel)]="email"
-            [disabled]="!isEditableEmail"
+            [disabled]="!isEditable"
+          >
+        </div>
+        <div class="profile__info__main__inputs__item">
+          <input
+            class="profile__info__main__inputs__item__input"
+            matInput
+            type="text"
+            [(ngModel)]="groupName"
+            [disabled]="!isEditable"
           >
         </div>
       </div>
@@ -89,8 +99,8 @@
       <div></div>
       <div class="profile__info__buttons__content">
         <button mat-flat-button>Reset</button>
-        <button mat-flat-button>Edit</button>
-        <button mat-flat-button>Update</button>
+        <button mat-flat-button (click)="changeStateEdit()">Edit</button>
+        <button mat-flat-button (click)="updateUserData()">Update</button>
       </div>
     </div>
   </div>

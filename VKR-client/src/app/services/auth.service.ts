@@ -7,6 +7,7 @@ import {ILoginRequest} from '../interfaces/login-request';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {IRegisterRequest} from '../interfaces/register-request';
+import {IUpdateUserData} from '../interfaces/update-user-data';
 
 @Injectable({
   providedIn: 'root'
@@ -73,6 +74,21 @@ export class AuthService {
           this.router.navigate(['/']).then(() =>{});
         })
       )
+  }
+  public updateUserData(newUserData: IUpdateUserData) : Observable<void> {
+    console.log(newUserData);
+
+    let headers1 = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+    });
+
+    return this._httpClient.put<IAuthResponse>(`${this._apiPath}/update-user-data`, JSON.stringify(newUserData), {headers: headers1})
+      .pipe(
+        map(authResponse => {
+          this._accessToken.set(authResponse.accessToken);
+        })
+      );
   }
 
   public signOut() : void {
