@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, effect, inject} from '@angular/core';
 import {NavigationComponent} from '../navigation/navigation.component';
 import {RouterOutlet} from '@angular/router';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-secured-area',
@@ -12,5 +13,13 @@ import {RouterOutlet} from '@angular/router';
   styleUrl: './secured-area.component.scss'
 })
 export class SecuredAreaComponent {
+  private readonly _authService = inject(AuthService);
+  public authData = this._authService.authData();
+
+  constructor() {
+    effect(() => {
+      this.authData = this._authService.authData();
+    });
+  }
 
 }

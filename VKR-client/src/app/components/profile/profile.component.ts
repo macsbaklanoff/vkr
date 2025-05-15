@@ -54,6 +54,7 @@ export class ProfileComponent {
     }
     this._authService.updateUserData(user).subscribe({
       next: result => {
+        this.authData = this._authService.authData();
         this.isEditable = !this.isEditable;
         this.dialog.open(UpdateUserDataComponent, {
           width: '250px',
@@ -75,7 +76,7 @@ export class ProfileComponent {
       this.lastName = this.authData?.lastName;
       this.email= this.authData?.email;
       this.groupName = this.authData?.groupName;
-      this.changeStateEdit();
+      this.isEditable = false;
       },
       complete: () => {},
     })

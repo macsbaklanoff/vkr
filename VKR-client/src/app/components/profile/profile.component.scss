@@ -9,7 +9,7 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: min-content min-content 1fr;
-    background-color: #fff;
+    background-color: var(--mat-sys-surface-container-low);
     justify-items: center;
     border-radius: 16px;
     padding-block: 24px;
@@ -24,15 +24,15 @@
           &__text {
             text-align: start;
             font-size: 14px;
-            color: #3f546c;
+            color: var(--mat-sys-on-surface);
           }
         }
-
+//color: #3f546c;
         &__right {
           &__text {
             text-align: end;
             font-size: 14px;
-            color: #3f546c;
+            color: var(--mat-sys-on-surface);
           }
         }
       }
@@ -41,7 +41,7 @@
     &__line {
       width: 100%;
       height: 1px;
-      background-color: #3f546c;
+      background-color: var(--mat-sys-on-surface);
     }
 
     &__works-info-user {
@@ -49,6 +49,9 @@
       grid-template-columns: 250px;
       grid-template-rows: min-content min-content;
       padding-top: 16px;
+      &__header {
+        color: var(--mat-sys-on-surface);
+      }
       &__block {
         display: grid;
         grid-template-columns: 240px 1fr;
@@ -57,14 +60,14 @@
           &__text {
             text-align: start;
             font-size: 14px;
-            color: #3f546c;
+            color: var(--mat-sys-on-surface);
           }
         }
 
         &__right {
           &__text {
             font-size: 14px;
-            color: #3f546c;
+            color: var(--mat-sys-on-surface);
           }
         }
       }
@@ -72,7 +75,7 @@
   }
 
   &__info {
-    background-color: #fff;
+    background-color: var(--mat-sys-surface-container-low);
     border-radius: 16px;
     display: grid;
     grid-template-columns: 1fr;
@@ -81,12 +84,13 @@
     row-gap: 16px;
 
     &__header {
+      color: var(--mat-sys-on-surface);
     }
 
     &__line {
       width: 100%;
       height: 1px;
-      background-color: #3f546c;
+      background-color: var(--mat-sys-on-surface);
     }
 
     &__main {
@@ -101,7 +105,7 @@
 
         &__text {
           font-size: 14px;
-          color: #3f546c;
+          color: var(--mat-sys-on-surface);
         }
       }
 

@@ -13,8 +13,9 @@ html, body {
   margin: 0;
   height: 100dvh;
   width: 100dvw;
-
   background-color: var(--mat-sys-secondary-container);
+  //background-color: var(--mat-sys-background);
+  overflow-x: hidden;
 }
 
 h1,h2,h3,h4,h5,h6 {

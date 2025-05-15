@@ -61,7 +61,7 @@ export class AuthService {
       .pipe(
         map(authResponse => {
           this._accessToken.set(authResponse.accessToken);
-          this.router.navigate(['/']).then(() =>{
+          this.router.navigate(['/main-page']).then(() =>{
           });
         })
       );
@@ -71,13 +71,11 @@ export class AuthService {
       .pipe(
         map(authResponse => {
           this._accessToken.set(authResponse.accessToken);
-          this.router.navigate(['/']).then(() =>{});
+          this.router.navigate(['/main-page']).then(() =>{});
         })
       )
   }
   public updateUserData(newUserData: IUpdateUserData) : Observable<void> {
-    console.log(newUserData);
-
     let headers1 = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
