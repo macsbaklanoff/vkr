@@ -1,6 +1,18 @@
+.users {
+  display: grid;
+  height: 100%;
+}
+.table {
+  padding: 4px;
+  width: 100%;
+  background-color: var(--mat-sys-surface-container-low);
+  border-radius: 16px;
+}
 
 .demo-table {
   width: 100%;
+  background-color: var(--mat-sys-surface-container-low);
+  border-radius: 16px;
 }
 
 .mat-mdc-row .mat-mdc-cell {

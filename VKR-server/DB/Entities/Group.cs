@@ -10,6 +10,6 @@ namespace VKR_server.DB.Entities
         [Column("group_name")]
         public string GroupName { get; set; }
 
-        ICollection<User> Users { get; set; } = new List<User>();
+        public ICollection<User> Users { get; set; } = new List<User>();
     }
 }

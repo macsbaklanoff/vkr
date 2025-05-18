@@ -8,6 +8,7 @@ import {RegisterComponent} from './components/register/register.component';
 import {authGuard} from './guards/auth.guard';
 import {ProfileComponent} from './components/profile/profile.component';
 import {MainPageComponent} from './components/main-page/main-page.component';
+import {StudentsComponent} from './components/students/students.component';
 
 export const routes: Routes = [
   {
@@ -21,15 +22,19 @@ export const routes: Routes = [
       },
       {
         path: 'users',
-        component: UsersComponent
+        component: UsersComponent,
+      },
+      {
+        path: 'students',
+        component: StudentsComponent,
       },
       {
         path: 'check-work',
-        component: CheckWorkComponent
+        component: CheckWorkComponent,
       },
       {
         path: 'profile',
-        component: ProfileComponent
+        component: ProfileComponent,
       }
     ]
   },
@@ -39,11 +44,11 @@ export const routes: Routes = [
     children: [
       {
         path: 'sign-in',
-        component: LoginComponent
+        component: LoginComponent,
       },
       {
         path: 'sign-up',
-        component: RegisterComponent
+        component: RegisterComponent,
       }
     ]
   }

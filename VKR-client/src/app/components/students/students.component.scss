@@ -1,0 +1,50 @@
+.students {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 200px 1fr;
+  column-gap: 64px;
+  &__group {
+    display: grid;
+    grid-auto-rows: min-content;
+    width: 100%;
+    background-color: var(--mat-sys-surface-container-low);
+    border-radius: 16px;
+    padding: 16px;
+    &__headline {
+      padding: 8px;
+    }
+  }
+  &__table {
+    padding: 16px;
+    width: 100%;
+    background-color: var(--mat-sys-surface-container-low);
+    border-radius: 16px;
+  }
+}
+.example-radio-group {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: min-content;
+  //padding: 16px;
+}
+
+.demo-table {
+  width: 100%;
+  background-color: var(--mat-sys-surface-container-low);
+  border-radius: 16px;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+

@@ -66,17 +66,31 @@ namespace VKR_server.Controllers
             return Ok(teachers);
         }
 
-        [HttpGet("students", Name = "GetStudents")]
+        [HttpGet("students/{groupId}", Name = "GetStudents")]
         [Authorize]
-        public IActionResult GetStudents()
+        public IActionResult GetStudents(int groupId)
         {
             var jwt = GetJwtData(HttpContext.Request.Headers.Authorization.ToString().Split()[1]);
 
             if (jwt.RoleName == "Student") return BadRequest("Invalide role");
 
-            var students = GetUserByRole("Student");
+            //var students = GetUserByRole("Student");
+            var studentsInGroup = _context.Users.Where(s => s.GroupId == groupId);
 
-            return Ok(students);
+            return Ok(studentsInGroup);
+        }
+
+        [HttpGet("groups", Name = "GetGroups")]
+        [Authorize]
+        public IActionResult GetGroups()
+        {
+            var jwt = GetJwtData(HttpContext.Request.Headers.Authorization.ToString().Split()[1]);
+
+            if (jwt.RoleName == "Student") return BadRequest("Invalide role");
+
+            var groups = _context.Groups.Where(g => g.Users.ToList().Count != 0).ToList();
+
+            return Ok(groups);
         }
 
         [HttpPut("update-role/{id}/{idNewRole}", Name = "UpdateRoleUser")]
