@@ -3,18 +3,11 @@
 </div>
 <div class="header">
   <h4 class="header__text">Student assistance</h4>
-  <div class="header__account">
-    @if (true) {
-      <!--      <mat-icon>account_circle</mat-icon>-->
+  <div class="header__account" routerLink="/profile">
       <span class="material-symbols-outlined">
         account_circle
       </span>
       <span>{{authData?.firstName}} {{authData?.lastName}}</span>
-    } @else {
-      <span class="material-symbols-outlined">
-        account_circle_off
-      </span>
-    }
   </div>
 </div>
 <div class="content">

@@ -74,6 +74,11 @@ $typography-map: (
   background: inherit;
 }
 
+.mat-sidenav-content {
+  display: grid;
+  justify-content: center;
+}
+
 .mat-toolbar.mat-primary {
 
   position: sticky;
@@ -86,7 +91,7 @@ mat-nav-list {
 }
 
 .mdc-list-item {
-  padding-inline: 0px;
+  padding: 0px;
 }
 
 .mat-toolbar-tablet {
@@ -112,6 +117,7 @@ mat-nav-list {
   &__item {
     display: grid;
     place-items: center;
+    width: 78px;
 
     &__icon {
       display: flex;
@@ -129,6 +135,7 @@ mat-nav-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   overflow-y: hidden;
+  padding: 0px;
   &__item {
     display: grid;
     grid-template-columns: minmax(50px, 126px);

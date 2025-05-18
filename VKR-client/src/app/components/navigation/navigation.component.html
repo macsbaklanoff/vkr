@@ -25,6 +25,8 @@
           <span class="nav-list-desktop__item__text">Users</span>
         </span>
         </a>
+      }
+      @if (authData?.roleName == "Admin" || authData?.roleName == "Teacher") {
         <a mat-list-item routerLink="/students">
         <span class="nav-list-desktop__item">
           <mat-icon>school</mat-icon>
@@ -51,18 +53,17 @@
     <mat-toolbar color="primary" class="mat-toolbar-tablet">
       @if (isPhone$ | async) {
         <mat-nav-list [ngClass]="{'nav-list-phone': isPhone$ | async}">
-          <a mat-list-item routerLink="/projects">
+          <a mat-list-item routerLink="/main-page">
             <span class="nav-list-phone__item">
               <mat-icon class="nav-list-phone__item__icon">home</mat-icon>
             </span>
           </a>
-          <a mat-list-item routerLink="/issues">
+          <a mat-list-item routerLink="/check-work">
             <span class="nav-list-phone__item">
-              <mat-icon class="nav-list-phone__item__icon">sync_problem</mat-icon>
+              <mat-icon class="nav-list-phone__item__icon">library_books</mat-icon>
             </span>
           </a>
-
-          <a mat-list-item routerLink="/sign-out">
+          <a mat-list-item  (click)="openDialog('0ms', '0ms')">
             <span class="nav-list-phone__item">
               <mat-icon class="nav-list-phone__item__icon">logout</mat-icon>
             </span>
@@ -77,23 +78,45 @@
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
         <mat-nav-list [ngClass]="{'nav-list-tablet': isHandset$ | async}">
-          <a mat-list-item routerLink="/projects">
-            <span class="nav-list-tablet__item">
-            <mat-icon class="nav-list-tablet__item__icon">home</mat-icon>
-            <span class="nav-list-tablet__item__text">Projects</span>
-            </span>
+          <a mat-list-item routerLink="/main-page">
+        <span class="nav-list-tablet__item">
+          <mat-icon>home</mat-icon>
+          <span class="nav-list-tablet__item__text">Main Page</span>
+        </span>
           </a>
-          <a mat-list-item routerLink="/issues">
-            <span class="nav-list-tablet__item">
-              <mat-icon>sync_problem</mat-icon>
-              <span class="nav-list-tablet__item__text">Issues</span>
-            </span>
+          <a mat-list-item routerLink="/check-work">
+        <span class="nav-list-tablet__item">
+          <mat-icon>library_books</mat-icon>
+          <span class="nav-list-tablet__item__text">Check work</span>
+        </span>
           </a>
-          <a mat-list-item routerLink="/sign-out">
-            <span class="nav-list-tablet__item">
-              <mat-icon class="nav-list-tablet__item__icon">logout</mat-icon>
-              <span class="nav-list-tablet__item__text">Sign-out</span>
-            </span>
+          @if (authData?.roleName == "Admin") {
+            <a mat-list-item routerLink="/users">
+        <span class="nav-list-tablet__item">
+          <mat-icon>group</mat-icon>
+          <span class="nav-list-tablet__item__text">Users</span>
+        </span>
+            </a>
+          }
+          @if (authData?.roleName == "Admin" || authData?.roleName == "Teacher") {
+            <a mat-list-item routerLink="/students">
+              <span class="nav-list-tablet__item">
+                <mat-icon>school</mat-icon>
+              <span class="nav-list-tablet__item__text">Students</span>
+              </span>
+            </a>
+          }
+          <a mat-list-item routerLink="/profile">
+        <span class="nav-list-tablet__item">
+          <mat-icon>person</mat-icon>
+          <span class="nav-list-tablet__item__text">Profile</span>
+        </span>
+          </a>
+          <a mat-list-item (click)="openDialog('0ms', '0ms')">
+        <span class="nav-list-tablet__item">
+          <mat-icon>logout</mat-icon>
+          <span class="nav-list-tablet__item__text">Sign-out</span>
+        </span>
           </a>
         </mat-nav-list>
       }
