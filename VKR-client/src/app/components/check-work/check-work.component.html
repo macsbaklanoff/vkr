@@ -1,1 +1,26 @@
-<p>check-work works!</p>
+<div class="check-work">
+  <div class="check-work__header">
+    <button mat-flat-button>Выбрать файл</button>
+  </div>
+  <div class="check-work__content">
+    <div class="check-work__content__form"
+         (drop)="onDrop($event)"
+         (dragover)="onDragOver($event)"
+         (dragleave)="onDragLeave($event)"
+         [class.drag-over]="isDragOver">
+      @if (file == undefined) {
+        <p>Перетащите работу сюда (только pdf)</p>
+      } @else {
+        <div class="check-work__content__form__file">
+          <div class="test">
+            <p>Имя файла: {{ file.name }}</p>
+            <p>Размер файла: {{ formatFileSize(file.size) }}</p>
+          </div>
+          <button mat-flat-button (click)="uploadFile()">Отправить</button>
+          <button mat-flat-button (click)="removeFile()" class="deleteFile">Удалить работу</button>
+        </div>
+      }
+    </div>
+  </div>
+  <div class="check-work__footer"></div>
+</div>
