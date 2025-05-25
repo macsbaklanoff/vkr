@@ -26,7 +26,7 @@ namespace VKR_server.Controllers
         [Authorize]
         public IActionResult UploadFile([FromForm] UploadFileDto uploadFile)
         {
-            Console.WriteLine(uploadFile.File.Name);
+            Console.WriteLine(uploadFile.File.FileName);
             return Ok();
         }
     }
