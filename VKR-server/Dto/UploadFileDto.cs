@@ -2,7 +2,7 @@
 {
     public class UploadFileDto
     {
-        public int UserId { get; set; }
+        public string UserId { get; set; } //строка потому что FormData только строки
         public IFormFile File { get; set; }
     }
 }
