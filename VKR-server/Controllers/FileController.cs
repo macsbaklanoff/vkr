@@ -26,44 +26,26 @@ namespace VKR_server.Controllers
         {
             _logger = logger;
             _context = context;
-
+            
         }
-
+        //meta - llama / Llama - 3.3 - 70B - Instruct - Turbo - Free
+        //meta-llama/Llama-Vision-Free
+        //a058cfce7db8aed599e95914b94e9999403a6392d87bdfc444023920bd1671ed
         [HttpPost("upload-file", Name = "UploadFile")]
         [Authorize]
         public async Task<IActionResult> UploadFile([FromForm] UploadFileDto uploadFile)
         {
 
-            Console.WriteLine(uploadFile.File.FileName);
-            Console.WriteLine(uploadFile.UserId);
-            //meta - llama / Llama - 3.3 - 70B - Instruct - Turbo - Free
-            this._kernel = Kernel.CreateBuilder().AddTogetherChatCompletion(
-                "meta-llama/Llama-Vision-Free",
-                "a058cfce7db8aed599e95914b94e9999403a6392d87bdfc444023920bd1671ed"
-                )
-                .Build();
-            //Task<string> content = ReadPdfFile(uploadFile.File);
-            //Console.WriteLine(content.Result);
-            var chatResult = await _kernel.InvokePromptAsync($"Привет!");
-            Console.WriteLine(chatResult);
+            var client = new TogetherClient("a058cfce7db8aed599e95914b94e9999403a6392d87bdfc444023920bd1671ed");
+            var response = await client.ChatCompletions.CreateAsync(new ChatCompletionRequest
+            {
+                Model = "meta-llama/Llama-Vision-Free",
+                Messages = new[]
+                {
+                    new ChatCompletionMessage { Role = "user", Content = "Hello!" }
+                }
+            });
             return Ok();
         }
-        //private async Task<string> ReadPdfFile(IFormFile file)
-        //{
-        //    using var memoryStream = new MemoryStream();
-        //    await file.CopyToAsync(memoryStream); //возможно memory плохая штука
-        //    memoryStream.Position = 0;
-
-        //    var pdfText = new StringBuilder();
-
-        //    using (var pdfDocument = PdfDocument.Open(memoryStream))
-        //    {
-        //        foreach (var page in pdfDocument.GetPages())
-        //        {
-        //            pdfText.Append(page.Text);
-        //        }
-        //    }
-        //    return pdfText.ToString();
-        //}
     }
 }
