@@ -309,3 +309,5 @@ e2e/*.map
 .DS_Store/
 
 # End of https://www.toptal.com/developers/gitignore/api/angular
+/VKR-server/appsettings.development.json
+/VKR-server/appsettings.Development.json
