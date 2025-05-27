@@ -311,3 +311,5 @@ e2e/*.map
 # End of https://www.toptal.com/developers/gitignore/api/angular
 /VKR-server/appsettings.development.json
 /VKR-server/appsettings.Development.json
+/VKR-server/obj/
+/VKR-server/.vs/
