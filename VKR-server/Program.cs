@@ -14,7 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddCors(options => //cors
+builder.Services.AddCors(options => 
 {
     options.AddPolicy("AllowAll", builder =>
     {
@@ -24,7 +24,7 @@ builder.Services.AddCors(options => //cors
     });
 });
 
-builder.Services.AddDbContext<ApplicationContext>(options => //context
+builder.Services.AddDbContext<ApplicationContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 

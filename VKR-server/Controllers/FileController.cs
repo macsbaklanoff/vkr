@@ -6,9 +6,13 @@ using VKR_server.DB;
 using VKR_server.Dto;
 using VKR_server.JWT;
 using Microsoft.SemanticKernel;
-using Together;
+using Microsoft.Extensions.AI;
 using Together.Models.ChatCompletions;
+using Together;
 using Together.SemanticKernel.Extensions;
+using System.Text;
+using UglyToad.PdfPig;
+using System.Text.RegularExpressions;
 
 namespace VKR_server.Controllers
 {
@@ -28,7 +32,7 @@ namespace VKR_server.Controllers
             _context = context;
 
         }
-
+        //meta-llama/Llama-Vision-Free
         [HttpPost("upload-file", Name = "UploadFile")]
         [Authorize]
         public async Task<IActionResult> UploadFile([FromForm] UploadFileDto uploadFile)
@@ -44,26 +48,39 @@ namespace VKR_server.Controllers
                 .Build();
             //Task<string> content = ReadPdfFile(uploadFile.File);
             //Console.WriteLine(content.Result);
-            var chatResult = await _kernel.InvokePromptAsync($"Привет!");
+            var textContent = ReadPdfFile(uploadFile.File);
+            Console.WriteLine(textContent.Result);
+            var chatResult = await _kernel.InvokePromptAsync($"Оцени содержимое файла по содержанию и " +
+                $"глубине проработке темы от 0 до 100 баллов" +
+                $"Обоснуй оценку и " +
+                $"Ответ дай **строго** в следующем формате: " +
+                $"Score: число" +
+                $"Текст для оценки:" +
+                $" {textContent.Result}");
+            var match = Regex.Match(chatResult.GetValue<string>(), @"Score:\s(\d+)");
+            if (match.Success)
+            {
+                int score = int.Parse(match.Groups[1].Value);
+            }
             Console.WriteLine(chatResult);
             return Ok();
         }
-        //private async Task<string> ReadPdfFile(IFormFile file)
-        //{
-        //    using var memoryStream = new MemoryStream();
-        //    await file.CopyToAsync(memoryStream); //возможно memory плохая штука
-        //    memoryStream.Position = 0;
+        private async Task<string> ReadPdfFile(IFormFile file)
+        {
+            using var memoryStream = new MemoryStream();
+            await file.CopyToAsync(memoryStream); //возможно memory плохая штука
+            memoryStream.Position = 0;
 
-        //    var pdfText = new StringBuilder();
+            var pdfText = new StringBuilder();
 
-        //    using (var pdfDocument = PdfDocument.Open(memoryStream))
-        //    {
-        //        foreach (var page in pdfDocument.GetPages())
-        //        {
-        //            pdfText.Append(page.Text);
-        //        }
-        //    }
-        //    return pdfText.ToString();
-        //}
+            using (var pdfDocument = PdfDocument.Open(memoryStream))
+            {
+                foreach (var page in pdfDocument.GetPages())
+                {
+                    pdfText.Append(page.Text);
+                }
+            }
+            return pdfText.ToString();
+        }
     }
 }
