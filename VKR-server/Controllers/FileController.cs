@@ -49,7 +49,7 @@ namespace VKR_server.Controllers
             //Task<string> content = ReadPdfFile(uploadFile.File);
             //Console.WriteLine(content.Result);
             var textContent = ReadPdfFile(uploadFile.File);
-            Console.WriteLine(textContent.Result);
+            //Console.WriteLine(textContent.Result);
             var chatResult = await _kernel.InvokePromptAsync($"Оцени содержимое файла по содержанию и " +
                 $"глубине проработке темы от 0 до 100 баллов" +
                 $"Обоснуй оценку и " +
@@ -58,11 +58,12 @@ namespace VKR_server.Controllers
                 $"Текст для оценки:" +
                 $" {textContent.Result}");
             var match = Regex.Match(chatResult.GetValue<string>(), @"Score:\s(\d+)");
+            int score = 0;
             if (match.Success)
             {
-                int score = int.Parse(match.Groups[1].Value);
+                score = int.Parse(match.Groups[1].Value);
             }
-            Console.WriteLine(chatResult);
+            Console.WriteLine(score);
             return Ok();
         }
         private async Task<string> ReadPdfFile(IFormFile file)
