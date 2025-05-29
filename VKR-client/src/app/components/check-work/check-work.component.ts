@@ -4,13 +4,18 @@ import {NgForOf, NgIf} from '@angular/common';
 import {FileService} from '../../services/file.service';
 import {IUploadFile} from '../../interfaces/upload-file';
 import {AuthService} from '../../services/auth.service';
+import {MatInput} from "@angular/material/input";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-check-work',
   imports: [
     MatButton,
     NgForOf,
-    NgIf
+    NgIf,
+    MatInput,
+    ReactiveFormsModule,
+    FormsModule
   ],
   templateUrl: './check-work.component.html',
   styleUrl: './check-work.component.scss'
@@ -21,6 +26,9 @@ export class CheckWorkComponent {
   private readonly authData = this._authService.authData();
 
   public file: File | undefined = undefined;
+
+  public topicWork: string = '';
+  public academicSubject: string = '';
 
   isDragOver = false;
 
@@ -60,8 +68,14 @@ export class CheckWorkComponent {
   }
 
   public uploadFile() {
+    if (this.topicWork == '' || this.academicSubject == '') {
+      alert('Заполните поля!')
+      return;
+    }
     let dataFile: IUploadFile = {
       userId: this.authData!.userId.toString(), //в строку потому что FormData - только строки
+      topicWork: this.topicWork,
+      academicSubject: this.academicSubject,
       file: this.file!
     }
     this._fileService.uploadFile(dataFile).subscribe({

@@ -9,6 +9,8 @@ namespace VKR_server.DB
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Group> Groups { get; set; }
+        public DbSet<Entities.File> Files { get; set; }
+        public DbSet<Estimation> Estimations { get; set; }
         public ApplicationContext(DbContextOptions<ApplicationContext> options) 
             : base(options) { }
 

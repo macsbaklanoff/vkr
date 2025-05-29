@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using VKR_server.DB;
@@ -11,9 +12,11 @@ using VKR_server.DB;
 namespace VKR_server.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20250529194407_AddEntitiesFileAndEstimation")]
+    partial class AddEntitiesFileAndEstimation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,6 +63,10 @@ namespace VKR_server.Migrations
                         .HasColumnType("text")
                         .HasColumnName("academic_subject");
 
+                    b.Property<int>("EstimationId")
+                        .HasColumnType("integer")
+                        .HasColumnName("estimation_id");
+
                     b.Property<string>("FileName")
                         .IsRequired()
                         .HasColumnType("text")
@@ -76,6 +83,8 @@ namespace VKR_server.Migrations
                         .HasColumnName("topic_work");
 
                     b.HasKey("FileId");
+
+                    b.HasIndex("EstimationId");
 
                     b.ToTable("files");
                 });
@@ -167,6 +176,17 @@ namespace VKR_server.Migrations
                     b.ToTable("users");
                 });
 
+            modelBuilder.Entity("VKR_server.DB.Entities.File", b =>
+                {
+                    b.HasOne("VKR_server.DB.Entities.Estimation", "Estimation")
+                        .WithMany()
+                        .HasForeignKey("EstimationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Estimation");
+                });
+
             modelBuilder.Entity("VKR_server.DB.Entities.User", b =>
                 {
                     b.HasOne("VKR_server.DB.Entities.Group", "Group")
@@ -174,7 +194,7 @@ namespace VKR_server.Migrations
                         .HasForeignKey("GroupId");
 
                     b.HasOne("VKR_server.DB.Entities.Role", "Role")
-                        .WithMany("Users")
+                        .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -185,11 +205,6 @@ namespace VKR_server.Migrations
                 });
 
             modelBuilder.Entity("VKR_server.DB.Entities.Group", b =>
-                {
-                    b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("VKR_server.DB.Entities.Role", b =>
                 {
                     b.Navigation("Users");
                 });

@@ -1,4 +1,6 @@
 export interface IUploadFile {
-  userId: string,
-  file: File,
+  userId: string;
+  topicWork: string;
+  academicSubject: string;
+  file: File;
 }

@@ -21,6 +21,8 @@ export class FileService {
     });
     const formData = new FormData();
     formData.append('userId', uploadFile.userId);
+    formData.append('topicWork', uploadFile.topicWork);
+    formData.append('academicSubject', uploadFile.academicSubject);
     formData.append('file', uploadFile.file);
     return this._httpClient.post(`${this._apiPath}/upload-file`, formData, {headers: headers1});
   }

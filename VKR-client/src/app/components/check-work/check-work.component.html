@@ -12,12 +12,28 @@
         <p>Перетащите работу сюда (только pdf)</p>
       } @else {
         <div class="check-work__content__form__file">
-          <div class="test">
+          <div class="check-work__content__form__file__upper">
             <p>Имя файла: {{ file.name }}</p>
             <p>Размер файла: {{ formatFileSize(file.size) }}</p>
+            <input
+              class="check-work__content__form__file__upper__input"
+              matInput
+              type="text"
+              [(ngModel)]="topicWork"
+              placeholder="Тема работы"
+            >
+            <input
+              class="check-work__content__form__file__upper__input"
+              matInput
+              type="text"
+              [(ngModel)]="academicSubject"
+              placeholder="Название предмета"
+            >
           </div>
-          <button mat-flat-button (click)="uploadFile()">Отправить</button>
-          <button mat-flat-button (click)="removeFile()" class="deleteFile">Удалить работу</button>
+          <div class="check-work__content__form__file__lower">
+            <button mat-flat-button (click)="uploadFile()">Отправить</button>
+            <button mat-flat-button (click)="removeFile()" class="deleteFile">Удалить работу</button>
+          </div>
         </div>
       }
     </div>
