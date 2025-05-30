@@ -5,16 +5,15 @@ namespace VKR_server.Dto
 {
     public class UserResponseDto
     {
+        public int UserId { get; set; }
         public string FirstName { get; set; } = string.Empty;
 
         public string LastName { get; set; } = string.Empty;
 
         public string Email { get; set; } = string.Empty;
 
-        public int RoleId { get; set; }
-
-        public int? GroupId { get; set; }
-
-        public DateTime CreationDate { get; set; } = DateTime.UtcNow;
+        public string RoleName { get; set; }
+        
+        public int CountWorks { get; set; }
     }
 }

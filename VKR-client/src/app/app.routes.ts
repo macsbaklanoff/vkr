@@ -9,6 +9,8 @@ import {authGuard} from './guards/auth.guard';
 import {ProfileComponent} from './components/profile/profile.component';
 import {MainPageComponent} from './components/main-page/main-page.component';
 import {StudentsComponent} from './components/students/students.component';
+import {UserProfileComponent} from './components/user-profile/user-profile.component';
+import {adminGuard} from './guards/admin.guard';
 
 export const routes: Routes = [
   {
@@ -35,6 +37,11 @@ export const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
+      },
+      {
+        path: 'user-profile/:id',
+        canActivate: [adminGuard],
+        component: UserProfileComponent,
       }
     ]
   },

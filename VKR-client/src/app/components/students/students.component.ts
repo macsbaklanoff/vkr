@@ -1,4 +1,4 @@
-import {Component, effect, inject, signal} from '@angular/core';
+import {Component, effect, inject, Input, signal} from '@angular/core';
 import {MatRadioButton, MatRadioGroup} from '@angular/material/radio';
 import {FormsModule} from '@angular/forms';
 import {IUserResponse} from '../../interfaces/user-response';
@@ -16,6 +16,7 @@ import {
 import {MatIconButton} from '@angular/material/button';
 import {MatMenu, MatMenuItem} from '@angular/material/menu';
 import {MatIcon} from '@angular/material/icon';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-students',
@@ -36,12 +37,14 @@ import {MatIcon} from '@angular/material/icon';
     MatRow,
     MatRowDef,
     MatTable,
-    MatHeaderCellDef
+    MatHeaderCellDef,
+    RouterLink
   ],
   templateUrl: './students.component.html',
   styleUrl: './students.component.scss'
 })
 export class StudentsComponent {
+
   private readonly _userService = inject(UserService);
 
   public students = signal<IUserResponse[]>([]);

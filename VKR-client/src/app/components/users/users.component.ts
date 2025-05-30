@@ -21,6 +21,7 @@ import {AuthService} from '../../services/auth.service';
 import {MatIconButton} from '@angular/material/button';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
 import {ChangeRoleDialogComponent} from '../dialogs/change-role-dialog/change-role-dialog.component';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -39,7 +40,8 @@ import {ChangeRoleDialogComponent} from '../dialogs/change-role-dialog/change-ro
     MatIconButton,
     MatMenu,
     MatMenuItem,
-    MatMenuTrigger
+    MatMenuTrigger,
+    RouterLink
   ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
@@ -60,7 +62,10 @@ export class UsersComponent {
 
   private load() : void {
     this._userService.getUsers().subscribe({
-      next: users => this.users.set(users),
+      next: users => {
+        this.users.set(users);
+        console.log(this.users());
+      },
     })
   }
 

@@ -36,7 +36,6 @@ export class AuthService {
 
   private readonly _authData = computed<IAuthData | undefined>(() => {
     if (!this._accessTokenPayload()) return undefined;
-    // console.log(this._accessTokenPayload());
     return {
       userId: this._accessTokenPayload().UserId,
       email: this._accessTokenPayload().Email,

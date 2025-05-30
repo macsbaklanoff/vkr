@@ -76,8 +76,16 @@ namespace VKR_server.Controllers
 
             //var students = GetUserByRole("Student");
             var studentsInGroup = _context.Users.Where(s => s.GroupId == groupId);
-
-            return Ok(studentsInGroup);
+            var studentsInGroupDto = studentsInGroup.Select(s => new UserResponseDto
+            {
+                UserId = s.Id,
+                Email = s.Email,
+                FirstName = s.FirstName,
+                LastName = s.LastName,
+                RoleName = "Student",
+                CountWorks = s.Files.Count(),
+            });
+            return Ok(studentsInGroupDto);
         }
 
         [HttpGet("groups", Name = "GetGroups")]
@@ -141,17 +149,15 @@ namespace VKR_server.Controllers
                 RoleName = jsonToken.Claims.FirstOrDefault(claim => claim.Type == "RoleName")!.Value.ToString()
             };
         }
-        private IEnumerable<UserDto> GetUserByRole(string roleName)
+        private IEnumerable<UserResponseDto> GetUserByRole(string roleName)
         {
             var users = _context.Users.ToList();
-            var new_users = users.Select(u => new UserDto()
+            var new_users = users.Select(u => new UserResponseDto()
             {
                 UserId = u.Id,
                 FirstName = u.FirstName,
                 LastName = u.LastName,
                 Email = u.Email,
-                Password = u.Password,
-                RoleId = u.RoleId,
                 RoleName = _context.Roles.ToList().FirstOrDefault(r => r.RoleId == u.RoleId)?.RoleName.ToString()
             }).Where(u => u.RoleName.Contains(roleName));
 
