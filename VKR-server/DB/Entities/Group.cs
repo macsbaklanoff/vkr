@@ -5,6 +5,7 @@ namespace VKR_server.DB.Entities
     [Table("groups")]
     public class Group
     {
+        [Column("group_id")]
         public int GroupId { get; set; }
 
         [Column("group_name")]

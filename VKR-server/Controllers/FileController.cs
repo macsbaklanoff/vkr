@@ -62,8 +62,6 @@ namespace VKR_server.Controllers
                 $"2. Оценка стилистики: целое число. " +
                 $"3. Оценка содержания: целое число. " +
                 $"4. Оценка актуальности: целое число. " +
-                $"5. Предмет, для которого представлена учебная работа. " +
-                $"6. Тема учебной работы. " + 
                 $"Текст для проверки представлен далее: {textContent.Result}");
             var match1 = Regex.Match(chatResult.GetValue<string>(), @"Оценка стилистики:\s(\d+)");
             var match2 = Regex.Match(chatResult.GetValue<string>(), @"Оценка содержания:\s(\d+)");
@@ -78,7 +76,25 @@ namespace VKR_server.Controllers
             estRelevance = int.Parse(match2.Groups[1].Value);
             estStylistic = int.Parse(match3.Groups[1].Value);
 
-
+            var new_file = new DB.Entities.File 
+            { 
+                FileName = uploadFile.File.FileName,
+                AcademicSubject = uploadFile.AcademicSubject,
+                TopicWork = uploadFile.TopicWork,
+                UserId = int.Parse(uploadFile.UserId),
+            };
+            
+            var new_estimation = new Estimation
+            {
+                EstContent = estContent,
+                EstRelevance = estRelevance,
+                EstStylistic = estStylistic,
+                FileId = new_file.FileId
+            };
+            new_file.Estimation = new_estimation;
+            _context.Add(new_file);
+            _context.Add(new_estimation);
+            _context.SaveChanges();
             Console.WriteLine($"{chatResult}");
             Console.WriteLine($"Оценка стилистики: {estContent}");
             Console.WriteLine($"Оценка содержания: {estRelevance}");

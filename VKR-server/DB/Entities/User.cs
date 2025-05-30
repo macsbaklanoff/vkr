@@ -36,6 +36,8 @@ namespace VKR_server.DB.Entities
 
         public int? GroupId { get; set; }
 
+        public IEnumerable<File> Files { get; set; } = new List<File>();
+
         public Role Role { get; set; } = null!;//навигационное свойство
 
         public Group? Group { get; set; }//навигационное свойство

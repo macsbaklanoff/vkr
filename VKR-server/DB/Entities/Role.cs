@@ -10,6 +10,7 @@ namespace VKR_server.DB.Entities
     {
         [Column("role_name")]
         public string RoleName { get; set; }
+        [Column("role_id")]
         public int RoleId { get; set; }
 
         //[ValidateNever]
