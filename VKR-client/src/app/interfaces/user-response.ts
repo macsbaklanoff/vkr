@@ -5,4 +5,5 @@ export interface IUserResponse {
   lastName: string;
   roleName: string;
   countWorks: string;
+  groupName: string;
 }

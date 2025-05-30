@@ -14,6 +14,8 @@ namespace VKR_server.Dto
 
         public string RoleName { get; set; }
         
+        public string? GroupName { get; set; }
+
         public int CountWorks { get; set; }
     }
 }

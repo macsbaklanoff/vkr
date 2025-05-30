@@ -1,15 +1,49 @@
-import {Component, Input} from '@angular/core';
+import {Component, inject, Input, signal} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {IUserResponse} from '../../interfaces/user-response';
+import {UserService} from '../../services/user.service';
+import {FormsModule} from '@angular/forms';
+import {MatButton} from '@angular/material/button';
+import {MatInput} from '@angular/material/input';
+import {EstimationService} from '../../services/estimation.service';
+import {IEstimationProfile} from '../../interfaces/estimation-profile-response';
 
 @Component({
   selector: 'app-user-profile',
-  imports: [],
+  imports: [
+    FormsModule,
+    MatButton,
+    MatInput
+  ],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.scss'
 })
 export class UserProfileComponent {
+  private readonly _userService = inject(UserService);
+  private readonly _estimationService = inject(EstimationService);
+
+  public user_info: IUserResponse | undefined = undefined;
+  public estimationData: IEstimationProfile = {
+    countWorks: 0,
+    countRatedExc: 0,
+    countRatedGood: 0,
+    countRatedSatisfactory: 0,
+    countRatedUnSatisfactory: 0
+  };
+
+
   constructor(private route: ActivatedRoute) {
     const user_id = this.route.snapshot.params['id'];
-    console.log(user_id);
+    this._userService.getUser(user_id).subscribe({
+      next: user => {
+        this.user_info = user;
+        console.log(user);
+      }
+    })
+    this._estimationService.getEstimationProfile(user_id).subscribe({
+      next: (profile: IEstimationProfile) => {
+        this.estimationData = profile;
+      },
+    })
   }
 }

@@ -1,1 +1,59 @@
-<p>user-profile works!</p>
+<div class="profile">
+  <div class="profile__main">
+    <div class="profile__main__main-info-user">
+      <img class="image" src="assets/logo_profile_user.svg">
+      <div class='profile__main__main-info-user__block'>
+        <div class="profile__main__main-info-user__block__left">
+          <p class="profile__main__main-info-user__block__left__text">Name:</p>
+          <p class="profile__main__main-info-user__block__left__text">Email:</p>
+          <p class="profile__main__main-info-user__block__left__text">Role:</p>
+          <p class="profile__main__main-info-user__block__left__text">Group:</p>
+        </div>
+        <div class="profile__main__main-info-user__block__right">
+          <p
+            class="profile__main__main-info-user__block__right__text">{{ user_info?.firstName }} {{ user_info?.lastName }}</p>
+          <p class="profile__main__main-info-user__block__right__text">{{ user_info?.email }}</p>
+          <p class="profile__main__main-info-user__block__right__text">{{ user_info?.roleName }}</p>
+          @if (user_info?.groupName != null) {
+            <p class="profile__main__main-info-user__block__right__text">{{ user_info?.groupName }}</p>
+          } @else {
+            <p class="profile__main__main-info-user__block__right__text">...</p>
+          }
+        </div>
+      </div>
+    </div>
+    <div class="profile__main__line"></div>
+    <div class="profile__main__works-info-user">
+      <h4 class="profile__main__works-info-user__header">Works:</h4>
+      <div class="profile__main__works-info-user__block">
+        <div class="profile__main__works-info-user__block__left">
+          <p class="profile__main__works-info-user__block__left__text">Number of sent files:</p>
+          <p class="profile__main__works-info-user__block__left__text">Rated excellent:</p>
+          <p class="profile__main__works-info-user__block__left__text">Rated good:</p>
+          <p class="profile__main__works-info-user__block__left__text">Rated as satisfactory:</p>
+          <p class="profile__main__works-info-user__block__left__text">Rated as unsatisfactory:</p>
+        </div>
+        <div class="profile__main__works-info-user__block__right">
+          <p class="profile__main__works-info-user__block__left__text">{{estimationData.countWorks}}</p>
+          <p class="profile__main__works-info-user__block__left__text">{{estimationData.countRatedExc}}</p>
+          <p class="profile__main__works-info-user__block__left__text">{{estimationData.countRatedGood}}</p>
+          <p class="profile__main__works-info-user__block__left__text">{{estimationData.countRatedSatisfactory}}</p>
+          <p class="profile__main__works-info-user__block__left__text">{{estimationData.countRatedUnSatisfactory}}</p>
+        </div>
+      </div>
+    </div>
+    <button mat-flat-button>View More</button>
+  </div>
+  <div class="profile__info">
+    <div class="profile__info__main">
+
+    </div>
+    <div class="profile__info__buttons">
+      <div></div>
+      <div class="profile__info__buttons__content">
+<!--        <button mat-flat-button (click)="changeStateEdit()">Edit</button>-->
+<!--        <button mat-flat-button (click)="updateUserData()">Update</button>-->
+      </div>
+    </div>
+  </div>
+</div>

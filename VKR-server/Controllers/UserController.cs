@@ -36,35 +36,66 @@ namespace VKR_server.Controllers
 
             if (jwt.RoleName != "Admin") return BadRequest("Invalide role");
 
-            var users = GetUserByRole("");
+            var users = _context.Users.Select(u => new UserResponseDto
+            {
+                UserId = u.Id,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                Email = u.Email,
+                GroupName = _context.Groups.FirstOrDefault(g => g.GroupId == u.GroupId).GroupName,
+                CountWorks = u.Files.Count(),
+                RoleName = _context.Roles.FirstOrDefault(r => r.RoleId == u.RoleId).RoleName,
+            });
             return Ok(users);
         }
 
-        [HttpGet("admins", Name = "GetAdmins")]
+        [HttpGet("user/{user_id}", Name = "GetUser")]
         [Authorize]
-        public IActionResult GetAdmins()
+        public IActionResult GetUser(int user_id)
         {
             var jwt = GetJwtData(HttpContext.Request.Headers.Authorization.ToString().Split()[1]);
 
             if (jwt.RoleName != "Admin") return BadRequest("Invalide role");
 
-            var admins = GetUserByRole("Admin");
-
-            return Ok(admins);
+            var user = _context.Users.FirstOrDefault(u => u.Id == user_id);
+            if (user == null) return BadRequest("User doesnt exists");
+            return Ok(new UserResponseDto
+            {
+                UserId = user_id,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                CountWorks = user.Files.Count(),
+                RoleName = "Student",
+                GroupName = _context.Groups.FirstOrDefault(g => g.GroupId == user.GroupId).ToString()
+            });
         }
 
-        [HttpGet("teachers", Name = "GetTeachers")]
-        [Authorize]
-        public IActionResult GetTeachers()
-        {
-            var jwt = GetJwtData(HttpContext.Request.Headers.Authorization.ToString().Split()[1]);
+        //[HttpGet("admins", Name = "GetAdmins")]
+        //[Authorize]
+        //public IActionResult GetAdmins()
+        //{
+        //    var jwt = GetJwtData(HttpContext.Request.Headers.Authorization.ToString().Split()[1]);
 
-            if (jwt.RoleName != "Admin") return BadRequest("Invalide role");
+        //    if (jwt.RoleName != "Admin") return BadRequest("Invalide role");
 
-            var teachers = GetUserByRole("Teacher");
+        //    var admins = GetUserByRole("Admin");
 
-            return Ok(teachers);
-        }
+        //    return Ok(admins);
+        //}
+
+        //[HttpGet("teachers", Name = "GetTeachers")]
+        //[Authorize]
+        //public IActionResult GetTeachers()
+        //{
+        //    var jwt = GetJwtData(HttpContext.Request.Headers.Authorization.ToString().Split()[1]);
+
+        //    if (jwt.RoleName != "Admin") return BadRequest("Invalide role");
+
+        //    var teachers = GetUserByRole("Teacher");
+
+        //    return Ok(teachers);
+        //}
 
         [HttpGet("students/{groupId}", Name = "GetStudents")]
         [Authorize]
@@ -84,6 +115,7 @@ namespace VKR_server.Controllers
                 LastName = s.LastName,
                 RoleName = "Student",
                 CountWorks = s.Files.Count(),
+                GroupName = _context.Groups.FirstOrDefault(g => g.GroupId == groupId).ToString()
             });
             return Ok(studentsInGroupDto);
         }
@@ -149,19 +181,20 @@ namespace VKR_server.Controllers
                 RoleName = jsonToken.Claims.FirstOrDefault(claim => claim.Type == "RoleName")!.Value.ToString()
             };
         }
-        private IEnumerable<UserResponseDto> GetUserByRole(string roleName)
-        {
-            var users = _context.Users.ToList();
-            var new_users = users.Select(u => new UserResponseDto()
-            {
-                UserId = u.Id,
-                FirstName = u.FirstName,
-                LastName = u.LastName,
-                Email = u.Email,
-                RoleName = _context.Roles.ToList().FirstOrDefault(r => r.RoleId == u.RoleId)?.RoleName.ToString()
-            }).Where(u => u.RoleName.Contains(roleName));
+        //private IEnumerable<UserResponseDto> GetUserByRole(string roleName)
+        //{
+        //    var users = _context.Users.ToList();
+        //    var new_users = users.Select(u => new UserResponseDto()
+        //    {
+        //        UserId = u.Id,
+        //        FirstName = u.FirstName,
+        //        LastName = u.LastName,
+        //        Email = u.Email,
+        //        RoleName = _context.Roles.ToList().FirstOrDefault(r => r.RoleId == u.RoleId)?.RoleName.ToString(),
+        //        GroupName = _context.Groups.FirstOrDefault(g => g.GroupId == u.GroupId).ToString()
+        //    }).Where(u => u.RoleName.Contains(roleName));
 
-            return new_users;
-        }
+        //    return new_users;
+        //}
     }
 }

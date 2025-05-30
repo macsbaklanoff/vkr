@@ -47,7 +47,7 @@ export class AuthService {
   })
 
   public authData = computed(() => {
-    console.log(this._authData());
+    // console.log(this._authData());
     return this._authData();
   })
 

@@ -17,6 +17,7 @@ export class UserService {
   private readonly _apiPath = 'https://localhost:7274/api/user';
   private readonly _authService = inject(AuthService);
 
+
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',
     'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
@@ -39,5 +40,8 @@ export class UserService {
   }
   public getStudentsInGroup(groupId: number | undefined): Observable<IUserResponse[]> {
     return this._httpClient.get<IUserResponse[]>(`${this._apiPath}/students/${groupId}`, {headers: this.headers});
+  }
+  public getUser(userId: number) : Observable<IUserResponse> {
+    return this._httpClient.get<IUserResponse>(`${this._apiPath}/user/${userId}`, {headers: this.headers});
   }
 }
