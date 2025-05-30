@@ -10,6 +10,8 @@ import {UserService} from '../../services/user.service';
 import {MatDialog} from '@angular/material/dialog';
 import {SignOutDialogComponent} from '../dialogs/sign-out-dialog/sign-out-dialog.component';
 import {UpdateUserDataComponent} from '../dialogs/update-user-data/update-user-data.component';
+import {EstimationService} from '../../services/estimation.service';
+import {IEstimationProfile} from '../../interfaces/estimation-profile-response';
 
 @Component({
   selector: 'app-profile',
@@ -29,7 +31,16 @@ import {UpdateUserDataComponent} from '../dialogs/update-user-data/update-user-d
 export class ProfileComponent {
   private readonly _authService = inject(AuthService);
   private readonly _userService = inject(UserService);
+  private readonly _estimationService = inject(EstimationService);
+
   public authData = this._authService.authData();
+  public estimationData: IEstimationProfile = {
+    countWorks: 0,
+    countRatedExc: 0,
+    countRatedGood: 0,
+    countRatedSatisfactory: 0,
+    countRatedUnSatisfactory: 0
+  };
 
   public firstName: string | undefined = this.authData?.firstName;
   public lastName: string | undefined = this.authData?.lastName;
@@ -39,6 +50,14 @@ export class ProfileComponent {
   private readonly dialog = inject(MatDialog);
 
   public isEditable: boolean = false;
+
+  constructor() {
+    this._estimationService.getEstimationProfile(this.authData!.userId).subscribe({
+      next: (profile: IEstimationProfile) => {
+        this.estimationData = profile;
+        },
+    })
+  }
 
   public changeStateEdit(): void {
     this.isEditable = !this.isEditable;
