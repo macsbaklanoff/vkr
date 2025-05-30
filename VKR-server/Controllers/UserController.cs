@@ -67,35 +67,10 @@ namespace VKR_server.Controllers
                 LastName = user.LastName,
                 CountWorks = user.Files.Count(),
                 RoleName = "Student",
-                GroupName = _context.Groups.FirstOrDefault(g => g.GroupId == user.GroupId).ToString()
+                GroupName = _context.Groups.FirstOrDefault(g => g.GroupId == user.GroupId).GroupName.ToString()
             });
         }
 
-        //[HttpGet("admins", Name = "GetAdmins")]
-        //[Authorize]
-        //public IActionResult GetAdmins()
-        //{
-        //    var jwt = GetJwtData(HttpContext.Request.Headers.Authorization.ToString().Split()[1]);
-
-        //    if (jwt.RoleName != "Admin") return BadRequest("Invalide role");
-
-        //    var admins = GetUserByRole("Admin");
-
-        //    return Ok(admins);
-        //}
-
-        //[HttpGet("teachers", Name = "GetTeachers")]
-        //[Authorize]
-        //public IActionResult GetTeachers()
-        //{
-        //    var jwt = GetJwtData(HttpContext.Request.Headers.Authorization.ToString().Split()[1]);
-
-        //    if (jwt.RoleName != "Admin") return BadRequest("Invalide role");
-
-        //    var teachers = GetUserByRole("Teacher");
-
-        //    return Ok(teachers);
-        //}
 
         [HttpGet("students/{groupId}", Name = "GetStudents")]
         [Authorize]
@@ -181,20 +156,6 @@ namespace VKR_server.Controllers
                 RoleName = jsonToken.Claims.FirstOrDefault(claim => claim.Type == "RoleName")!.Value.ToString()
             };
         }
-        //private IEnumerable<UserResponseDto> GetUserByRole(string roleName)
-        //{
-        //    var users = _context.Users.ToList();
-        //    var new_users = users.Select(u => new UserResponseDto()
-        //    {
-        //        UserId = u.Id,
-        //        FirstName = u.FirstName,
-        //        LastName = u.LastName,
-        //        Email = u.Email,
-        //        RoleName = _context.Roles.ToList().FirstOrDefault(r => r.RoleId == u.RoleId)?.RoleName.ToString(),
-        //        GroupName = _context.Groups.FirstOrDefault(g => g.GroupId == u.GroupId).ToString()
-        //    }).Where(u => u.RoleName.Contains(roleName));
 
-        //    return new_users;
-        //}
     }
 }
