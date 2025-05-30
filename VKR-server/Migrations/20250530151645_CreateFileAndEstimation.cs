@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace VKR_server.Migrations
 {
     /// <inheritdoc />
-    public partial class AddEntitiesFileAndEstimation : Migration
+    public partial class CreateFileAndEstimation : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -33,36 +33,35 @@ namespace VKR_server.Migrations
                     FileId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     file_name = table.Column<string>(type: "text", nullable: false),
-                    name_job = table.Column<string>(type: "text", nullable: false),
                     academic_subject = table.Column<string>(type: "text", nullable: false),
+                    name_job = table.Column<string>(type: "text", nullable: false),
                     topic_work = table.Column<string>(type: "text", nullable: false),
-                    estimation_id = table.Column<int>(type: "integer", nullable: false)
+                    UserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_files", x => x.FileId);
                     table.ForeignKey(
-                        name: "FK_files_estimations_estimation_id",
-                        column: x => x.estimation_id,
-                        principalTable: "estimations",
-                        principalColumn: "EstimationId",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_files_users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "users",
+                        principalColumn: "user_id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_files_estimation_id",
+                name: "IX_files_UserId",
                 table: "files",
-                column: "estimation_id");
+                column: "UserId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "files");
+                name: "estimations");
 
             migrationBuilder.DropTable(
-                name: "estimations");
+                name: "files");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Org.BouncyCastle.Asn1.Mozilla;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VKR_server.DB.Entities
 {
@@ -16,8 +17,9 @@ namespace VKR_server.DB.Entities
         public string TopicWork { get; set; }
         [Column("user_id")]
         public int UserId { get; set; }
+        [Column("estimation_id")]
+        public int? EstimationId { get; set; }
         public User User { get; set; }
-
         public Estimation? Estimation { get; set; }
     }
 }

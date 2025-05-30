@@ -12,8 +12,8 @@ using VKR_server.DB;
 namespace VKR_server.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20250530084508_AddEntityBetweenFileUser")]
-    partial class AddEntityBetweenFileUser
+    [Migration("20250530151645_CreateFileAndEstimation")]
+    partial class CreateFileAndEstimation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -78,7 +78,7 @@ namespace VKR_server.Migrations
                         .HasColumnType("text")
                         .HasColumnName("topic_work");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("integer");
 
                     b.HasKey("FileId");
@@ -177,13 +177,9 @@ namespace VKR_server.Migrations
 
             modelBuilder.Entity("VKR_server.DB.Entities.File", b =>
                 {
-                    b.HasOne("VKR_server.DB.Entities.User", "User")
+                    b.HasOne("VKR_server.DB.Entities.User", null)
                         .WithMany("Files")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("VKR_server.DB.Entities.User", b =>

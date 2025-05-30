@@ -5,7 +5,7 @@
 namespace VKR_server.Migrations
 {
     /// <inheritdoc />
-    public partial class RenameFieldIDInTablesRoleGroupFileEst : Migration
+    public partial class RenameFeildId : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

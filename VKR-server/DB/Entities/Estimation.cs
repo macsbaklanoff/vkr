@@ -13,8 +13,6 @@ namespace VKR_server.DB.Entities
         public int EstRelevance { get; set; }
         [Column("est_stylistic")]
         public int EstStylistic { get; set; }
-        [Column("file_id")]
-        public int FileId { get; set; }
         public File File { get; set; }
     }
 }

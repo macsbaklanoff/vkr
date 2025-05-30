@@ -12,8 +12,8 @@ using VKR_server.DB;
 namespace VKR_server.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20250530115837_RenameFieldIDInTablesRoleGroupFileEst")]
-    partial class RenameFieldIDInTablesRoleGroupFileEst
+    [Migration("20250530171116_RemoveFieldNameJob")]
+    partial class RemoveFieldNameJob
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,14 +46,7 @@ namespace VKR_server.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("est_stylistic");
 
-                    b.Property<int>("FileId")
-                        .HasColumnType("integer")
-                        .HasColumnName("file_id");
-
                     b.HasKey("EstimationId");
-
-                    b.HasIndex("FileId")
-                        .IsUnique();
 
                     b.ToTable("estimations");
                 });
@@ -72,15 +65,14 @@ namespace VKR_server.Migrations
                         .HasColumnType("text")
                         .HasColumnName("academic_subject");
 
+                    b.Property<int?>("EstimationId")
+                        .HasColumnType("integer")
+                        .HasColumnName("estimation_id");
+
                     b.Property<string>("FileName")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("file_name");
-
-                    b.Property<string>("NameJob")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name_job");
 
                     b.Property<string>("TopicWork")
                         .IsRequired()
@@ -92,6 +84,9 @@ namespace VKR_server.Migrations
                         .HasColumnName("user_id");
 
                     b.HasKey("FileId");
+
+                    b.HasIndex("EstimationId")
+                        .IsUnique();
 
                     b.HasIndex("UserId");
 
@@ -187,24 +182,19 @@ namespace VKR_server.Migrations
                     b.ToTable("users");
                 });
 
-            modelBuilder.Entity("VKR_server.DB.Entities.Estimation", b =>
-                {
-                    b.HasOne("VKR_server.DB.Entities.File", "File")
-                        .WithOne("Estimation")
-                        .HasForeignKey("VKR_server.DB.Entities.Estimation", "FileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("File");
-                });
-
             modelBuilder.Entity("VKR_server.DB.Entities.File", b =>
                 {
+                    b.HasOne("VKR_server.DB.Entities.Estimation", "Estimation")
+                        .WithOne("File")
+                        .HasForeignKey("VKR_server.DB.Entities.File", "EstimationId");
+
                     b.HasOne("VKR_server.DB.Entities.User", "User")
                         .WithMany("Files")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Estimation");
 
                     b.Navigation("User");
                 });
@@ -226,9 +216,10 @@ namespace VKR_server.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("VKR_server.DB.Entities.File", b =>
+            modelBuilder.Entity("VKR_server.DB.Entities.Estimation", b =>
                 {
-                    b.Navigation("Estimation");
+                    b.Navigation("File")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("VKR_server.DB.Entities.Group", b =>

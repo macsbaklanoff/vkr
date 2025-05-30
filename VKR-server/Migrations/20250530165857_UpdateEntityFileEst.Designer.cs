@@ -12,8 +12,8 @@ using VKR_server.DB;
 namespace VKR_server.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20250530120749_UpdateErd")]
-    partial class UpdateErd
+    [Migration("20250530165857_UpdateEntityFileEst")]
+    partial class UpdateEntityFileEst
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,8 +29,7 @@ namespace VKR_server.Migrations
                 {
                     b.Property<int>("EstimationId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("estimation_id");
+                        .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("EstimationId"));
 
@@ -46,14 +45,7 @@ namespace VKR_server.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("est_stylistic");
 
-                    b.Property<int>("FileId")
-                        .HasColumnType("integer")
-                        .HasColumnName("file_id");
-
                     b.HasKey("EstimationId");
-
-                    b.HasIndex("FileId")
-                        .IsUnique();
 
                     b.ToTable("estimations");
                 });
@@ -62,8 +54,7 @@ namespace VKR_server.Migrations
                 {
                     b.Property<int>("FileId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("file_id");
+                        .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("FileId"));
 
@@ -72,10 +63,19 @@ namespace VKR_server.Migrations
                         .HasColumnType("text")
                         .HasColumnName("academic_subject");
 
+                    b.Property<int>("EstimationId")
+                        .HasColumnType("integer")
+                        .HasColumnName("estimation_id");
+
                     b.Property<string>("FileName")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("file_name");
+
+                    b.Property<string>("NameJob")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name_job");
 
                     b.Property<string>("TopicWork")
                         .IsRequired()
@@ -88,6 +88,9 @@ namespace VKR_server.Migrations
 
                     b.HasKey("FileId");
 
+                    b.HasIndex("EstimationId")
+                        .IsUnique();
+
                     b.HasIndex("UserId");
 
                     b.ToTable("files");
@@ -97,8 +100,7 @@ namespace VKR_server.Migrations
                 {
                     b.Property<int>("GroupId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("group_id");
+                        .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("GroupId"));
 
@@ -116,8 +118,7 @@ namespace VKR_server.Migrations
                 {
                     b.Property<int>("RoleId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("role_id");
+                        .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RoleId"));
 
@@ -182,24 +183,21 @@ namespace VKR_server.Migrations
                     b.ToTable("users");
                 });
 
-            modelBuilder.Entity("VKR_server.DB.Entities.Estimation", b =>
+            modelBuilder.Entity("VKR_server.DB.Entities.File", b =>
                 {
-                    b.HasOne("VKR_server.DB.Entities.File", "File")
-                        .WithOne("Estimation")
-                        .HasForeignKey("VKR_server.DB.Entities.Estimation", "FileId")
+                    b.HasOne("VKR_server.DB.Entities.Estimation", "Estimation")
+                        .WithOne("File")
+                        .HasForeignKey("VKR_server.DB.Entities.File", "EstimationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("File");
-                });
-
-            modelBuilder.Entity("VKR_server.DB.Entities.File", b =>
-                {
                     b.HasOne("VKR_server.DB.Entities.User", "User")
                         .WithMany("Files")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Estimation");
 
                     b.Navigation("User");
                 });
@@ -221,9 +219,10 @@ namespace VKR_server.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("VKR_server.DB.Entities.File", b =>
+            modelBuilder.Entity("VKR_server.DB.Entities.Estimation", b =>
                 {
-                    b.Navigation("Estimation");
+                    b.Navigation("File")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("VKR_server.DB.Entities.Group", b =>

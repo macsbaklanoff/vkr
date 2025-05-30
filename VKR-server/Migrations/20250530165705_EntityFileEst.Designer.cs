@@ -12,8 +12,8 @@ using VKR_server.DB;
 namespace VKR_server.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20250530114432_AddEntityFileEstimation")]
-    partial class AddEntityFileEstimation
+    [Migration("20250530165705_EntityFileEst")]
+    partial class EntityFileEst
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,7 +46,8 @@ namespace VKR_server.Migrations
                         .HasColumnName("est_stylistic");
 
                     b.Property<int>("FileId")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("file_id");
 
                     b.HasKey("EstimationId");
 
@@ -85,7 +86,8 @@ namespace VKR_server.Migrations
                         .HasColumnName("topic_work");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("user_id");
 
                     b.HasKey("FileId");
 
