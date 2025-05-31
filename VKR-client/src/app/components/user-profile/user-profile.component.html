@@ -45,15 +45,15 @@
     <button mat-flat-button>View More</button>
   </div>
   <div class="profile__info">
-    <div class="profile__info__main">
-
-    </div>
-    <div class="profile__info__buttons">
-      <div></div>
-      <div class="profile__info__buttons__content">
-<!--        <button mat-flat-button (click)="changeStateEdit()">Edit</button>-->
-<!--        <button mat-flat-button (click)="updateUserData()">Update</button>-->
+    @for (file of fileEstimationData; track file) {
+      <div class="profile__info__file">
+        <p>Предмет: {{file.academicSubject}}</p>
+        <p>Тема работы: {{file.topicWork}}</p>
+        <p>Содержание: {{file.estContent}}</p>
+        <p>Актуальность: {{file.estRelevance}}</p>
+        <p>Стилистика: {{file.estStylistic}}</p>
+        <p>Итоговый балл: {{file.estContent + file.estRelevance + file.estStylistic}}</p>
       </div>
-    </div>
+    }
   </div>
 </div>

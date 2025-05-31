@@ -7,6 +7,8 @@ import {MatButton} from '@angular/material/button';
 import {MatInput} from '@angular/material/input';
 import {EstimationService} from '../../services/estimation.service';
 import {IEstimationProfile} from '../../interfaces/estimation-profile-response';
+import {IInfoFileEstimationResponse} from '../../interfaces/info-file-estimation-response';
+import {FileService} from '../../services/file.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -21,6 +23,7 @@ import {IEstimationProfile} from '../../interfaces/estimation-profile-response';
 export class UserProfileComponent {
   private readonly _userService = inject(UserService);
   private readonly _estimationService = inject(EstimationService);
+  private readonly _fileService = inject(FileService);
 
   public user_info: IUserResponse | undefined = undefined;
   public estimationData: IEstimationProfile = {
@@ -30,6 +33,7 @@ export class UserProfileComponent {
     countRatedSatisfactory: 0,
     countRatedUnSatisfactory: 0
   };
+  public fileEstimationData: IInfoFileEstimationResponse[] = [];
 
 
   constructor(private route: ActivatedRoute) {
@@ -44,6 +48,11 @@ export class UserProfileComponent {
       next: (profile: IEstimationProfile) => {
         this.estimationData = profile;
       },
+    })
+    this._fileService.getFileEstimation(user_id).subscribe({
+      next: (data: IInfoFileEstimationResponse[]) => {
+        this.fileEstimationData = data;
+      }
     })
   }
 }

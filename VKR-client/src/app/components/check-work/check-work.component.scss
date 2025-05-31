@@ -16,6 +16,7 @@
       display: grid;
       grid-template-columns: minmax(10px, 500px);
       border: var(--mat-sys-outline-variant) dashed;
+      border-radius: 32px;
       height: 100%;
       place-items: center;
       padding-block: 16px;
