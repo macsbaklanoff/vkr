@@ -68,7 +68,7 @@ namespace VKR_server.Controllers
                 LastName = user.LastName,
                 CountWorks = user.Files.Count(),
                 RoleName = "Student",
-                GroupName = _context.Groups.FirstOrDefault(g => g.GroupId == user.GroupId).GroupName.ToString()
+                GroupName = user.Group?.GroupName,
             });
         }
 
