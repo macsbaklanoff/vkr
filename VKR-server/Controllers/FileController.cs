@@ -105,7 +105,16 @@ namespace VKR_server.Controllers
             Console.WriteLine($"Оценка акутальности: {estStylistic}");
 
             Console.WriteLine(_context.Files.ToArray()[0].FileName);
-            return Ok();
+            return Ok(new
+            {
+                fileName = new_file.FileName,
+                academicSubject = new_file.AcademicSubject,
+                topicWork = new_file.TopicWork,
+                estContent = new_estimation.EstContent,
+                estRelevance = new_estimation.EstRelevance,
+                estStylistic = new_estimation.EstStylistic,
+                estRecommendations = new_estimation.EstRecommedations
+            });
         }
 
         //метаданные файла и оценки

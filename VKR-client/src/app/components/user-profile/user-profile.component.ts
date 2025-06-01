@@ -38,10 +38,10 @@ export class UserProfileComponent {
   public fileEstimationData: IInfoFileEstimationResponse[] = [];
 
   public getColor(estimation: number) : string {
-    if (estimation >= 81) return '#DB4242';
-    else if (estimation >= 61 && estimation < 81) return '#EBA134';
-    else if (estimation >=41 && estimation < 61) return '#dbd765';
-    return '#45a85b';
+    if (estimation >= 81) return '#45a85b';
+    else if (estimation >= 61 && estimation < 81) return '#dbd765';
+    else if (estimation >=41 && estimation < 61) return '#EBA134';
+    return '#DB4242';
   }
 
   constructor(private route: ActivatedRoute) {

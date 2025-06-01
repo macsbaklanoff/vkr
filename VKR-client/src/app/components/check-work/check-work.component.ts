@@ -1,11 +1,13 @@
 import {Component, EventEmitter, inject, Output, signal} from '@angular/core';
 import {MatButton} from '@angular/material/button';
-import {NgForOf, NgIf} from '@angular/common';
+import {NgForOf, NgIf, NgStyle} from '@angular/common';
 import {FileService} from '../../services/file.service';
 import {IUploadFile} from '../../interfaces/upload-file';
 import {AuthService} from '../../services/auth.service';
-import {MatInput} from "@angular/material/input";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatError, MatFormField, MatInput, MatLabel} from "@angular/material/input";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {IInfoFileEstimationResponse} from '../../interfaces/info-file-estimation-response';
+import {MatProgressSpinner} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-check-work',
@@ -15,7 +17,12 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     NgIf,
     MatInput,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatError,
+    MatFormField,
+    MatLabel,
+    NgStyle,
+    MatProgressSpinner,
   ],
   templateUrl: './check-work.component.html',
   styleUrl: './check-work.component.scss'
@@ -29,6 +36,10 @@ export class CheckWorkComponent {
 
   public topicWork: string = '';
   public academicSubject: string = '';
+
+  public resultEstimation: IInfoFileEstimationResponse | undefined = undefined;
+
+  public inProgressChecking: boolean = false;
 
   isDragOver = false;
 
@@ -55,6 +66,13 @@ export class CheckWorkComponent {
     }
   }
 
+  public getColor(estimation: number) : string {
+    if (estimation >= 81) return '#45a85b';
+    else if (estimation >= 61 && estimation < 81) return '#dbd765';
+    else if (estimation >=41 && estimation < 61) return '#EBA134';
+    return '#DB4242';
+  }
+
   removeFile() {
     this.file = undefined;
   }
@@ -72,6 +90,7 @@ export class CheckWorkComponent {
       alert('Заполните поля!')
       return;
     }
+    this.inProgressChecking = true;
     let dataFile: IUploadFile = {
       userId: this.authData!.userId.toString(), //в строку потому что FormData - только строки
       topicWork: this.topicWork,
@@ -79,8 +98,13 @@ export class CheckWorkComponent {
       file: this.file!
     }
     this._fileService.uploadFile(dataFile).subscribe({
-      next: () => {},
-      error: (err) => {console.log(err)}
+      next: (result) => {
+        this.resultEstimation = result;
+      },
+      error: (err) => {console.log(err)},
+      complete: () => {
+        this.inProgressChecking = false;
+      }
     })
   }
 }

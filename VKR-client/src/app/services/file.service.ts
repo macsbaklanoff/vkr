@@ -20,13 +20,13 @@ export class FileService {
 
   constructor() { }
 
-  public uploadFile(uploadFile: IUploadFile) : Observable<any> {
+  public uploadFile(uploadFile: IUploadFile) : Observable<IInfoFileEstimationResponse> {
     const formData = new FormData();
     formData.append('userId', uploadFile.userId);
     formData.append('topicWork', uploadFile.topicWork);
     formData.append('academicSubject', uploadFile.academicSubject);
     formData.append('file', uploadFile.file);
-    return this._httpClient.post(`${this._apiPath}/upload-file`, formData, {headers: this._headers});
+    return this._httpClient.post<IInfoFileEstimationResponse>(`${this._apiPath}/upload-file`, formData, {headers: this._headers});
   }
   public getFileEstimation(userId: number) : Observable<IInfoFileEstimationResponse[]> {
     return this._httpClient.get<IInfoFileEstimationResponse[]>(`${this._apiPath}/get-info-file-estimation/${userId}`, {headers: this._headers});

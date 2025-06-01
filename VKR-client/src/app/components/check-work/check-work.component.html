@@ -2,7 +2,24 @@
   <div class="check-work__header">
     <button mat-flat-button>Выбрать файл</button>
   </div>
-  <div class="check-work__content">
+    <div class="check-work__content">
+    <input
+      class="check-work__content__input"
+      matInput
+      type="text"
+      [(ngModel)]="topicWork"
+      placeholder="Тема работы"
+    >
+    <input
+      class="check-work__content__input"
+      matInput
+      type="text"
+      [(ngModel)]="academicSubject"
+      placeholder="Название предмета"
+    >
+      @if (inProgressChecking) {
+        <mat-spinner></mat-spinner>
+      }@else {
     <div class="check-work__content__form"
          (drop)="onDrop($event)"
          (dragover)="onDragOver($event)"
@@ -15,20 +32,6 @@
           <div class="check-work__content__form__file__upper">
             <p>Имя файла: {{ file.name }}</p>
             <p>Размер файла: {{ formatFileSize(file.size) }}</p>
-            <input
-              class="check-work__content__form__file__upper__input"
-              matInput
-              type="text"
-              [(ngModel)]="topicWork"
-              placeholder="Тема работы"
-            >
-            <input
-              class="check-work__content__form__file__upper__input"
-              matInput
-              type="text"
-              [(ngModel)]="academicSubject"
-              placeholder="Название предмета"
-            >
           </div>
           <div class="check-work__content__form__file__lower">
             <button mat-flat-button (click)="uploadFile()">Отправить</button>
@@ -37,6 +40,25 @@
         </div>
       }
     </div>
+      }
   </div>
-  <div class="check-work__footer"></div>
+  <div class="check-work__footer">
+    @if (resultEstimation != undefined) {
+      <div class="check-work__footer__item"
+           [ngStyle]="{'--color': getColor(resultEstimation.estContent + resultEstimation.estRelevance + resultEstimation.estStylistic)}"
+      >
+        <div class="check-work__footer__item__left">
+          <p class="check-work__footer__item__left__text">Предмет: {{ resultEstimation.academicSubject }}</p>
+          <p class="check-work__footer__item__left__text">Тема работы: {{ resultEstimation.topicWork }}</p>
+          <p class="check-work__footer__item__left__text">Оценка содержания (0-50): {{ resultEstimation.estContent }}</p>
+          <p class="check-work__footer__item__left__text">Оценка актуальности (0-25): {{ resultEstimation.estRelevance }}</p>
+          <p class="check-work__footer__item__left__text">Оценка стилистики (0-25): {{ resultEstimation.estStylistic }}</p>
+          <p class="check-work__footer__item__left__text">Итоговый
+            балл: {{ resultEstimation.estContent + resultEstimation.estRelevance + resultEstimation.estStylistic }}</p>
+        </div>
+        <div class="check-work__footer__item__right"
+        ></div>
+      </div>
+    }
+  </div>
 </div>
