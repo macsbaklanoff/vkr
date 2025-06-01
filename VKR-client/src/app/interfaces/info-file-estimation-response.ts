@@ -2,7 +2,7 @@ export interface IInfoFileEstimationResponse {
     fileName: string;
     academicSubject: string;
     topicWork: string;
-    estContent: string;
-    estRelevance: string;
-    estStylistic: string;
+    estContent: number;
+    estRelevance: number;
+    estStylistic: number;
 }

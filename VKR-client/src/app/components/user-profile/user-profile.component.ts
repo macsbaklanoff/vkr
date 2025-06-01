@@ -9,13 +9,15 @@ import {EstimationService} from '../../services/estimation.service';
 import {IEstimationProfile} from '../../interfaces/estimation-profile-response';
 import {IInfoFileEstimationResponse} from '../../interfaces/info-file-estimation-response';
 import {FileService} from '../../services/file.service';
+import {NgStyle} from '@angular/common';
 
 @Component({
   selector: 'app-user-profile',
   imports: [
     FormsModule,
     MatButton,
-    MatInput
+    MatInput,
+    NgStyle
   ],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.scss'
@@ -35,6 +37,12 @@ export class UserProfileComponent {
   };
   public fileEstimationData: IInfoFileEstimationResponse[] = [];
 
+  public getColor(estimation: number) : string {
+    if (estimation >= 81) return '#DB4242';
+    else if (estimation >= 61 && estimation < 81) return '#EBA134';
+    else if (estimation >=41 && estimation < 61) return '#dbd765';
+    return '#45a85b';
+  }
 
   constructor(private route: ActivatedRoute) {
     const user_id = this.route.snapshot.params['id'];
