@@ -70,6 +70,7 @@ export class ProfileComponent {
     this._fileService.getFileEstimation(this.authData!.userId).subscribe({
       next: (filesData: IInfoFileEstimationResponse[]) => {
         this.filesData = filesData;
+        console.log(this.filesData);
       }
     })
   }

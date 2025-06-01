@@ -13,6 +13,8 @@ namespace VKR_server.DB.Entities
         public int EstRelevance { get; set; }
         [Column("est_stylistic")]
         public int EstStylistic { get; set; }
+        [Column("est_recommendations")]
+        public string EstRecommedations { get; set; }
         public File File { get; set; }
     }
 }

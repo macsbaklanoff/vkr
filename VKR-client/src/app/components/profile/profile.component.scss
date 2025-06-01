@@ -147,8 +147,10 @@
         border-radius: 16px;
         display: grid;
         grid-template-columns: 1fr 20px;
+        height: 150px;
         &__left {
           padding: 10px;
+          overflow: auto;
           &__text {
             margin: 0;
             font-size: 14px;

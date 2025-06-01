@@ -5,4 +5,5 @@ export interface IInfoFileEstimationResponse {
     estContent: number;
     estRelevance: number;
     estStylistic: number;
+    estRecommendations: string;
 }

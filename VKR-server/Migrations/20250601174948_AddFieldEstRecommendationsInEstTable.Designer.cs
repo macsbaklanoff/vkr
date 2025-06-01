@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using VKR_server.DB;
@@ -11,9 +12,11 @@ using VKR_server.DB;
 namespace VKR_server.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20250601174948_AddFieldEstRecommendationsInEstTable")]
+    partial class AddFieldEstRecommendationsInEstTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,9 +38,8 @@ namespace VKR_server.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("est_content");
 
-                    b.Property<string>("EstRecommedations")
-                        .IsRequired()
-                        .HasColumnType("text")
+                    b.Property<int>("EstRecommedations")
+                        .HasColumnType("integer")
                         .HasColumnName("est_recommendations");
 
                     b.Property<int>("EstRelevance")
