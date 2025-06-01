@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
 using VKR_server.DB;
 using VKR_server.DB.Entities;
 using VKR_server.Dto;
@@ -71,6 +72,38 @@ namespace VKR_server.Controllers
             });
         }
 
+        [HttpGet("roles", Name = "GetRoles")]
+        [Authorize]
+        public IActionResult GetRoles()
+        {
+            var jwt = GetJwtData(HttpContext.Request.Headers.Authorization.ToString().Split()[1]);
+
+            if (jwt.RoleName != "Admin") return BadRequest("Invalide role");
+
+            var roles = _context.Roles.ToList();
+            return Ok(roles);
+        }
+
+        [HttpGet("users-on-role/{role_id}", Name = "GetUsersOnRole")]
+        [Authorize]
+        public IActionResult GetRoles(int role_id)
+        {
+            var jwt = GetJwtData(HttpContext.Request.Headers.Authorization.ToString().Split()[1]);
+
+            if (jwt.RoleName != "Admin") return BadRequest("Invalide role");
+
+            var users = _context.Users.Where(u => u.RoleId == role_id).Select(s => new UserResponseDto
+            {
+                UserId = s.Id,
+                Email = s.Email,
+                FirstName = s.FirstName,
+                LastName = s.LastName,
+                RoleName = s.Role.RoleName,
+                CountWorks = s.Files.Count(),
+                GroupName = s.Group.GroupName
+            });
+            return Ok(users);
+        }
 
         [HttpGet("students/{groupId}", Name = "GetStudents")]
         [Authorize]
@@ -88,9 +121,9 @@ namespace VKR_server.Controllers
                 Email = s.Email,
                 FirstName = s.FirstName,
                 LastName = s.LastName,
-                RoleName = "Student",
+                RoleName = s.Role.RoleName,
                 CountWorks = s.Files.Count(),
-                GroupName = _context.Groups.FirstOrDefault(g => g.GroupId == groupId).ToString()
+                GroupName = s.Group.GroupName
             });
             return Ok(studentsInGroupDto);
         }

@@ -7,6 +7,7 @@ import {IUpdateUserData} from '../interfaces/update-user-data';
 import {IAuthData} from '../interfaces/auth-data';
 import {IAuthResponse} from '../interfaces/auth-response';
 import {IGroupResponse} from '../interfaces/group-response';
+import {IRoleResponse} from '../interfaces/role-response';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,9 @@ export class UserService {
   public deleteUser(userId: number) : Observable<number> {
     return this._httpClient.delete<number>(`${this._apiPath}/delete-user/${userId}`, {headers: this.headers});
   }
+  public getRoles(): Observable<IRoleResponse[]> {
+    return this._httpClient.get<IRoleResponse[]>(`${this._apiPath}/roles/`, {headers: this.headers});
+  }
   public changeRoleUser(userId: number, roleId: number) : Observable<number> {
     return this._httpClient.put<number>(`${this._apiPath}/update-role/${userId}/${roleId}`, {}, {headers: this.headers});
   }
@@ -43,5 +47,8 @@ export class UserService {
   }
   public getUser(userId: number) : Observable<IUserResponse> {
     return this._httpClient.get<IUserResponse>(`${this._apiPath}/user/${userId}`, {headers: this.headers});
+  }
+  public getUsersOnRole (roleId: number): Observable<IUserResponse[]> {
+    return this._httpClient.get<IUserResponse[]>(`${this._apiPath}/users-on-role/${roleId}`, {headers: this.headers});
   }
 }

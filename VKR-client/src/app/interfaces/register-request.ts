@@ -3,5 +3,5 @@ export interface IRegisterRequest {
   password: string;
   firstName: string;
   lastName: string;
-  groupName: string;
+  groupName: string | undefined;
 }

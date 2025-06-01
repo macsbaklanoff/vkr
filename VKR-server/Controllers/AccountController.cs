@@ -60,7 +60,7 @@ namespace VKR_server.Controllers
 
             User new_user = new User();
 
-            if (userDto.GroupName == null)
+            if (userDto.GroupName == string.Empty)
             {
                 new_user = new User
                 {
@@ -74,7 +74,7 @@ namespace VKR_server.Controllers
                 _context.SaveChanges();
             }
 
-            if (userDto.GroupName != null)
+            if (userDto.GroupName != string.Empty)
             {
                 var group = _context.Groups.FirstOrDefault(g => g.GroupName == userDto.GroupName);
                 if (group == null)

@@ -1,14 +1,25 @@
 .users {
   display: grid;
+  grid-template-columns: 150px 1fr;
+  column-gap: 16px;
   height: 100%;
+  &__filters {
+    padding-inline: 16px;
+    display: grid;
+    grid-auto-rows: min-content;
+    border-radius: 16px;
+    background-color: var(--mat-sys-surface-container-low);
+  }
+  &__table {
+    padding: 4px;
+    width: 100%;
+    background-color: var(--mat-sys-surface-container-low);
+    border-radius: 16px;
+  }
 }
-.table {
-  padding: 4px;
-  width: 100%;
-  background-color: var(--mat-sys-surface-container-low);
-  border-radius: 16px;
+.example-radio-group {
+  display: grid;
 }
-
 .demo-table {
   width: 100%;
   background-color: var(--mat-sys-surface-container-low);
