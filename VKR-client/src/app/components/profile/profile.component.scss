@@ -74,6 +74,9 @@
         }
       }
     }
+    &__button-delete {
+      background-color: var(--mat-sys-error) !important;
+    }
   }
 
   &__info {

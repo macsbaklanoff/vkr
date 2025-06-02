@@ -42,7 +42,7 @@
         </div>
       </div>
     </div>
-    <button mat-flat-button>View More</button>
+    <button mat-flat-button class="profile__main__button-delete" (click)="deleteAccount()">Удалить аккаунт</button>
   </div>
   <div class="profile__info">
     <mat-tab-group>
@@ -97,7 +97,6 @@
           <div class="profile__info__settings__buttons">
             <div></div>
             <div class="profile__info__settings__buttons__content">
-              <button mat-flat-button>Reset</button>
               <button mat-flat-button (click)="changeStateEdit()">Edit</button>
               <button mat-flat-button (click)="updateUserData()">Update</button>
             </div>
@@ -106,86 +105,36 @@
       </mat-tab>
       <mat-tab label="Works">
         <div class="profile__info__files">
-          @for (file of filesData; track file) {
-            <div class="profile__info__files__item"
-                 [ngStyle]="{'--color': getColor(file.estContent + file.estRelevance + file.estStylistic)}"
-            >
-              <div class="profile__info__files__item__left">
-                <p class="profile__info__files__item__left__text">Предмет: {{ file.academicSubject }}</p>
-                <p class="profile__info__files__item__left__text">Тема работы: {{ file.topicWork }}</p>
-                <p class="profile__info__files__item__left__text">Оценка содержания (0-50): {{ file.estContent }}</p>
-                <p class="profile__info__files__item__left__text">Оценка актуальности (0-25): {{ file.estRelevance }}</p>
-                <p class="profile__info__files__item__left__text">Оценка стилистики (0-25): {{ file.estStylistic }}</p>
-                <p class="profile__info__files__item__left__text">Итоговый
-                  балл: <b>{{ file.estContent + file.estRelevance + file.estStylistic }}</b></p>
-                <p class="profile__info__files__item__left__text">
-                  Рекоммендации по улучшению учебной работы: {{ file.estRecommendations }}
-                </p>
+          @if (filesData.length == 0) {
+            <mat-icon>sentiment_dissatisfied</mat-icon>
+            К сожалению, у вас отсутствуют учебные работы. <a routerLink="/check-work">Загрузите
+              работу</a>чтобы увидеть результаты.
+          } @else {
+            @for (file of filesData; track file) {
+              <div class="profile__info__files__item"
+                   [ngStyle]="{'--color': getColor(file.estContent + file.estRelevance + file.estStylistic)}"
+              >
+                <div class="profile__info__files__item__left">
+                  <p class="profile__info__files__item__left__text">Предмет: {{ file.academicSubject }}</p>
+                  <p class="profile__info__files__item__left__text">Тема работы: {{ file.topicWork }}</p>
+                  <p class="profile__info__files__item__left__text">Оценка содержания (0-50): {{ file.estContent }}</p>
+                  <p class="profile__info__files__item__left__text">Оценка актуальности
+                    (0-25): {{ file.estRelevance }}</p>
+                  <p class="profile__info__files__item__left__text">Оценка стилистики
+                    (0-25): {{ file.estStylistic }}</p>
+                  <p class="profile__info__files__item__left__text">Итоговый
+                    балл: <b>{{ file.estContent + file.estRelevance + file.estStylistic }}</b></p>
+                  <p class="profile__info__files__item__left__text">
+                    Рекоммендации по улучшению учебной работы: {{ file.estRecommendations }}
+                  </p>
+                </div>
+                <div class="profile__info__files__item__right"
+                ></div>
               </div>
-              <div class="profile__info__files__item__right"
-              ></div>
-            </div>
+            }
           }
         </div>
       </mat-tab>
     </mat-tab-group>
-<!--        <div class="profile__info__header">-->
-<!--          <h3>Account Settings</h3>-->
-<!--        </div>-->
-<!--        <div class="profile__info__line"></div>-->
-<!--        <div class="profile__info__main">-->
-<!--          <div class="profile__info__main__labels">-->
-<!--            <p class="profile__info__main__labels__text">First name:</p>-->
-<!--            <p class="profile__info__main__labels__text">Last name:</p>-->
-<!--            <p class="profile__info__main__labels__text">Email:</p>-->
-<!--            <p class="profile__info__main__labels__text">Group:</p>-->
-<!--          </div>-->
-<!--          <div class="profile__info__main__inputs">-->
-<!--            <div class="profile__info__main__inputs__item">-->
-<!--              <input-->
-<!--                class="profile__info__main__inputs__item__input"-->
-<!--                matInput-->
-<!--                type="text"-->
-<!--                [(ngModel)]="firstName"-->
-<!--                [disabled]="!isEditable"-->
-<!--              >-->
-<!--            </div>-->
-<!--            <div class="profile__info__main__inputs__item">-->
-<!--              <input-->
-<!--                class="profile__info__main__inputs__item__input"-->
-<!--                matInput-->
-<!--                type="text"-->
-<!--                [(ngModel)]="lastName"-->
-<!--                [disabled]="!isEditable"-->
-<!--              >-->
-<!--            </div>-->
-<!--            <div class="profile__info__main__inputs__item">-->
-<!--              <input-->
-<!--                class="profile__info__main__inputs__item__input"-->
-<!--                matInput-->
-<!--                type="text"-->
-<!--                [(ngModel)]="email"-->
-<!--                [disabled]="!isEditable"-->
-<!--              >-->
-<!--            </div>-->
-<!--            <div class="profile__info__main__inputs__item">-->
-<!--              <input-->
-<!--                class="profile__info__main__inputs__item__input"-->
-<!--                matInput-->
-<!--                type="text"-->
-<!--                [(ngModel)]="groupName"-->
-<!--                [disabled]="!isEditable"-->
-<!--              >-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="profile__info__buttons">-->
-<!--          <div></div>-->
-<!--          <div class="profile__info__buttons__content">-->
-<!--            <button mat-flat-button>Reset</button>-->
-<!--            <button mat-flat-button (click)="changeStateEdit()">Edit</button>-->
-<!--            <button mat-flat-button (click)="updateUserData()">Update</button>-->
-<!--          </div>-->
-<!--        </div>-->
   </div>
 </div>

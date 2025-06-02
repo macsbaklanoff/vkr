@@ -161,21 +161,24 @@ namespace VKR_server.Controllers
             return Ok(id);
         }
 
-        [HttpDelete("delete-user/{id}", Name = "DeleteUser")]
+        [HttpDelete("delete-user/{user_id}", Name = "DeleteUser")]
         [Authorize]
-        public IActionResult DeleteUser(int id)
+        public IActionResult DeleteUser(int user_id)
         {
             var jwt = GetJwtData(HttpContext.Request.Headers.Authorization.ToString().Split()[1]);
 
-            if (jwt.RoleName != "Admin") return BadRequest("Invalide role");
-
-            var user = _context.Users.Find(id);
+            var user = _context.Users.Find(user_id);
             if (user == null) return BadRequest("Not-existent user");
 
+            var files = _context.Files.Where(f => f.UserId == user_id);
             _context.Users.Remove(user);
+            foreach (var file in files)
+            {
+                _context.Files.Remove(file);
+            }
             _context.SaveChanges();
-
-            return Ok(id);
+            
+            return Ok(user_id);
         }
 
         private JwtData GetJwtData(string token)

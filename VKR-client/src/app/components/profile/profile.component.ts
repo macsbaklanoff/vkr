@@ -16,6 +16,10 @@ import {MatTab, MatTabGroup} from '@angular/material/tabs';
 import {FileService} from '../../services/file.service';
 import {IInfoFileEstimationResponse} from '../../interfaces/info-file-estimation-response';
 import {NgStyle} from '@angular/common';
+import {GetStatsComponent} from '../dialogs/get-stats/get-stats.component';
+import {GraphicsComponent} from '../dialogs/graphics/graphics.component';
+import {DeleteAccountDialogComponent} from '../dialogs/delete-account-dialog/delete-account-dialog.component';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -30,7 +34,9 @@ import {NgStyle} from '@angular/common';
     FormsModule,
     MatTabGroup,
     MatTab,
-    NgStyle
+    NgStyle,
+    MatIcon,
+    RouterLink
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
@@ -83,6 +89,19 @@ export class ProfileComponent {
 
   public changeStateEdit(): void {
     this.isEditable = !this.isEditable;
+  }
+
+  public deleteAccount(): void {
+    const dialogRef = this.dialog.open(DeleteAccountDialogComponent)
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!result) return;
+      this._userService.deleteUser(this.authData!.userId).subscribe({
+        next: () => {
+          this._authService.signOut();
+        }
+      })
+    });
   }
 
   public updateUserData(): void {
