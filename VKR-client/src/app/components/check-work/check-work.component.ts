@@ -73,6 +73,13 @@ export class CheckWorkComponent {
     return '#DB4242';
   }
 
+  public onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.file = input.files[0];
+    }
+  }
+
   removeFile() {
     this.file = undefined;
   }
