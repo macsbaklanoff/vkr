@@ -9,6 +9,7 @@
         <mat-radio-button class="example-radio-button" [value]="group">{{group.groupName}}</mat-radio-button>
       }
     </mat-radio-group>
+    <button mat-flat-button (click)="getStats()">Статистика</button>
   </div>
   <div class="students__table">
     <table mat-table [dataSource]="students()" class="mat-elevation-z8 demo-table">

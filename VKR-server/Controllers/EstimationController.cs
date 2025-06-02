@@ -36,7 +36,23 @@ namespace VKR_server.Controllers
 
             return Ok(response);
         }
-
+        [Authorize]
+        [HttpGet("get-estimations-all-groups", Name = "GetEstimationsAllGroups")]
+        public IActionResult GetEstimationsAllGroups()
+        {
+            var est_ids = _context.Files.Select(f => f.EstimationId).ToArray();
+            var estimations = _context.Estimations.Where(e => est_ids.Contains(e.EstimationId));
+            var countEstEx = estimations.Where(e => e.EstContent + e.EstRelevance + e.EstStylistic >= 81).Count();
+            var countEstGood = estimations.Where(e => e.EstContent + e.EstRelevance + e.EstStylistic >= 61 &&
+            e.EstContent + e.EstRelevance + e.EstStylistic < 81)
+                .Count();
+            var countEstSutisfactory = estimations.Where(e => e.EstContent + e.EstRelevance + e.EstStylistic >= 41 &&
+            e.EstContent + e.EstRelevance + e.EstStylistic < 61)
+                .Count();
+            var countEstUnSutisfactory = estimations.Where(e => e.EstContent + e.EstRelevance + e.EstStylistic < 41).Count();
+            int[] arrayEstimationsCount = [countEstEx, countEstGood, countEstSutisfactory, countEstUnSutisfactory];
+            return Ok(arrayEstimationsCount);
+        }
         private int CountSendWorks(int user_id)
         {
             var sendWorks = from f in _context.Files

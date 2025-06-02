@@ -1,0 +1,14 @@
+<div class="test">
+  <h2 mat-dialog-title>Get Stats?</h2>
+  <mat-dialog-content>
+    Данная статистика представляет оценки:
+    <mat-radio-group aria-label="Select an option" class="test1" [(ngModel)]="test[1]">
+      <mat-radio-button value="one">По выбранной группе</mat-radio-button>
+      <mat-radio-button value="all">По всем группам</mat-radio-button>
+    </mat-radio-group>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-button mat-dialog-close cdkFocusInitial (click)="stats()">Stats</button>
+  </mat-dialog-actions>
+</div>

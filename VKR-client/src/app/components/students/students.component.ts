@@ -13,10 +13,15 @@ import {
   MatHeaderRowDef,
   MatRow, MatRowDef, MatTable
 } from '@angular/material/table';
-import {MatIconButton} from '@angular/material/button';
+import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatMenu, MatMenuItem} from '@angular/material/menu';
 import {MatIcon} from '@angular/material/icon';
 import {RouterLink} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {SignOutDialogComponent} from '../dialogs/sign-out-dialog/sign-out-dialog.component';
+import {GetStatsComponent} from '../dialogs/get-stats/get-stats.component';
+import {DeleteDialogComponent} from '../dialogs/delete-dialog/delete-dialog.component';
+import {GraphicsComponent} from '../dialogs/graphics/graphics.component';
 
 @Component({
   selector: 'app-students',
@@ -38,7 +43,8 @@ import {RouterLink} from '@angular/router';
     MatRowDef,
     MatTable,
     MatHeaderCellDef,
-    RouterLink
+    RouterLink,
+    MatButton
   ],
   templateUrl: './students.component.html',
   styleUrl: './students.component.scss'
@@ -50,8 +56,24 @@ export class StudentsComponent {
   public students = signal<IUserResponse[]>([]);
   public groups = signal<IGroupResponse[]>([]);
   public favoriteGroup = signal<IGroupResponse>(this.groups()[0]);
-
+  private readonly _matDialogRef = inject(MatDialog);
   public displayedColumns: string[] = ['№', 'Name', 'Email', 'Count works'];
+
+  private readonly dialog = inject(MatDialog);
+
+  public getStats(): void {
+    const dialogRef = this._matDialogRef.open(GetStatsComponent)
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result[1])
+      if (!result[0]) return;
+      console.log(this.favoriteGroup())
+      const dialogRefGr = this._matDialogRef.open(GraphicsComponent, {
+        data: result[1],
+      });
+    });
+
+  }
 
   constructor() {
     this._userService.getGroups().subscribe({
