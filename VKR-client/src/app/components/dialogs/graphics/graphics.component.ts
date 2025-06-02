@@ -3,6 +3,7 @@ import Chart, {ChartTypeRegistry} from 'chart.js/auto';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {EstimationService} from '../../../services/estimation.service';
 import {IEstsAllGroups} from '../../../interfaces/ests-all-groups';
+import {IGroupResponse} from '../../../interfaces/group-response';
 
 @Component({
   selector: 'app-graphics',
@@ -15,11 +16,11 @@ export class GraphicsComponent {
   barChart: any;
   private readonly _estimationService = inject(EstimationService);
   private dataGraphics: number[] = []
+  public graphicName : string = "";
 
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
-    if (data == 'all') {
-      console.log(data)
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {group: string, favoriteGroup: IGroupResponse}) {
+    if (data.group == 'all') {
+      this.graphicName = 'Оценки работ всем группам'
       this._estimationService.getEstimationsAllGroups().subscribe({
         next: (data): void => {
           this.dataGraphics = data
@@ -28,8 +29,15 @@ export class GraphicsComponent {
         }
       })
     }
-    else {
-
+    else if (data.group == 'one') {
+      this.graphicName = `Оценки работ по группе ${data.favoriteGroup.groupName}`
+      this._estimationService.getEstimationsGroup(data.favoriteGroup.groupId).subscribe({
+        next: (data): void => {
+          this.dataGraphics = data
+          this.barChartMethod();
+          console.log(this.dataGraphics)
+        }
+      })
     }
   }
   public test1 = this.dataGraphics[0]

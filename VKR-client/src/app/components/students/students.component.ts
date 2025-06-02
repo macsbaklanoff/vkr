@@ -69,7 +69,10 @@ export class StudentsComponent {
       if (!result[0]) return;
       console.log(this.favoriteGroup())
       const dialogRefGr = this._matDialogRef.open(GraphicsComponent, {
-        data: result[1],
+        data: {
+          group: result[1],
+          favoriteGroup: this.favoriteGroup(),
+        },
       });
     });
 

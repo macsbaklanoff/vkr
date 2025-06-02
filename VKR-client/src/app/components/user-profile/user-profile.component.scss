@@ -20,7 +20,7 @@
 
       &__block {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: min-content 1fr;
 
         &__left {
           &__text {
@@ -29,8 +29,6 @@
             color: var(--mat-sys-on-surface);
           }
         }
-
-        //color: #3f546c;
         &__right {
           &__text {
             text-align: end;
@@ -86,7 +84,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: min-content min-content 1fr min-content;
     padding: 24px;
-
+    row-gap: 16px;
     &__item {
       border: 1px solid var(--mat-sys-on-surface);
       border-radius: 16px;

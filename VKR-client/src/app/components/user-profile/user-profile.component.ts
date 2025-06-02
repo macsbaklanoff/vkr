@@ -10,6 +10,7 @@ import {IEstimationProfile} from '../../interfaces/estimation-profile-response';
 import {IInfoFileEstimationResponse} from '../../interfaces/info-file-estimation-response';
 import {FileService} from '../../services/file.service';
 import {NgStyle} from '@angular/common';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-user-profile',
@@ -17,7 +18,8 @@ import {NgStyle} from '@angular/common';
     FormsModule,
     MatButton,
     MatInput,
-    NgStyle
+    NgStyle,
+    MatIconModule
   ],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.scss'

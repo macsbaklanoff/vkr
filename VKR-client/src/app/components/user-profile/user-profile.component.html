@@ -45,6 +45,10 @@
     <button mat-flat-button>View More</button>
   </div>
   <div class="profile__info">
+    @if (fileEstimationData.length == 0) {
+      <mat-icon>sentiment_dissatisfied</mat-icon>
+      К сожалению, у пользователя отсутствуют учебные работы
+    }
     @for (file of fileEstimationData; track file) {
       <div class="profile__info__item"
            [ngStyle]="{'--color': getColor(file.estContent + file.estRelevance + file.estStylistic)}"

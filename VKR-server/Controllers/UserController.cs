@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -58,7 +59,9 @@ namespace VKR_server.Controllers
 
             if (jwt.RoleName != "Admin") return BadRequest("Invalide role");
 
-            var user = _context.Users.FirstOrDefault(u => u.Id == user_id);
+            //Include явно загружает связанные данные
+            var user = _context.Users.Include(u => u.Role).Include(u => u.Group).FirstOrDefault(u => u.Id == user_id);
+
             if (user == null) return BadRequest("User doesnt exists");
             return Ok(new UserResponseDto
             {
@@ -67,11 +70,10 @@ namespace VKR_server.Controllers
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 CountWorks = user.Files.Count(),
-                RoleName = "Student",
+                RoleName = user.Role.RoleName,
                 GroupName = user.Group?.GroupName,
             });
         }
-
         [HttpGet("roles", Name = "GetRoles")]
         [Authorize]
         public IActionResult GetRoles()
@@ -86,12 +88,13 @@ namespace VKR_server.Controllers
 
         [HttpGet("users-on-role/{role_id}", Name = "GetUsersOnRole")]
         [Authorize]
-        public IActionResult GetRoles(int role_id)
+        public IActionResult GetUsersOnRole(int role_id)
         {
             var jwt = GetJwtData(HttpContext.Request.Headers.Authorization.ToString().Split()[1]);
 
             if (jwt.RoleName != "Admin") return BadRequest("Invalide role");
 
+            //Select по умолчанию неявно подгружает связанные сущности
             var users = _context.Users.Where(u => u.RoleId == role_id).Select(s => new UserResponseDto
             {
                 UserId = s.Id,

@@ -22,4 +22,7 @@ export class EstimationService {
   public getEstimationsAllGroups() : Observable<number[]> {
     return this._httpClient.get<number[]>(`${this._path}/get-estimations-all-groups`, {headers: this._headers});
   }
+  public getEstimationsGroup(group_id: number) : Observable<number[]> {
+    return this._httpClient.get<number[]>(`${this._path}/get-estimations-group/${group_id}`, {headers: this._headers});
+  }
 }
