@@ -52,7 +52,8 @@ import {FormArray, FormBuilder, FormControl, FormsModule, ReactiveFormsModule} f
     MatCheckbox,
     ReactiveFormsModule,
     FormsModule,
-    MatButton
+    MatButton,
+    NgIf
   ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
@@ -64,6 +65,7 @@ export class UsersComponent {
 
   public readonly _authService = inject(AuthService);
 
+  public authData = this._authService.authData();
   public users = signal<IUserResponse[]>([]);
 
   public groups = signal<IGroupResponse[]>([]);

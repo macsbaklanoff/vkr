@@ -108,9 +108,20 @@ export class CheckWorkComponent {
       next: (result) => {
         this.resultEstimation = result;
       },
-      error: (err) => {console.log(err)},
+      error: (err) => {
+        if (err.status === 400) {
+          alert("Повторите попытку!")
+          this.inProgressChecking = false;
+          this.topicWork = ''
+          this.academicSubject = ''
+          this.file = undefined;
+        }
+      },
       complete: () => {
         this.inProgressChecking = false;
+        this.topicWork = ''
+        this.academicSubject = ''
+        this.file = undefined;
       }
     })
   }

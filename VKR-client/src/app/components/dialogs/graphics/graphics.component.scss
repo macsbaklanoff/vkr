@@ -1,12 +1,19 @@
 .graphics {
   display: grid;
   width: 500px;
-  height: 600px;
+  height: 500px;
+
   &__content {
     margin-top: 16px;
-    padding: 15px;
-  &__gr {
-    margin-top: 16px;
+    padding: 16px;
+
+    &__gr {
+      margin-top: 16px;
+    }
   }
+  &__footer {
+    display: grid;
+    padding-inline: 16px;
+    grid-template-columns: 1fr min-content;
   }
 }

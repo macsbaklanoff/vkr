@@ -43,7 +43,8 @@ namespace VKR_server.Controllers
         {
             int[] arrayEstimationsCount = [];
             int countEstEx = 0, countEstGood = 0, countEstSutisfactory = 0, countEstUnSutisfactory = 0;
-            var est_ids = _context.Files.Select(f => f.EstimationId).ToArray();
+            var est_ids = _context.Files.Where(f => f.User.Group != null).Select(f => f.EstimationId).ToArray();
+
             var estimations = _context.Estimations.Where(e => est_ids.Contains(e.EstimationId));
             countEstEx = estimations.Where(e => e.EstContent + e.EstRelevance + e.EstStylistic >= 81).Count();
             countEstGood = estimations.Where(e => e.EstContent + e.EstRelevance + e.EstStylistic >= 61 &&

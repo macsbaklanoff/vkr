@@ -1,13 +1,17 @@
 import {Component, ElementRef, inject, Inject, ViewChild} from '@angular/core';
 import Chart, {ChartTypeRegistry} from 'chart.js/auto';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogClose} from '@angular/material/dialog';
 import {EstimationService} from '../../../services/estimation.service';
 import {IEstsAllGroups} from '../../../interfaces/ests-all-groups';
 import {IGroupResponse} from '../../../interfaces/group-response';
+import {MatButton} from '@angular/material/button';
 
 @Component({
   selector: 'app-graphics',
-  imports: [],
+  imports: [
+    MatButton,
+    MatDialogClose
+  ],
   templateUrl: './graphics.component.html',
   styleUrl: './graphics.component.scss'
 })
@@ -40,11 +44,7 @@ export class GraphicsComponent {
       })
     }
   }
-  public test1 = this.dataGraphics[0]
-  public test2 = this.dataGraphics[1];
-  ngAfterViewInit(): void {
 
-  }
   barChartMethod() {
     this.barChart = new Chart(this.barCanvas?.nativeElement, {
       type: `bar`,
@@ -52,32 +52,32 @@ export class GraphicsComponent {
         labels: ['5', '4', '3', '2'],
         datasets: [
           {
-            label: '5',
+            label: '',
             data: this.dataGraphics,
             backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
+              'rgba(69, 168, 91, 0,5)',
+              'rgba(219, 215, 101, 0.5)',
+              'rgba(235, 161, 52, 0.5)',
+              'rgba(219, 66, 66, 0.5)',
               // 'rgba(153, 102, 255, 0.2)',
               // 'rgba(255, 159, 64, 0.2)',
             ],
             borderColor: [
-              'rgba(255,99,132,1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
+              'rgba(69, 168, 91, 1)',
+              'rgba(219, 215, 101, 1)',
+              'rgba(235, 161, 52, 1)',
+              'rgba(219, 66, 66, 1)',
               // 'rgba(153, 102, 255, 1)',
               // 'rgba(255, 159, 64, 1)',
             ],
-            borderWidth: 1,
+            borderWidth: 2,
           },
         ],
       },
       options: {
         plugins: {
           legend: {
-            // display: true,
+            display: false,
             position: 'bottom',
           }
         },

@@ -12,12 +12,14 @@
           <span class="nav-list-desktop__item__text">Main Page</span>
         </span>
       </a>
+      @if (authData?.roleName == 'Student') {
       <a mat-list-item routerLink="/check-work">
         <span class="nav-list-desktop__item">
           <mat-icon>library_books</mat-icon>
           <span class="nav-list-desktop__item__text">Check work</span>
         </span>
       </a>
+      }
       @if (authData?.roleName == "Admin") {
         <a mat-list-item routerLink="/users">
         <span class="nav-list-desktop__item">
@@ -84,12 +86,14 @@
           <span class="nav-list-tablet__item__text">Main Page</span>
         </span>
           </a>
+          @if (authData?.roleName == 'Student') {
           <a mat-list-item routerLink="/check-work">
         <span class="nav-list-tablet__item">
           <mat-icon>library_books</mat-icon>
           <span class="nav-list-tablet__item__text">Check work</span>
         </span>
           </a>
+          }
           @if (authData?.roleName == "Admin") {
             <a mat-list-item routerLink="/users">
         <span class="nav-list-tablet__item">

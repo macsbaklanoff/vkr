@@ -22,6 +22,7 @@
         </div>
       </div>
     </div>
+    @if (authData!.roleName == 'Student') {
     <div class="profile__main__line"></div>
     <div class="profile__main__works-info-user">
       <h4 class="profile__main__works-info-user__header">Works:</h4>
@@ -42,6 +43,7 @@
         </div>
       </div>
     </div>
+    }
     <button mat-flat-button class="profile__main__button-delete" (click)="deleteAccount()">Удалить аккаунт</button>
   </div>
   <div class="profile__info">
@@ -103,6 +105,7 @@
           </div>
         </div>
       </mat-tab>
+      @if (authData?.roleName == 'Student') {
       <mat-tab label="Works">
         <div class="profile__info__files">
           @if (filesData.length == 0) {
@@ -135,6 +138,7 @@
           }
         </div>
       </mat-tab>
+      }
     </mat-tab-group>
   </div>
 </div>
