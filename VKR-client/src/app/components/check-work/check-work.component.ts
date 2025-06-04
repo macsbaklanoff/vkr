@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, Output, signal} from '@angular/core';
+import {Component, effect, EventEmitter, inject, Output, signal} from '@angular/core';
 import {MatButton} from '@angular/material/button';
 import {NgForOf, NgIf, NgStyle} from '@angular/common';
 import {FileService} from '../../services/file.service';
@@ -8,6 +8,10 @@ import {MatError, MatFormField, MatInput, MatLabel} from "@angular/material/inpu
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {IInfoFileEstimationResponse} from '../../interfaces/info-file-estimation-response';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
+import {
+  EstimationCheckWorkDoughnutComponent
+} from '../estimation-check-work-doughnut/estimation-check-work-doughnut.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-check-work',
@@ -23,6 +27,7 @@ import {MatProgressSpinner} from '@angular/material/progress-spinner';
     MatLabel,
     NgStyle,
     MatProgressSpinner,
+    EstimationCheckWorkDoughnutComponent,
   ],
   templateUrl: './check-work.component.html',
   styleUrl: './check-work.component.scss'
@@ -39,9 +44,11 @@ export class CheckWorkComponent {
 
   public resultEstimation: IInfoFileEstimationResponse | undefined = undefined;
 
-  public inProgressChecking: boolean = false;
+  public inProgressChecking = signal<boolean>(false);
 
   isDragOver = false;
+
+  private router = inject(Router);
 
   onDragOver(event: DragEvent) {
     event.preventDefault(); //фикс открытия файла при его перетаскивании
@@ -97,7 +104,7 @@ export class CheckWorkComponent {
       alert('Заполните поля!')
       return;
     }
-    this.inProgressChecking = true;
+    this.inProgressChecking.set(true);
     let dataFile: IUploadFile = {
       userId: this.authData!.userId.toString(), //в строку потому что FormData - только строки
       topicWork: this.topicWork,
@@ -111,18 +118,19 @@ export class CheckWorkComponent {
       error: (err) => {
         if (err.status === 400) {
           alert("Повторите попытку!")
-          this.inProgressChecking = false;
+          this.inProgressChecking.set(false);
           this.topicWork = ''
           this.academicSubject = ''
           this.file = undefined;
         }
       },
       complete: () => {
-        this.inProgressChecking = false;
+        this.inProgressChecking.set(false);
         this.topicWork = ''
         this.academicSubject = ''
         this.file = undefined;
       }
     })
   }
+
 }

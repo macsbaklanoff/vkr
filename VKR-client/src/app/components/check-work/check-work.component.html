@@ -18,7 +18,7 @@
       [(ngModel)]="academicSubject"
       placeholder="Название предмета"
     >
-      @if (inProgressChecking) {
+      @if (inProgressChecking()) {
         <mat-spinner></mat-spinner>
       }@else {
     <div class="check-work__content__form"
@@ -43,23 +43,35 @@
     </div>
       }
   </div>
+  @if (resultEstimation != undefined) {
   <div class="check-work__footer">
-    @if (resultEstimation != undefined) {
-      <div class="check-work__footer__item"
-           [ngStyle]="{'--color': getColor(resultEstimation.estContent + resultEstimation.estRelevance + resultEstimation.estStylistic)}"
+    <h4>Результаты проверки:</h4>
+    <p>Итоговый балл: {{resultEstimation.estContent+resultEstimation.estRelevance+resultEstimation.estStylistic}}</p>
+    <div class="check-work__footer__doughnuts">
+      <app-estimation-check-work-doughnut
+        [name]="'Оценка содержания: '"
+        [result]="resultEstimation.estContent"
+        [estimationFrom]="50"
       >
-        <div class="check-work__footer__item__left">
-          <p class="check-work__footer__item__left__text">Предмет: {{ resultEstimation.academicSubject }}</p>
-          <p class="check-work__footer__item__left__text">Тема работы: {{ resultEstimation.topicWork }}</p>
-          <p class="check-work__footer__item__left__text">Оценка содержания (0-50): {{ resultEstimation.estContent }}</p>
-          <p class="check-work__footer__item__left__text">Оценка актуальности (0-25): {{ resultEstimation.estRelevance }}</p>
-          <p class="check-work__footer__item__left__text">Оценка стилистики (0-25): {{ resultEstimation.estStylistic }}</p>
-          <p class="check-work__footer__item__left__text">Итоговый
-            балл: {{ resultEstimation.estContent + resultEstimation.estRelevance + resultEstimation.estStylistic }}</p>
-        </div>
-        <div class="check-work__footer__item__right"
-        ></div>
-      </div>
-    }
+      </app-estimation-check-work-doughnut>
+      <app-estimation-check-work-doughnut
+        [name]="'Оценка актуальности: '"
+        [result]="resultEstimation.estRelevance"
+        [estimationFrom]="25"
+      >
+      </app-estimation-check-work-doughnut>
+      <app-estimation-check-work-doughnut
+        [name]="'Оценка стилистики: '"
+        [result]="resultEstimation.estStylistic"
+        [estimationFrom]="25"
+      >
+      </app-estimation-check-work-doughnut>
+
+    </div>
+    <div class="check-work__footer__recommendations">
+      <h4>Рекомендации к улучшению:</h4>
+      <p>{{resultEstimation?.estRecommendations}}</p>
+    </div>
   </div>
+  }
 </div>

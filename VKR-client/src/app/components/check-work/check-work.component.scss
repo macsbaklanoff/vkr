@@ -1,7 +1,7 @@
 .check-work {
   display: grid;
   grid-template-columns: 1fr;
-  grid-auto-rows: min-content 1fr min-content;
+  grid-auto-rows: min-content 700px 1fr;
   width: 100%;
   height: 100%;
   row-gap: 20px;
@@ -48,30 +48,24 @@
     }
   }
   &__footer {
+    display: grid;
+    font-size: 15px;
+    color: var(--mat-sys-on-surface);
+    grid-template-columns: 1fr;
+    row-gap: 16px;
     background-color: var(--mat-sys-surface-container-low);
     border-radius: 16px;
-    &__item {
-      border: 1px solid var(--mat-sys-on-surface);
-      border-radius: 16px;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    &__doughnuts {
       display: grid;
-      grid-template-columns: 1fr 20px;
-      &__left {
-        padding: 10px;
-        &__text {
-          margin: 0;
-          font-size: 14px;
-          color: var(--mat-sys-on-surface);
-        }
-      }
-      &__right {
-        border-radius: 0px 16px 16px 0px;
-        background-color: var(--color);
-      }
+      grid-template-columns: 1fr;
+      gap: 16px;
     }
-    &__item:hover {
-      transform: translate(0px, -2px);
-      box-shadow: 10px 10px 10px var(--color);
-      transition: 0.2s;
+    &__recommendations {
+      display: grid;
+      row-gap: 16px;
     }
   }
 }
