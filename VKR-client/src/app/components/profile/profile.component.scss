@@ -22,7 +22,7 @@
       grid-template-columns: 250px;
       &__block {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: min-content 1fr;
         &__left {
           &__text {
             text-align: start;

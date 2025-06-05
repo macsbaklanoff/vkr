@@ -34,6 +34,7 @@ export class RegisterComponent {
     email: new FormControl<string>("", [Validators.required, Validators.email]),
     password: new FormControl<string>("", [Validators.required]),
     firstName: new FormControl<string>("", [Validators.required]),
+    patronymic: new FormControl<string | null>(null),
     lastName: new FormControl<string>("", [Validators.required]),
     groupName: new FormControl<string>(""),
   });
@@ -48,6 +49,9 @@ export class RegisterComponent {
   }
   public get firstName(): FormControl {
     return this.registerForm.controls['firstName'] as FormControl;
+  }
+  public get patronymic(): FormControl {
+    return this.registerForm.controls['patronymic'] as FormControl;
   }
   public get lastName(): FormControl {
     return this.registerForm.controls['lastName'] as FormControl;

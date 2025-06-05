@@ -7,6 +7,7 @@ namespace VKR_server.Dto
     {
         public int UserId { get; set; }
         public string FirstName { get; set; } = string.Empty;
+        public string? Patronymic { get; set; }
 
         public string LastName { get; set; } = string.Empty;
 

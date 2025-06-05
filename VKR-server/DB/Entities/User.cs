@@ -22,6 +22,10 @@ namespace VKR_server.DB.Entities
         [MaxLength(50)]
         public string LastName { get; set; } = string.Empty;
 
+        [Column("patronymic")]
+        [MaxLength(50)]
+        public string? Patronymic { get; set; } = string.Empty;
+
         [Column("email")]
         [Required]
         [MaxLength(50)]

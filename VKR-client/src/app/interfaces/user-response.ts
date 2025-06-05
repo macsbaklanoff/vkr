@@ -6,4 +6,5 @@ export interface IUserResponse {
   roleName: string;
   countWorks: string;
   groupName: string;
+  patronymic: string;
 }

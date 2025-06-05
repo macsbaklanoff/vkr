@@ -59,6 +59,7 @@ export class ProfileComponent {
   };
 
   public firstName: string | undefined = this.authData?.firstName;
+  public patronymic: string | undefined = this.authData?.patronymic;
   public lastName: string | undefined = this.authData?.lastName;
   public email: string | undefined = this.authData?.email;
   public groupName: string | undefined = this.authData?.groupName;
@@ -105,11 +106,13 @@ export class ProfileComponent {
   }
 
   public updateUserData(): void {
+    if (!this.isEditable) return;
     let user: IUpdateUserData = {
       userId: this.authData?.userId,
       firstName: this.firstName,
       lastName: this.lastName,
       email: this.email,
+      patronymic: this.patronymic ?? null,
       groupName: this.groupName != "" ? this.groupName : undefined,
     }
     this._authService.updateUserData(user).subscribe({
@@ -136,6 +139,7 @@ export class ProfileComponent {
       this.lastName = this.authData?.lastName;
       this.email= this.authData?.email;
       this.groupName = this.authData?.groupName;
+      this.patronymic = this.authData?.patronymic;
       this.isEditable = false;
       },
       complete: () => {},

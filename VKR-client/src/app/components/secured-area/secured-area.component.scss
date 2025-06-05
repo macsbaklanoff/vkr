@@ -25,17 +25,20 @@
   grid-column: main;
   grid-row: header;
 
-  &__text {
-    //color: var(--md-sys-on-secondary-container);
+  &__logo-text {
     color: var(--mat-sys-on-primary);
     font-size: 22px;
+    display: flex;
+    gap: 8px;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 4px;
+    transition: all 0.3s ease;
   }
-
-  //&__account {
-  //  display: flex;
-  //  color: var(--mat-sys-on-primary);
-  //  cursor: pointer;
-  //}
+  &__logo-text:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+  }
   &__account {
     display: flex;
     color: var(--mat-sys-on-primary);

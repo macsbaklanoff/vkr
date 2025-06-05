@@ -31,7 +31,7 @@
       <ng-container matColumnDef="Name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
         <td mat-cell *matCellDef="let user" [routerLink]="user.userId == authData?.userId ? ['/profile'] : ['/user-profile', user.userId]">
-          {{user.firstName}} {{user.lastName}}
+          {{user.lastName}} {{user.firstName}} {{user.patronymic}}
         </td>
       </ng-container>
 

@@ -42,6 +42,7 @@ namespace VKR_server.Controllers
             {
                 UserId = u.Id,
                 FirstName = u.FirstName,
+                Patronymic = u.Patronymic,
                 LastName = u.LastName,
                 Email = u.Email,
                 GroupName = _context.Groups.FirstOrDefault(g => g.GroupId == u.GroupId).GroupName,
@@ -68,6 +69,7 @@ namespace VKR_server.Controllers
                 UserId = user_id,
                 Email = user.Email,
                 FirstName = user.FirstName,
+                Patronymic = user.Patronymic,
                 LastName = user.LastName,
                 CountWorks = user.Files.Count(),
                 RoleName = user.Role.RoleName,
@@ -100,6 +102,7 @@ namespace VKR_server.Controllers
                 UserId = s.Id,
                 Email = s.Email,
                 FirstName = s.FirstName,
+                Patronymic = s.Patronymic,
                 LastName = s.LastName,
                 RoleName = s.Role.RoleName,
                 CountWorks = s.Files.Count(),
@@ -123,6 +126,7 @@ namespace VKR_server.Controllers
                 UserId = s.Id,
                 Email = s.Email,
                 FirstName = s.FirstName,
+                Patronymic = s.Patronymic,
                 LastName = s.LastName,
                 RoleName = s.Role.RoleName,
                 CountWorks = s.Files.Count(),
@@ -191,6 +195,7 @@ namespace VKR_server.Controllers
             {
                 Email = jsonToken.Claims.FirstOrDefault(claim => claim.Type == "Email")!.Value.ToString(),
                 FirstName = jsonToken.Claims.FirstOrDefault(claim => claim.Type == "FirstName")!.Value.ToString(),
+                Patronymic = jsonToken.Claims.FirstOrDefault(claim => claim.Type == "Patronymic")?.Value.ToString(),
                 LastName = jsonToken.Claims.FirstOrDefault(claim => claim.Type == "LastName")!.Value.ToString(),
                 RoleName = jsonToken.Claims.FirstOrDefault(claim => claim.Type == "RoleName")!.Value.ToString()
             };

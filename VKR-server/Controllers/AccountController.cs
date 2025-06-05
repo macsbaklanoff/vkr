@@ -68,6 +68,7 @@ namespace VKR_server.Controllers
                     FirstName = userDto.FirstName,
                     LastName = userDto.LastName,
                     Password = userDto.Password,
+                    Patronymic = userDto.Patronymic,
                     RoleId = 3,
                 };
                 _context.Users.Add(new_user);
@@ -87,6 +88,7 @@ namespace VKR_server.Controllers
                 {
                     Email = userDto.Email,
                     FirstName = userDto.FirstName,
+                    Patronymic = userDto.Patronymic,
                     LastName = userDto.LastName,
                     Password = userDto.Password,
                     RoleId = 3,
@@ -136,6 +138,7 @@ namespace VKR_server.Controllers
             }
             user.FirstName = updateUser.FirstName;
             user.LastName = updateUser.LastName;
+            user.Patronymic = updateUser.Patronymic;
 
             if (updateUser.GroupName != null) //условия на обновления группы
             {
@@ -209,6 +212,10 @@ namespace VKR_server.Controllers
             if (userGroup != null)
             {
                 claims.Add(new Claim("GroupName", userGroup.GroupName));
+            }
+            if (user.Patronymic != null)
+            {
+                claims.Add(new Claim("Patronymic", user.Patronymic));
             }
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
                 ClaimsIdentity.DefaultRoleClaimType);

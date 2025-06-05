@@ -40,6 +40,7 @@ export class AuthService {
       userId: this._accessTokenPayload().UserId,
       email: this._accessTokenPayload().Email,
       firstName: this._accessTokenPayload().FirstName,
+      patronymic: this._accessTokenPayload().Patronymic,
       lastName: this._accessTokenPayload().LastName,
       roleName: this._accessTokenPayload().RoleName,
       groupName: this._accessTokenPayload().GroupName,

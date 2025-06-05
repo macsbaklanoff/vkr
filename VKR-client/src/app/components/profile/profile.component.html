@@ -11,7 +11,7 @@
         </div>
         <div class="profile__main__main-info-user__block__right">
           <p
-            class="profile__main__main-info-user__block__right__text">{{ authData?.firstName }} {{ authData?.lastName }}</p>
+            class="profile__main__main-info-user__block__right__text">{{ authData?.lastName }} {{ authData?.firstName }} {{ authData?.patronymic }}</p>
           <p class="profile__main__main-info-user__block__right__text">{{ authData?.email }}</p>
           <p class="profile__main__main-info-user__block__right__text">{{ authData?.roleName }}</p>
           @if (authData?.groupName != null) {
@@ -53,6 +53,7 @@
           <div class="profile__info__settings__main">
             <div class="profile__info__settings__main__labels">
               <p class="profile__info__settings__main__labels__text">First name:</p>
+              <p class="profile__info__settings__main__labels__text">Patronymic:</p>
               <p class="profile__info__settings__main__labels__text">Last name:</p>
               <p class="profile__info__settings__main__labels__text">Email:</p>
               <p class="profile__info__settings__main__labels__text">Group:</p>
@@ -64,6 +65,15 @@
                   matInput
                   type="text"
                   [(ngModel)]="firstName"
+                  [disabled]="!isEditable"
+                >
+              </div>
+              <div class="profile__info__settings__main__inputs__item">
+                <input
+                  class="profile__info__settings__main__inputs__item__input"
+                  matInput
+                  type="text"
+                  [(ngModel)]="patronymic"
                   [disabled]="!isEditable"
                 >
               </div>
