@@ -94,7 +94,7 @@ export class UsersComponent {
       if (this.favoriteGroup() == undefined) return; //чтобы не отправлять undefined на сервер
       this.favoriteRole.set(undefined);
       console.log(this.favoriteGroup());
-      this._userService.getStudentsInGroup(this.favoriteGroup()?.groupId).subscribe({
+      this._userService.getStudentsInGroup(this.favoriteGroup()!.groupId).subscribe({
         next: users => {
           this.users.set(users);
           // console.log(this.users());

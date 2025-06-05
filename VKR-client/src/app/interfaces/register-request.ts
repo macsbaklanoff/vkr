@@ -4,5 +4,5 @@ export interface IRegisterRequest {
   firstName: string;
   patronymic: string | null;
   lastName: string;
-  groupName: string | undefined;
+  groupName: string | null;
 }

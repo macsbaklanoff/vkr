@@ -1,8 +1,8 @@
 export interface IUpdateUserData {
-  userId: number | undefined;
-  firstName: string | undefined;
+  userId: number | null;
+  firstName: string | null;
   patronymic: string | null;
-  lastName: string | undefined;
-  email: string | undefined;
-  groupName: string | undefined;
+  lastName: string | null;
+  email: string | null;
+  groupName: string | null;
 }

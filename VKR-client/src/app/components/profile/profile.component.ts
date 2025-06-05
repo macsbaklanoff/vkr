@@ -107,13 +107,14 @@ export class ProfileComponent {
 
   public updateUserData(): void {
     if (!this.isEditable) return;
+    console.log(this.lastName)
     let user: IUpdateUserData = {
-      userId: this.authData?.userId,
-      firstName: this.firstName,
-      lastName: this.lastName,
-      email: this.email,
+      userId: this.authData?.userId ?? null,
+      firstName: this.firstName ?? null,
+      lastName: this.lastName ?? null,
+      email: this.email ?? null,
       patronymic: this.patronymic ?? null,
-      groupName: this.groupName != "" ? this.groupName : undefined,
+      groupName: this.patronymic ?? null,
     }
     this._authService.updateUserData(user).subscribe({
       next: result => {

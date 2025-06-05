@@ -36,7 +36,7 @@ export class RegisterComponent {
     firstName: new FormControl<string>("", [Validators.required]),
     patronymic: new FormControl<string | null>(null),
     lastName: new FormControl<string>("", [Validators.required]),
-    groupName: new FormControl<string>(""),
+    groupName: new FormControl<string | null>(null),
   });
 
   public formStatusChange = toSignal(this.registerForm.statusChanges)

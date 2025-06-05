@@ -42,7 +42,7 @@ export class UserService {
   public getGroups() : Observable<IGroupResponse[]> {
     return this._httpClient.get<IGroupResponse[]>(`${this._apiPath}/groups`, {headers: this.headers});
   }
-  public getStudentsInGroup(groupId: number | undefined): Observable<IUserResponse[]> {
+  public getStudentsInGroup(groupId: number): Observable<IUserResponse[]> {
     return this._httpClient.get<IUserResponse[]>(`${this._apiPath}/students/${groupId}`, {headers: this.headers});
   }
   public getUser(userId: number) : Observable<IUserResponse> {

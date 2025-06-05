@@ -29,7 +29,7 @@ export class UserProfileComponent {
   private readonly _estimationService = inject(EstimationService);
   private readonly _fileService = inject(FileService);
 
-  public user_info: IUserResponse | undefined = undefined;
+  public user_info: IUserResponse | null = null;
   public estimationData: IEstimationProfile = {
     countWorks: 0,
     countRatedExc: 0,

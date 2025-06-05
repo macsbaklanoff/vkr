@@ -45,9 +45,9 @@ namespace VKR_server.Controllers
                 Patronymic = u.Patronymic,
                 LastName = u.LastName,
                 Email = u.Email,
-                GroupName = _context.Groups.FirstOrDefault(g => g.GroupId == u.GroupId).GroupName,
+                GroupName = u.Group.GroupName,
                 CountWorks = u.Files.Count(),
-                RoleName = _context.Roles.FirstOrDefault(r => r.RoleId == u.RoleId).RoleName,
+                RoleName = u.Role.RoleName,
             });
             return Ok(users);
         }
