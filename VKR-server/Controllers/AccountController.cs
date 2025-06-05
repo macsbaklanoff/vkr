@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -21,10 +22,13 @@ namespace VKR_server.Controllers
 
 		private readonly ApplicationContext _context;
 
-		public AuthController(ILogger<AuthController> logger, ApplicationContext context)
+		private readonly IPasswordHasher<User> _passwordHasher;
+
+		public AuthController(ILogger<AuthController> logger, ApplicationContext context, IPasswordHasher<User> passwordHasher)
 		{
 			_logger = logger;
 			_context = context;
+			_passwordHasher = passwordHasher;
 		}
 
 		[HttpPost("sign-in", Name = "Token")]
@@ -90,6 +94,8 @@ namespace VKR_server.Controllers
                 Password = userDto.Password,
                 RoleId = 3,
             };
+			string hashedPassword = _passwordHasher.HashPassword(new_user, userDto.Password);
+			new_user.Password = hashedPassword;
             _context.Users.Add(new_user);
 			_context.SaveChanges();
 
@@ -188,13 +194,18 @@ namespace VKR_server.Controllers
 		}
 
 		private ClaimsIdentity? GetIdentity(string email, string password)
-		{
-			User? user = _context.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
+		{ 
+			User? user = _context.Users.FirstOrDefault(u => u.Email == email);
 
-			if (user != null)
+			if (user == null) return null;
+
+
+			var test = _passwordHasher.VerifyHashedPassword(user, user.Password, password);
+
+			if (test == PasswordVerificationResult.Success)
 			{
-				return GetClaims(user);
-			}
+                return GetClaims(user);
+            }
 			return null;
 		}
 
