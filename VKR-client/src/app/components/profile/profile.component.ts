@@ -62,7 +62,7 @@ export class ProfileComponent {
   public patronymic: string | undefined = this.authData?.patronymic;
   public lastName: string | undefined = this.authData?.lastName;
   public email: string | undefined = this.authData?.email;
-  public groupName: string | undefined = this.authData?.groupName;
+  public groupName: string | null = this.authData!.groupName!;
 
   private readonly dialog = inject(MatDialog);
 
@@ -114,8 +114,9 @@ export class ProfileComponent {
       lastName: this.lastName ?? null,
       email: this.email ?? null,
       patronymic: this.patronymic ?? null,
-      groupName: this.patronymic ?? null,
+      groupName: this.groupName == "" ? null : this.groupName,
     }
+    console.log(user);
     this._authService.updateUserData(user).subscribe({
       next: result => {
         this.authData = this._authService.authData();
@@ -139,7 +140,7 @@ export class ProfileComponent {
       this.firstName = this.authData?.firstName;
       this.lastName = this.authData?.lastName;
       this.email= this.authData?.email;
-      this.groupName = this.authData?.groupName;
+      this.groupName = this.authData!.groupName!;
       this.patronymic = this.authData?.patronymic;
       this.isEditable = false;
       },

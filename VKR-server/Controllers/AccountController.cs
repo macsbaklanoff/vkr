@@ -155,7 +155,11 @@ namespace VKR_server.Controllers
 					}
 					user.GroupId = group.GroupId;
 				}
-				_context.SaveChanges();
+				else
+				{
+                    user.GroupId = null;
+                }
+                _context.SaveChanges();
 			} catch (Exception ex)
 			{
 				return BadRequest(ex.Message);

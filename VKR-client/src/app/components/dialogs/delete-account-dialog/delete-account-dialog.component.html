@@ -1,8 +1,8 @@
-<h2 mat-dialog-title>Delete account?</h2>
+<h2 mat-dialog-title>Удаление аккаунта</h2>
 <mat-dialog-content>
-  <p>Are you sure you want to delete account?</p>
+  <p>Вы уверены, что хотите удалить аккаунт? Это действие необратимо.</p>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button (click)="cancel()">No</button>
-  <button mat-button mat-dialog-close cdkFocusInitial (click)="delete()">Delete</button>
+  <button mat-button (click)="cancel()">Нет</button>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="delete()">Удалить</button>
 </mat-dialog-actions>

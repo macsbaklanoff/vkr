@@ -1,7 +1,7 @@
 <div class="app">
   <form class="app__register" [formGroup]="registerForm">
     <div class="app__register__header">
-      <span>Sign up</span>
+      <span>Регистрация</span>
     </div>
     <div class="app__register__body">
       <div class="app__register__body__inputs">
@@ -16,32 +16,32 @@
           }
         </mat-form-field>
         <mat-form-field>
-          <mat-label>FirstName</mat-label>
+          <mat-label>Имя</mat-label>
           <input matInput formControlName="firstName"/>
           @if (password.hasError('required')) {
-            <mat-error>FirstName is <strong>required</strong></mat-error>
+            <mat-error>Имя <strong>обязательное поле</strong></mat-error>
           }
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Patronymic</mat-label>
+          <mat-label>Фамилия</mat-label>
+          <input matInput formControlName="lastName"/>
+          @if (password.hasError('required')) {
+            <mat-error>Фамилия <strong>обязательное поле</strong></mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Отчество</mat-label>
           <input matInput formControlName="patronymic"/>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>LastName</mat-label>
-          <input matInput formControlName="lastName"/>
-          @if (password.hasError('required')) {
-            <mat-error>LastName is <strong>required</strong></mat-error>
-          }
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Group (required if you are student)</mat-label>
+          <mat-label>Группа (обязательна для студента)</mat-label>
           <input matInput formControlName="groupName"/>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Password</mat-label>
+          <mat-label>Пароль</mat-label>
           <input matInput formControlName="password"/>
           @if (password.hasError('required')) {
-            <mat-error>Password is <strong>required</strong></mat-error>
+            <mat-error>Пароль <strong>обязательное поле</strong></mat-error>
           }
         </mat-form-field>
       </div>
@@ -49,8 +49,8 @@
     <div class="app__register__footer">
       <div class="app__register__footer__left"></div>
       <div class="app__register__footer__right">
-        <button mat-button routerLink="/auth/sign-in">Sign-in</button>
-        <button mat-flat-button (click)="register()">Sign-up</button>
+        <button mat-button routerLink="/auth/sign-in">Вход</button>
+        <button mat-flat-button (click)="register()">Регистрация</button>
       </div>
     </div>
   </form>

@@ -1,7 +1,7 @@
 <div class="app">
   <form class="app__login" [formGroup]="loginForm">
     <div class="app__login__header">
-      <span>Sign in</span>
+      <span>Вход</span>
     </div>
     <div class="app__login__body">
       <div class="app__login__body__inputs">
@@ -16,7 +16,7 @@
           }
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Password</mat-label>
+          <mat-label>Пароль</mat-label>
           <input matInput formControlName="password" type="password"/>
           @if (password.hasError('required')) {
             <mat-error>Password is <strong>required</strong></mat-error>
@@ -27,8 +27,8 @@
     <div class="app__login__footer">
       <div class="app__login__footer__left"></div>
       <div class="app__login__footer__right">
-        <button mat-button routerLink="/auth/sign-up">Sign-up</button>
-        <button mat-flat-button (click)="login()">Sign-in</button>
+        <button mat-button routerLink="/auth/sign-up">Регистрация</button>
+        <button mat-flat-button (click)="login()">Вход</button>
       </div>
     </div>
   </form>

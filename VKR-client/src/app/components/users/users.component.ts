@@ -16,7 +16,7 @@ import {MatIcon} from '@angular/material/icon';
 import {MatDialog} from '@angular/material/dialog';
 import {SignOutDialogComponent} from '../dialogs/sign-out-dialog/sign-out-dialog.component';
 import {DeleteDialogComponent} from '../dialogs/delete-dialog/delete-dialog.component';
-import {Observable} from 'rxjs';
+import {debounceTime, Observable} from 'rxjs';
 import {AuthService} from '../../services/auth.service';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
@@ -27,6 +27,8 @@ import {IRoleResponse} from '../../interfaces/role-response';
 import {MatRadioButton, MatRadioGroup} from '@angular/material/radio';
 import {MatCheckbox} from '@angular/material/checkbox';
 import {FormArray, FormBuilder, FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatFormField, MatInput} from '@angular/material/input';
+import {toObservable} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-users',
@@ -53,7 +55,9 @@ import {FormArray, FormBuilder, FormControl, FormsModule, ReactiveFormsModule} f
     ReactiveFormsModule,
     FormsModule,
     MatButton,
-    NgIf
+    NgIf,
+    MatInput,
+    MatFormField
   ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
@@ -75,6 +79,11 @@ export class UsersComponent {
 
   public displayedColumns: string[] = ['Number', 'Name', 'Email', 'Group', 'Role', 'Options'];
 
+  public searchTerm = signal<string>("");
+
+  private searchTerm$ = toObservable(this.searchTerm).pipe(
+    debounceTime(300)
+  );
 
   constructor() {
     this.load();
@@ -94,38 +103,68 @@ export class UsersComponent {
       if (this.favoriteGroup() == undefined) return; //чтобы не отправлять undefined на сервер
       this.favoriteRole.set(undefined);
       console.log(this.favoriteGroup());
-      this._userService.getStudentsInGroup(this.favoriteGroup()!.groupId).subscribe({
-        next: users => {
-          this.users.set(users);
-          // console.log(this.users());
-        },
-      })
+      this.searchTerm.set('');
+      this.loadStudents()
     })
     effect(() => {
       if (this.favoriteRole() == undefined) return; //чтобы не отправлять undefined на сервер
       // console.log(this.favoriteRole())
       this.favoriteGroup.set(undefined);
-      this._userService.getUsersOnRole(this.favoriteRole()!.roleId).subscribe({
-        next: users => {
-          this.users.set(users);
-          console.log(this.users());
-        },
-      })
+      this.searchTerm.set('');
+      this.loadUsersOnRole()
     })
+    effect(() => {
+      if (this.searchTerm() == '') {
+        this.load()
+      }
+      this.searchTerm$.subscribe(term => {
+        this.users.set(this.users().filter(user =>
+          user.lastName.toLowerCase().includes(term.toLowerCase()) ||
+          user.firstName.toLowerCase().includes(term.toLowerCase()) ||
+          user.patronymic?.toLowerCase().includes(term.toLowerCase()) ||
+          user.groupName?.toLowerCase().includes(term.toLowerCase()) ||
+          user.roleName.toLowerCase().includes(term.toLowerCase())
+        ));
+      })
+    });
   }
 
   private load() : void {
-    this._userService.getUsers().subscribe({
+    if (this.favoriteGroup() == undefined && this.favoriteRole() == undefined) {
+      this._userService.getUsers().subscribe({
+        next: users => {
+          this.users.set(users);
+          // console.log(this.users());
+        },
+      })
+    }
+    else if (this.favoriteGroup() == undefined) {
+      this.loadUsersOnRole()
+    }
+    else if (this.favoriteRole() == undefined) {
+      this.loadStudents()
+    }
+  }
+  private loadUsersOnRole() : void {
+    this._userService.getUsersOnRole(this.favoriteRole()!.roleId).subscribe({
+      next: users => {
+        this.users.set(users);
+        console.log(this.users());
+      },
+    })
+  }
+  private loadStudents() : void {
+    this._userService.getStudentsInGroup(this.favoriteGroup()!.groupId).subscribe({
       next: users => {
         this.users.set(users);
         // console.log(this.users());
       },
     })
   }
-
   public resetFilters() {
     this.favoriteRole.set(undefined);
     this.favoriteGroup.set(undefined);
+    this.searchTerm.set('');
     this.load()
   }
 
@@ -152,6 +191,7 @@ export class UsersComponent {
         next: userId => {
           this.favoriteRole.set(undefined);
           this.favoriteGroup.set(undefined);
+          this.searchTerm.set('');
           this.load();
         },
         error: err => {alert(err.error.detail)}

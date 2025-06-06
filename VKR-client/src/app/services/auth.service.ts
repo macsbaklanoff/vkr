@@ -43,7 +43,7 @@ export class AuthService {
       patronymic: this._accessTokenPayload().Patronymic,
       lastName: this._accessTokenPayload().LastName,
       roleName: this._accessTokenPayload().RoleName,
-      groupName: this._accessTokenPayload().GroupName,
+      groupName: this._accessTokenPayload().GroupName ?? null,
     }
   })
 

@@ -42,6 +42,7 @@
   &__account {
     display: flex;
     color: var(--mat-sys-on-primary);
+    align-items: center;
     cursor: pointer;
     padding: 4px;
     border-radius: 8px;

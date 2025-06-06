@@ -12,14 +12,17 @@
     <button mat-flat-button (click)="getStats()">Статистика</button>
   </div>
   <div class="students__table">
+    <mat-form-field subscriptSizing="dynamic" class="students__table__input">
+      <input matInput placeholder="Поиск" [(ngModel)]="searchTerm">
+    </mat-form-field>
     <table mat-table [dataSource]="students()" class="mat-elevation-z8 demo-table">
       <ng-container matColumnDef="№">
         <th mat-header-cell *matHeaderCellDef>№</th>
         <td mat-cell *matCellDef="let index = index"> {{ index + 1 }}</td>
       </ng-container>
       <ng-container matColumnDef="Name">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let user">{{ user.firstName }} {{user.lastName}}</td>
+        <th mat-header-cell *matHeaderCellDef>ФИО</th>
+        <td mat-cell *matCellDef="let user">{{ user.lastName }} {{user.firstName}} {{user.patronymic}}</td>
       </ng-container>
 
       <ng-container matColumnDef="Email">
@@ -27,11 +30,11 @@
         <td mat-cell *matCellDef="let user">{{ user.email }}</td>
       </ng-container>
       <ng-container matColumnDef="Count works">
-        <th mat-header-cell *matHeaderCellDef>Count works</th>
+        <th mat-header-cell *matHeaderCellDef>Количество работ</th>
         <td mat-cell *matCellDef="let user">{{ user.countWorks }}</td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr [routerLink]="['/user-profile', row.userId]"
+      <tr [routerLink]="authData?.userId == row.userId ? ['/profile'] : ['/user-profile', row.userId]"
         mat-row
         *matRowDef="let row; columns: displayedColumns;"
       ></tr>

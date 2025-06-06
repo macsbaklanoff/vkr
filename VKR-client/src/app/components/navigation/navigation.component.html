@@ -3,20 +3,20 @@
                [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
                [mode]="(isHandset$ | async) ? 'over' : 'side'"
                [opened]="(isHandset$ | async) === false">
-    <mat-toolbar class="sidenav__text">Menu</mat-toolbar>
+    <mat-toolbar class="sidenav__text">Меню</mat-toolbar>
     <mat-nav-list>
-      <span class="nav-list-desktop__item__text">Main</span>
+      <span class="nav-list-desktop__item__text">Главное</span>
       <a mat-list-item routerLink="/main-page">
         <span class="nav-list-desktop__item">
           <mat-icon>home</mat-icon>
-          <span class="nav-list-desktop__item__text">Main Page</span>
+          <span class="nav-list-desktop__item__text">Главная</span>
         </span>
       </a>
       @if (authData?.roleName == 'Student') {
       <a mat-list-item routerLink="/check-work">
         <span class="nav-list-desktop__item">
           <mat-icon>library_books</mat-icon>
-          <span class="nav-list-desktop__item__text">Check work</span>
+          <span class="nav-list-desktop__item__text">Проверить работу</span>
         </span>
       </a>
       }
@@ -24,7 +24,7 @@
         <a mat-list-item routerLink="/users">
         <span class="nav-list-desktop__item">
           <mat-icon>group</mat-icon>
-          <span class="nav-list-desktop__item__text">Users</span>
+          <span class="nav-list-desktop__item__text">Пользователи</span>
         </span>
         </a>
       }
@@ -32,21 +32,21 @@
         <a mat-list-item routerLink="/students">
         <span class="nav-list-desktop__item">
           <mat-icon>school</mat-icon>
-          <span class="nav-list-desktop__item__text">Students</span>
+          <span class="nav-list-desktop__item__text">Студенты</span>
         </span>
         </a>
       }
-      <span class="nav-list-desktop__item__text">Account</span>
+      <span class="nav-list-desktop__item__text">Аккаунт</span>
       <a mat-list-item routerLink="/profile">
         <span class="nav-list-desktop__item">
           <mat-icon>person</mat-icon>
-          <span class="nav-list-desktop__item__text">Profile</span>
+          <span class="nav-list-desktop__item__text">Профиль</span>
         </span>
       </a>
       <a mat-list-item (click)="openDialog('0ms', '0ms')">
         <span class="nav-list-desktop__item">
           <mat-icon>logout</mat-icon>
-          <span class="nav-list-desktop__item__text">Sign-out</span>
+          <span class="nav-list-desktop__item__text">Выход</span>
         </span>
       </a>
     </mat-nav-list>

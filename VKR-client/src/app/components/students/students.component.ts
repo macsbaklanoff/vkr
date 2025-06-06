@@ -22,6 +22,10 @@ import {SignOutDialogComponent} from '../dialogs/sign-out-dialog/sign-out-dialog
 import {GetStatsComponent} from '../dialogs/get-stats/get-stats.component';
 import {DeleteDialogComponent} from '../dialogs/delete-dialog/delete-dialog.component';
 import {GraphicsComponent} from '../dialogs/graphics/graphics.component';
+import {MatFormField, MatInput} from '@angular/material/input';
+import {toObservable} from '@angular/core/rxjs-interop';
+import {debounceTime} from 'rxjs';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-students',
@@ -44,7 +48,9 @@ import {GraphicsComponent} from '../dialogs/graphics/graphics.component';
     MatTable,
     MatHeaderCellDef,
     RouterLink,
-    MatButton
+    MatButton,
+    MatInput,
+    MatFormField
   ],
   templateUrl: './students.component.html',
   styleUrl: './students.component.scss'
@@ -52,6 +58,8 @@ import {GraphicsComponent} from '../dialogs/graphics/graphics.component';
 export class StudentsComponent {
 
   private readonly _userService = inject(UserService);
+  private readonly _authService = inject(AuthService);
+  public authData = this._authService.authData();
 
   public students = signal<IUserResponse[]>([]);
   public groups = signal<IGroupResponse[]>([]);
@@ -60,6 +68,12 @@ export class StudentsComponent {
   public displayedColumns: string[] = ['№', 'Name', 'Email', 'Count works'];
 
   private readonly dialog = inject(MatDialog);
+
+  public searchTerm = signal<string>("");
+
+  private searchTerm$ = toObservable(this.searchTerm).pipe(
+    debounceTime(300)
+  );
 
   public getStats(): void {
     const dialogRef = this._matDialogRef.open(GetStatsComponent)
@@ -86,12 +100,30 @@ export class StudentsComponent {
     })
     effect(() => {
       if (this.favoriteGroup() == undefined) return; //чтобы не отправлять undefined на сервер
-      this._userService.getStudentsInGroup(this.favoriteGroup()?.groupId).subscribe({
-        next: students => {
-          this.students.set(students);
-          console.log(this.students());
-        },
+      this.searchTerm.set('');
+      this.load()
+    })
+    effect(() => {
+      if (this.searchTerm() == '') {
+        this.load()
+      }
+      this.searchTerm$.subscribe(term => {
+        this.students.set(this.students().filter(user =>
+          user.lastName.toLowerCase().includes(term.toLowerCase()) ||
+          user.firstName.toLowerCase().includes(term.toLowerCase()) ||
+          user.patronymic?.toLowerCase().includes(term.toLowerCase()) ||
+          user.groupName?.toLowerCase().includes(term.toLowerCase()) ||
+          user.roleName.toLowerCase().includes(term.toLowerCase())
+        ));
       })
+    });
+  }
+  public load() : void {
+    this._userService.getStudentsInGroup(this.favoriteGroup()?.groupId).subscribe({
+      next: students => {
+        this.students.set(students);
+        console.log(this.students());
+      },
     })
   }
 }

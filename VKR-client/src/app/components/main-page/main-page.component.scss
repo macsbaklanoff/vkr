@@ -13,7 +13,7 @@
     }
     &__text {
       font-size: 16px;
-      color: #000;
+      color: var(--mat-sys-on-surface);
     }
     &__image {
       max-width: 100%;

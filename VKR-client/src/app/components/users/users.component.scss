@@ -11,10 +11,14 @@
     background-color: var(--mat-sys-surface-container-low);
   }
   &__table {
-    padding: 4px;
+    padding: 16px;
     width: 100%;
     background-color: var(--mat-sys-surface-container-low);
     border-radius: 16px;
+    &__input {
+      width: 100%;
+      height: 50px;
+    }
   }
 }
 .example-radio-group {
