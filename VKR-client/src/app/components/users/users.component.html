@@ -1,6 +1,6 @@
 <div class="users">
   <div class="users__filters">
-    <p>Группы:</p>
+    <h4 class="users__filters__headline">Группы: </h4>
     <mat-radio-group
       aria-labelledby="example-radio-group-label"
       class="example-radio-group"
@@ -10,7 +10,7 @@
         <mat-radio-button class="example-radio-button" [value]="group">{{ group.groupName }}</mat-radio-button>
       }
     </mat-radio-group>
-    <p>Роли:</p>
+    <h4 class="users__filters__headline">Роли: </h4>
     <mat-radio-group
       aria-labelledby="example-radio-group-label"
       class="example-radio-group"
@@ -23,96 +23,109 @@
     <button mat-flat-button (click)="resetFilters()">Сброс</button>
   </div>
   <div class="users__table">
-    <mat-form-field subscriptSizing="dynamic" class="users__table__input">
-      <input matInput placeholder="Поиск" [(ngModel)]="searchTerm">
-    </mat-form-field>
-    <table mat-table [dataSource]="users()" class="mat-elevation-z8 demo-table">
-      <ng-container matColumnDef="Number">
-        <th mat-header-cell *matHeaderCellDef>№</th>
-        <td mat-cell *matCellDef="let index = index"> {{ index + 1 }}</td>
-      </ng-container>
-      <ng-container matColumnDef="Name">
-        <th mat-header-cell *matHeaderCellDef>ФИО</th>
-        <td mat-cell *matCellDef="let user" [routerLink]="user.userId == authData?.userId ? ['/profile'] : ['/user-profile', user.userId]">
-          {{user.lastName}} {{user.firstName}} {{user.patronymic}}
-        </td>
-      </ng-container>
+    <div class="users__table__search">
+      <mat-form-field subscriptSizing="dynamic" class="users__table__search__input">
+        <input matInput placeholder="Поиск" [(ngModel)]="searchTerm">
+      </mat-form-field>
+    </div>
+    <div class="users__table__main-table">
+      <table mat-table [dataSource]="usersVisual" class="mat-elevation-z8 demo-table">
+        <ng-container matColumnDef="Number">
+          <th mat-header-cell *matHeaderCellDef>№</th>
+          <td mat-cell *matCellDef="let index = index"> {{ index + 1 }}</td>
+        </ng-container>
+        <ng-container matColumnDef="Name">
+          <th mat-header-cell *matHeaderCellDef>ФИО</th>
+          <td mat-cell *matCellDef="let user"
+              [routerLink]="user.userId == authData?.userId ? ['/profile'] : ['/user-profile', user.userId]">
+            {{ user.lastName }} {{ user.firstName }} {{ user.patronymic }}
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="Email">
-        <th mat-header-cell *matHeaderCellDef>email</th>
-        <td mat-cell *matCellDef="let user" [routerLink]="user.userId == authData?.userId ? ['/profile'] : ['/user-profile', user.userId]">{{ user.email }}</td>
-      </ng-container>
+        <ng-container matColumnDef="Email">
+          <th mat-header-cell *matHeaderCellDef>email</th>
+          <td mat-cell *matCellDef="let user"
+              [routerLink]="user.userId == authData?.userId ? ['/profile'] : ['/user-profile', user.userId]">{{ user.email }}
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="Role">
-        <th mat-header-cell *matHeaderCellDef>Роль</th>
-        <td mat-cell *matCellDef="let user" [routerLink]="user.userId == authData?.userId ? ['/profile'] : ['/user-profile', user.userId]">{{ user.roleName }}</td>
-      </ng-container>
-      <ng-container matColumnDef="Group">
-        <th mat-header-cell *matHeaderCellDef>Группа</th>
-        <td mat-cell *matCellDef="let user" [routerLink]="user.userId == authData?.userId ? ['/profile'] : ['/user-profile', user.userId]">
-          @if (user.groupName != null) {
-            {{ user.groupName }}
-          } @else {
-            ...
-          }
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="Options">
-        <th mat-header-cell *matHeaderCellDef>Опции</th>
-        <td mat-cell *matCellDef="let user">
-          @if (user.userId == this._authService.authData()?.userId) {
-            <p>Мы</p>
-          } @else {
-            <button mat-icon-button [matMenuTriggerFor]="options">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #options="matMenu">
-              <button mat-menu-item [matMenuTriggerFor]="change_role">Сменить роль</button>
-              <button mat-menu-item (click)="delete(user.userId)">
-                <mat-icon>delete</mat-icon>
-                <span>Удалить</span>
+        <ng-container matColumnDef="Role">
+          <th mat-header-cell *matHeaderCellDef>Роль</th>
+          <td mat-cell *matCellDef="let user"
+              [routerLink]="user.userId == authData?.userId ? ['/profile'] : ['/user-profile', user.userId]">{{ user.roleName }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Group">
+          <th mat-header-cell *matHeaderCellDef>Группа</th>
+          <td mat-cell *matCellDef="let user"
+              [routerLink]="user.userId == authData?.userId ? ['/profile'] : ['/user-profile', user.userId]">
+            @if (user.groupName != null) {
+              {{ user.groupName }}
+            } @else {
+              ...
+            }
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Options">
+          <th mat-header-cell *matHeaderCellDef>Опции</th>
+          <td mat-cell *matCellDef="let user">
+            @if (user.userId == this._authService.authData()?.userId) {
+              <p>Мы</p>
+            } @else {
+              <button mat-icon-button [matMenuTriggerFor]="options">
+                <mat-icon>more_vert</mat-icon>
               </button>
-            </mat-menu>
+              <mat-menu #options="matMenu">
+                <button mat-menu-item [matMenuTriggerFor]="change_role">Сменить роль</button>
+                <button mat-menu-item (click)="delete(user.userId)">
+                  <mat-icon>delete</mat-icon>
+                  <span>Удалить</span>
+                </button>
+              </mat-menu>
 
-            <mat-menu #change_role="matMenu">
-              @if (user.roleName == 'Student') {
-                <button mat-menu-item (click)="changeRoleUser(user.userId, 2)">
-                  <mat-icon>menu_book</mat-icon>
-                  <span>Преподаватель</span>
-                </button>
-                <button mat-menu-item (click)="changeRoleUser(user.userId, 1)">
-                  <mat-icon>manage_accounts</mat-icon>
-                  <span>Администратор</span>
-                </button>
-              } @else if (user.roleName == 'Teacher') {
-                <button mat-menu-item (click)="changeRoleUser(user.userId, 1)">
-                  <mat-icon>manage_accounts</mat-icon>
-                  <span>Администратор</span>
-                </button>
-                <button mat-menu-item (click)="changeRoleUser(user.userId, 3)">
-                  <mat-icon>school</mat-icon>
-                  <span>Студент</span>
-                </button>
-              } @else {
-                <button mat-menu-item (click)="changeRoleUser(user.userId, 2)">
-                  <mat-icon>menu_book</mat-icon>
-                  <span>Преподаватель</span>
-                </button>
-                <button mat-menu-item (click)="changeRoleUser(user.userId, 3)">
-                  <mat-icon>school</mat-icon>
-                  <span>Студент</span>
-                </button>
-              }
-            </mat-menu>
-          }
-        </td>
-      </ng-container>
+              <mat-menu #change_role="matMenu">
+                @if (user.roleName == 'Student') {
+                  <button mat-menu-item (click)="changeRoleUser(user.userId, 2)">
+                    <mat-icon>menu_book</mat-icon>
+                    <span>Преподаватель</span>
+                  </button>
+                  <button mat-menu-item (click)="changeRoleUser(user.userId, 1)">
+                    <mat-icon>manage_accounts</mat-icon>
+                    <span>Администратор</span>
+                  </button>
+                } @else if (user.roleName == 'Teacher') {
+                  <button mat-menu-item (click)="changeRoleUser(user.userId, 1)">
+                    <mat-icon>manage_accounts</mat-icon>
+                    <span>Администратор</span>
+                  </button>
+                  <button mat-menu-item (click)="changeRoleUser(user.userId, 3)">
+                    <mat-icon>school</mat-icon>
+                    <span>Студент</span>
+                  </button>
+                } @else {
+                  <button mat-menu-item (click)="changeRoleUser(user.userId, 2)">
+                    <mat-icon>menu_book</mat-icon>
+                    <span>Преподаватель</span>
+                  </button>
+                  <button mat-menu-item (click)="changeRoleUser(user.userId, 3)">
+                    <mat-icon>school</mat-icon>
+                    <span>Студент</span>
+                  </button>
+                }
+              </mat-menu>
+            }
+          </td>
+        </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr
-        mat-row
-        *matRowDef="let row; columns: displayedColumns;"
-      ></tr>
-    </table>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns;"
+        ></tr>
+      </table>
+    </div>
+      <mat-paginator class="users__table__footer" [length]="users.length" [pageSizeOptions]="[10, 15, 50]" aria-label="Select page"
+                     (page)="onPageChange($event)">
+      </mat-paginator>
   </div>
 </div>

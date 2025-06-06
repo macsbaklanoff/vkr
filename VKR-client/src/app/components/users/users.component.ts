@@ -1,4 +1,4 @@
-import {Component, effect, inject, signal} from '@angular/core';
+import {Component, computed, effect, inject, signal} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {IUserResponse} from '../../interfaces/user-response';
 import {
@@ -29,6 +29,7 @@ import {MatCheckbox} from '@angular/material/checkbox';
 import {FormArray, FormBuilder, FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatFormField, MatInput} from '@angular/material/input';
 import {toObservable} from '@angular/core/rxjs-interop';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-users',
@@ -57,7 +58,8 @@ import {toObservable} from '@angular/core/rxjs-interop';
     MatButton,
     NgIf,
     MatInput,
-    MatFormField
+    MatFormField,
+    MatPaginator
   ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
@@ -70,7 +72,14 @@ export class UsersComponent {
   public readonly _authService = inject(AuthService);
 
   public authData = this._authService.authData();
-  public users = signal<IUserResponse[]>([]);
+  public users: IUserResponse[]= [];
+  public usersVisual: IUserResponse[] = [];
+
+  // public usersVisual = computed(() => {
+  //   return this.users().slice(0,5);
+  // })
+
+
 
   public groups = signal<IGroupResponse[]>([]);
   public favoriteGroup = signal<IGroupResponse | undefined>(undefined);
@@ -81,12 +90,14 @@ export class UsersComponent {
 
   public searchTerm = signal<string>("");
 
+  public pageNumber = signal<number>(1);
+  public pageSize = signal<number>(5);
+
   private searchTerm$ = toObservable(this.searchTerm).pipe(
     debounceTime(300)
   );
 
   constructor() {
-    this.load();
     this._userService.getGroups().subscribe({
       next: groups => {
         this.groups.set(groups)
@@ -104,27 +115,27 @@ export class UsersComponent {
       this.favoriteRole.set(undefined);
       console.log(this.favoriteGroup());
       this.searchTerm.set('');
-      this.loadStudents()
+      this.load()
     })
     effect(() => {
       if (this.favoriteRole() == undefined) return; //чтобы не отправлять undefined на сервер
       // console.log(this.favoriteRole())
       this.favoriteGroup.set(undefined);
       this.searchTerm.set('');
-      this.loadUsersOnRole()
+      this.load()
     })
     effect(() => {
       if (this.searchTerm() == '') {
         this.load()
       }
       this.searchTerm$.subscribe(term => {
-        this.users.set(this.users().filter(user =>
+        this.users = this.users.filter(user =>
           user.lastName.toLowerCase().includes(term.toLowerCase()) ||
           user.firstName.toLowerCase().includes(term.toLowerCase()) ||
           user.patronymic?.toLowerCase().includes(term.toLowerCase()) ||
           user.groupName?.toLowerCase().includes(term.toLowerCase()) ||
           user.roleName.toLowerCase().includes(term.toLowerCase())
-        ));
+        );
       })
     });
   }
@@ -133,7 +144,8 @@ export class UsersComponent {
     if (this.favoriteGroup() == undefined && this.favoriteRole() == undefined) {
       this._userService.getUsers().subscribe({
         next: users => {
-          this.users.set(users);
+          this.users = users;
+          this.usersVisual = this.users.slice(0, 10);
           // console.log(this.users());
         },
       })
@@ -148,15 +160,17 @@ export class UsersComponent {
   private loadUsersOnRole() : void {
     this._userService.getUsersOnRole(this.favoriteRole()!.roleId).subscribe({
       next: users => {
-        this.users.set(users);
-        console.log(this.users());
+        this.users = users;
+        this.usersVisual = this.users.slice(0, 10);
+        console.log(this.users);
       },
     })
   }
   private loadStudents() : void {
     this._userService.getStudentsInGroup(this.favoriteGroup()!.groupId).subscribe({
       next: users => {
-        this.users.set(users);
+        this.users = users;
+        this.usersVisual = this.users.slice(0, 10);
         // console.log(this.users());
       },
     })
@@ -197,5 +211,22 @@ export class UsersComponent {
         error: err => {alert(err.error.detail)}
       });
     });
+  }
+
+  public onPageChange($event: PageEvent) {
+    console.log($event);
+    let from = $event.previousPageIndex == undefined ? 0 : $event.previousPageIndex + 1;
+    let to = $event.pageIndex + 1;
+    if (to < from) {
+      let temp = to;
+      to = from - 1;
+      from = temp - 1;
+    }
+    if (to == from) {
+      from = 0;
+      to = 1;
+    }
+    console.log(from, to);
+    this.usersVisual = this.users.slice(from * $event.pageSize, to * $event.pageSize);
   }
 }

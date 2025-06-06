@@ -9,15 +9,25 @@
     grid-auto-rows: min-content;
     border-radius: 16px;
     background-color: var(--mat-sys-surface-container-low);
+    &__headline {
+      padding: 8px;
+    }
   }
   &__table {
     padding: 16px;
+    display: grid;
+    grid-auto-rows: min-content 1fr min-content;
     width: 100%;
     background-color: var(--mat-sys-surface-container-low);
     border-radius: 16px;
-    &__input {
-      width: 100%;
-      height: 50px;
+    &__search {
+      &__input {
+        width: 100%;
+        height: 50px;
+      }
+    }
+    &__footer {
+      background-color: var(--mat-sys-surface-container-low);
     }
   }
 }
