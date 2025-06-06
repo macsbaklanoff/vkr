@@ -86,7 +86,7 @@ export class UsersComponent {
   public favoriteRole = signal<IRoleResponse | undefined>(undefined);
   public roles = signal<IRoleResponse[]>([]);
 
-  public displayedColumns: string[] = ['Number', 'Name', 'Email', 'Group', 'Role', 'Options'];
+  public displayedColumns: string[] = ['Name', 'Email', 'Group', 'Role', 'Options'];
 
   public searchTerm = signal<string>("");
 
@@ -129,7 +129,7 @@ export class UsersComponent {
         this.load()
       }
       this.searchTerm$.subscribe(term => {
-        this.users = this.users.filter(user =>
+        this.usersVisual = this.usersVisual.filter(user =>
           user.lastName.toLowerCase().includes(term.toLowerCase()) ||
           user.firstName.toLowerCase().includes(term.toLowerCase()) ||
           user.patronymic?.toLowerCase().includes(term.toLowerCase()) ||
@@ -215,6 +215,7 @@ export class UsersComponent {
 
   public onPageChange($event: PageEvent) {
     console.log($event);
+    this.searchTerm.set('');
     let from = $event.previousPageIndex == undefined ? 0 : $event.previousPageIndex + 1;
     let to = $event.pageIndex + 1;
     if (to < from) {

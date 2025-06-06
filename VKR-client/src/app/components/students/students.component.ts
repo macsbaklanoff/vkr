@@ -99,7 +99,6 @@ export class StudentsComponent {
       },
     })
     effect(() => {
-      if (this.favoriteGroup() == undefined) return; //чтобы не отправлять undefined на сервер
       this.searchTerm.set('');
       this.load()
     })
@@ -119,6 +118,7 @@ export class StudentsComponent {
     });
   }
   public load() : void {
+    if (this.favoriteGroup() == undefined) return; //чтобы не отправлять undefined на сервер
     this._userService.getStudentsInGroup(this.favoriteGroup()?.groupId).subscribe({
       next: students => {
         this.students.set(students);
