@@ -88,6 +88,7 @@
     grid-auto-rows: min-content;
     padding: 24px;
     row-gap: 16px;
+    color: var(--mat-sys-on-surface);
     &__item {
       border: 1px solid var(--mat-sys-on-surface);
       border-radius: 16px;
