@@ -20,6 +20,8 @@ import {GetStatsComponent} from '../dialogs/get-stats/get-stats.component';
 import {GraphicsComponent} from '../dialogs/graphics/graphics.component';
 import {DeleteAccountDialogComponent} from '../dialogs/delete-account-dialog/delete-account-dialog.component';
 import {RouterLink} from '@angular/router';
+import {ThemeService} from '../../services/theme.service';
+import {MatButtonToggle, MatButtonToggleGroup} from '@angular/material/button-toggle';
 
 @Component({
   selector: 'app-profile',
@@ -36,7 +38,9 @@ import {RouterLink} from '@angular/router';
     MatTab,
     NgStyle,
     MatIcon,
-    RouterLink
+    RouterLink,
+    MatButtonToggleGroup,
+    MatButtonToggle
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
@@ -46,6 +50,7 @@ export class ProfileComponent {
   private readonly _userService = inject(UserService);
   private readonly _estimationService = inject(EstimationService);
   private readonly _fileService = inject(FileService);
+  public _themeService = inject(ThemeService);
 
   public authData = this._authService.authData();
   public filesData: IInfoFileEstimationResponse[] = [];

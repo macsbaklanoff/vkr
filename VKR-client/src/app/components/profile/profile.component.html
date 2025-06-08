@@ -23,26 +23,27 @@
       </div>
     </div>
     @if (authData!.roleName == 'Student') {
-    <div class="profile__main__line"></div>
-    <div class="profile__main__works-info-user">
-      <h4 class="profile__main__works-info-user__header">Работы:</h4>
-      <div class="profile__main__works-info-user__block">
-        <div class="profile__main__works-info-user__block__left">
-          <p class="profile__main__works-info-user__block__left__text">Количество отправленных:</p>
-          <p class="profile__main__works-info-user__block__left__text">Оценено на отлично:</p>
-          <p class="profile__main__works-info-user__block__left__text">Оценено на хорошо:</p>
-          <p class="profile__main__works-info-user__block__left__text">Оценено на уд.:</p>
-          <p class="profile__main__works-info-user__block__left__text">Оценено на не уд.:</p>
-        </div>
-        <div class="profile__main__works-info-user__block__right">
-          <p class="profile__main__works-info-user__block__left__text">{{ estimationData.countWorks }}</p>
-          <p class="profile__main__works-info-user__block__left__text">{{ estimationData.countRatedExc }}</p>
-          <p class="profile__main__works-info-user__block__left__text">{{ estimationData.countRatedGood }}</p>
-          <p class="profile__main__works-info-user__block__left__text">{{ estimationData.countRatedSatisfactory }}</p>
-          <p class="profile__main__works-info-user__block__left__text">{{ estimationData.countRatedUnSatisfactory }}</p>
+      <div class="profile__main__line"></div>
+      <div class="profile__main__works-info-user">
+        <h4 class="profile__main__works-info-user__header">Работы:</h4>
+        <div class="profile__main__works-info-user__block">
+          <div class="profile__main__works-info-user__block__left">
+            <p class="profile__main__works-info-user__block__left__text">Количество отправленных:</p>
+            <p class="profile__main__works-info-user__block__left__text">Оценено на отлично:</p>
+            <p class="profile__main__works-info-user__block__left__text">Оценено на хорошо:</p>
+            <p class="profile__main__works-info-user__block__left__text">Оценено на уд.:</p>
+            <p class="profile__main__works-info-user__block__left__text">Оценено на не уд.:</p>
+          </div>
+          <div class="profile__main__works-info-user__block__right">
+            <p class="profile__main__works-info-user__block__left__text">{{ estimationData.countWorks }}</p>
+            <p class="profile__main__works-info-user__block__left__text">{{ estimationData.countRatedExc }}</p>
+            <p class="profile__main__works-info-user__block__left__text">{{ estimationData.countRatedGood }}</p>
+            <p class="profile__main__works-info-user__block__left__text">{{ estimationData.countRatedSatisfactory }}</p>
+            <p
+              class="profile__main__works-info-user__block__left__text">{{ estimationData.countRatedUnSatisfactory }}</p>
+          </div>
         </div>
       </div>
-    </div>
     }
     <button mat-flat-button class="profile__main__button-delete" (click)="deleteAccount()">Удалить аккаунт</button>
   </div>
@@ -106,6 +107,14 @@
               </div>
             </div>
           </div>
+          <div class="profile__info__settings__themes">
+            <div></div>
+            <mat-button-toggle-group class='test' aria-label="Font Style"
+                                     (change)="_themeService.changeColorScheme($event.value)">
+              <mat-button-toggle value="light">Светлая</mat-button-toggle>
+              <mat-button-toggle value="dark">Темная</mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
           <div class="profile__info__settings__buttons">
             <div></div>
             <div class="profile__info__settings__buttons__content">
@@ -116,38 +125,39 @@
         </div>
       </mat-tab>
       @if (authData?.roleName == 'Student') {
-      <mat-tab label="Работы">
-        <div class="profile__info__files">
-          @if (filesData.length == 0) {
-            <mat-icon>sentiment_dissatisfied</mat-icon>
-            К сожалению, у вас отсутствуют учебные работы. <a routerLink="/check-work">Загрузите
-              работу</a>чтобы увидеть результаты.
-          } @else {
-            @for (file of filesData; track file) {
-              <div class="profile__info__files__item"
-                   [ngStyle]="{'--color': getColor(file.estContent + file.estRelevance + file.estStylistic)}"
-              >
-                <div class="profile__info__files__item__left">
-                  <p class="profile__info__files__item__left__text">Предмет: {{ file.academicSubject }}</p>
-                  <p class="profile__info__files__item__left__text">Тема работы: {{ file.topicWork }}</p>
-                  <p class="profile__info__files__item__left__text">Оценка содержания (0-50): {{ file.estContent }}</p>
-                  <p class="profile__info__files__item__left__text">Оценка актуальности
-                    (0-25): {{ file.estRelevance }}</p>
-                  <p class="profile__info__files__item__left__text">Оценка стилистики
-                    (0-25): {{ file.estStylistic }}</p>
-                  <p class="profile__info__files__item__left__text">Итоговый
-                    балл: <b>{{ file.estContent + file.estRelevance + file.estStylistic }}</b></p>
-                  <p class="profile__info__files__item__left__text">
-                    Рекоммендации по улучшению учебной работы: {{ file.estRecommendations }}
-                  </p>
+        <mat-tab label="Работы">
+          <div class="profile__info__files">
+            @if (filesData.length == 0) {
+              <mat-icon>sentiment_dissatisfied</mat-icon>
+              К сожалению, у вас отсутствуют учебные работы. <a routerLink="/check-work">Загрузите
+                работу</a>чтобы увидеть результаты.
+            } @else {
+              @for (file of filesData; track file) {
+                <div class="profile__info__files__item"
+                     [ngStyle]="{'--color': getColor(file.estContent + file.estRelevance + file.estStylistic)}"
+                >
+                  <div class="profile__info__files__item__left">
+                    <p class="profile__info__files__item__left__text">Предмет: {{ file.academicSubject }}</p>
+                    <p class="profile__info__files__item__left__text">Тема работы: {{ file.topicWork }}</p>
+                    <p class="profile__info__files__item__left__text">Оценка содержания
+                      (0-50): {{ file.estContent }}</p>
+                    <p class="profile__info__files__item__left__text">Оценка актуальности
+                      (0-25): {{ file.estRelevance }}</p>
+                    <p class="profile__info__files__item__left__text">Оценка стилистики
+                      (0-25): {{ file.estStylistic }}</p>
+                    <p class="profile__info__files__item__left__text">Итоговый
+                      балл: <b>{{ file.estContent + file.estRelevance + file.estStylistic }}</b></p>
+                    <p class="profile__info__files__item__left__text">
+                      Рекоммендации по улучшению учебной работы: {{ file.estRecommendations }}
+                    </p>
+                  </div>
+                  <div class="profile__info__files__item__right"
+                  ></div>
                 </div>
-                <div class="profile__info__files__item__right"
-                ></div>
-              </div>
+              }
             }
-          }
-        </div>
-      </mat-tab>
+          </div>
+        </mat-tab>
       }
     </mat-tab-group>
   </div>

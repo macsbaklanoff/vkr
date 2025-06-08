@@ -90,6 +90,10 @@
 
     &__settings {
       margin-top: 16px;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: min-content min-content 1fr;
+      row-gap: 16px;
       &__header {
         color: var(--mat-sys-on-surface);
       }
@@ -131,11 +135,13 @@
           }
         }
       }
-
+      &__themes {
+        display: grid;
+        grid-template-columns: 1fr min-content;
+      }
       &__buttons {
         display: flex;
         justify-content: space-between;
-
         &__content {
           display: flex;
           gap: 16px;
@@ -190,7 +196,5 @@ mat-tab-group {
 }
 
 .test {
-  background-color: #ff897d;
-  display: flex;
-  height: 100%;
+  width: min-content;
 }

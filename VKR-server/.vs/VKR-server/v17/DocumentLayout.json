@@ -107,8 +107,7 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-30T20:41:22.415Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -124,8 +123,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAADwvxoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T17:43:10.254Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-05T17:43:10.254Z"
             },
             {
               "$type": "Document",
@@ -150,8 +148,7 @@
               "RelativeToolTip": "Controllers\\FileController.cs",
               "ViewState": "AgIAACgAAAAAAAAAAAAgwEEAAABqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-30T20:41:42.207Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-30T20:41:42.207Z"
             },
             {
               "$type": "Document",
@@ -163,8 +160,7 @@
               "RelativeToolTip": "Controllers\\UserController.cs",
               "ViewState": "AgIAAGEAAAAAAAAAAAAuwIcAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-30T20:41:48.944Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-30T20:41:48.944Z"
             },
             {
               "$type": "Document",
@@ -200,8 +196,7 @@
               "RelativeToolTip": "JWT\\AuthOptions.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T13:12:01.039Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-05T13:12:01.039Z"
             },
             {
               "$type": "Document",
@@ -225,8 +220,7 @@
               "RelativeToolTip": "DB\\ApplicationContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T18:59:57.113Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-05T18:59:57.113Z"
             },
             {
               "$type": "Document",
@@ -238,8 +232,7 @@
               "RelativeToolTip": "DB\\Entities\\Group.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-06T10:46:58.89Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-06T10:46:58.89Z"
             },
             {
               "$type": "Document",
