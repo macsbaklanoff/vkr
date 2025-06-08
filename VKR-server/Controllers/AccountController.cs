@@ -124,19 +124,19 @@ namespace VKR_server.Controllers
 			}
 			if (user.Email != updateUser.Email) //условия на обновления email
 			{
-				if (updateUser.Email == string.Empty) return BadRequest("Email is empty!");
+				if (updateUser.Email == string.Empty) return BadRequest("Email не может быть пустым!");
                 var matchEmail = Regex.Match(updateUser.Email, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
 				if (!matchEmail.Success) return BadRequest($"{updateUser.Email}");
                 var users = _context.Users.ToList();
 				if (!FindCountEmail(users, updateUser.Email))
 				{
-					return BadRequest("Email already exists!");
+					return BadRequest("Email уже существует!");
 				}
 				user.Email = updateUser.Email;
 			}
 			if (updateUser.FirstName == string.Empty || updateUser.LastName == string.Empty) //условия на обновления имен
 			{
-				return BadRequest("FirstName or LastName is empty");
+				return BadRequest("Имя или Фамилия не могут быть пустыми");
 			}
 			user.FirstName = updateUser.FirstName;
 			user.LastName = updateUser.LastName;

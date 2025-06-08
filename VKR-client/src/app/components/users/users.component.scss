@@ -10,6 +10,7 @@
     border-radius: 16px;
     background-color: var(--mat-sys-surface-container-low);
     &__headline {
+      color: var(--mat-sys-on-surface);
       padding: 8px;
     }
   }
@@ -52,4 +53,26 @@
 
 .demo-row-is-clicked {
   font-weight: bold;
+}
+
+@media (max-width: 1000px) {
+  .users {
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+    &__filters {
+      grid-template-columns: min-content;
+      padding: 16px;
+    }
+  }
+  .group-column {
+    display: none;
+  }
+}
+@media (max-width: 700px) {
+  .email-column {
+    display: none;
+  }
+  .users__table__footer {
+    display: none;
+  }
 }

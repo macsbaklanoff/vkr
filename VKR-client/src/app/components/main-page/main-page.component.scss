@@ -28,8 +28,10 @@
   background: var(--mat-sys-surface-container-low);
   border-radius: 16px;
   box-shadow: var(--mat-sys-level3);
+  display: grid;
+  grid-template-columns: 1fr;
 }
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .main-page {
     grid-template-columns: 1fr;
     &__item {

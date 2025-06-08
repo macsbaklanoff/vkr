@@ -74,12 +74,15 @@
   }
 }
 
-@media (width < 400px) {
+@media (width < 510px) {
   :host {
     display: grid;
     grid-template-columns: [navigation-start main-start ] 1fr [navigation-end main-end];
     grid-template-rows: [header-start] min-content [header-end content-start] 1fr
   [content-end navigation-start] 62px
   [navigation-end];
+  }
+  .content {
+    padding-inline: 8px;
   }
 }

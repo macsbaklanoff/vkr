@@ -140,10 +140,12 @@
         grid-template-columns: 1fr min-content;
       }
       &__buttons {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr min-content;
         justify-content: space-between;
         &__content {
-          display: flex;
+          display: grid;
+          grid-template-columns: min-content min-content;
           gap: 16px;
         }
       }
@@ -197,4 +199,17 @@ mat-tab-group {
 
 .test {
   width: min-content;
+}
+
+@media (max-width: 1000px) {
+  .profile {
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+    &__info__settings__buttons {
+      grid-template-columns: 1fr;
+      &__content {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
 }

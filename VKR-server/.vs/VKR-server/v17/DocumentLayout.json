@@ -3,16 +3,32 @@
   "WorkspaceRootPath": "D:\\vkr\\VKR-server\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|d:\\vkr\\vkr-server\\db\\entities\\file.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|solutionrelative:db\\entities\\file.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|d:\\vkr\\vkr-server\\db\\entities\\estimation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|solutionrelative:db\\entities\\estimation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|d:\\vkr\\vkr-server\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|d:\\vkr\\vkr-server\\controllers\\filecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|solutionrelative:controllers\\filecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|d:\\vkr\\vkr-server\\controllers\\estimationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|solutionrelative:controllers\\estimationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|d:\\vkr\\vkr-server\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|d:\\vkr\\vkr-server\\dto\\userresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|solutionrelative:dto\\userresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|d:\\vkr\\vkr-server\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|d:\\vkr\\vkr-server\\db\\applicationcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -25,10 +41,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|d:\\vkr\\vkr-server\\db\\entities\\group.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|solutionrelative:db\\entities\\group.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|d:\\vkr\\vkr-server\\controllers\\filecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|solutionrelative:controllers\\filecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|d:\\vkr\\vkr-server\\jwt\\authoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -45,18 +57,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|d:\\vkr\\vkr-server\\db\\entities\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|solutionrelative:db\\entities\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|d:\\vkr\\vkr-server\\db\\entities\\file.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|solutionrelative:db\\entities\\file.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|d:\\vkr\\vkr-server\\db\\entities\\estimation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|solutionrelative:db\\entities\\estimation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|d:\\vkr\\vkr-server\\controllers\\estimationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|solutionrelative:controllers\\estimationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F80369D4-8986-4DC4-AFF1-CE66C0416FE4}|VKR-server.csproj|d:\\vkr\\vkr-server\\interfaces\\ijwtdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -94,11 +94,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "UserResponseDto.cs",
               "DocumentMoniker": "D:\\vkr\\VKR-server\\Dto\\UserResponseDto.cs",
               "RelativeDocumentMoniker": "Dto\\UserResponseDto.cs",
@@ -115,91 +115,6 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\vkr\\VKR-server\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "D:\\vkr\\VKR-server\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAADwvxoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T17:43:10.254Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "D:\\vkr\\VKR-server\\Controllers\\AccountController.cs",
-              "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
-              "ToolTip": "D:\\vkr\\VKR-server\\Controllers\\AccountController.cs",
-              "RelativeToolTip": "Controllers\\AccountController.cs",
-              "ViewState": "AgIAAGsAAAAAAAAAAAAswH8AAABjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-30T20:41:47.326Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "FileController.cs",
-              "DocumentMoniker": "D:\\vkr\\VKR-server\\Controllers\\FileController.cs",
-              "RelativeDocumentMoniker": "Controllers\\FileController.cs",
-              "ToolTip": "D:\\vkr\\VKR-server\\Controllers\\FileController.cs",
-              "RelativeToolTip": "Controllers\\FileController.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAgwEEAAABqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-30T20:41:42.207Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "D:\\vkr\\VKR-server\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
-              "ToolTip": "D:\\vkr\\VKR-server\\Controllers\\UserController.cs",
-              "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AgIAAGEAAAAAAAAAAAAuwIcAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-30T20:41:48.944Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Estimation.cs",
-              "DocumentMoniker": "D:\\vkr\\VKR-server\\DB\\Entities\\Estimation.cs",
-              "RelativeDocumentMoniker": "DB\\Entities\\Estimation.cs",
-              "ToolTip": "D:\\vkr\\VKR-server\\DB\\Entities\\Estimation.cs",
-              "RelativeToolTip": "DB\\Entities\\Estimation.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAqwA8AAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-01T17:45:48.987Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "JwtData.cs",
-              "DocumentMoniker": "D:\\vkr\\VKR-server\\JWT\\JwtData.cs",
-              "RelativeDocumentMoniker": "JWT\\JwtData.cs",
-              "ToolTip": "D:\\vkr\\VKR-server\\JWT\\JwtData.cs",
-              "RelativeToolTip": "JWT\\JwtData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T13:08:51.527Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AuthOptions.cs",
-              "DocumentMoniker": "D:\\vkr\\VKR-server\\JWT\\AuthOptions.cs",
-              "RelativeDocumentMoniker": "JWT\\AuthOptions.cs",
-              "ToolTip": "D:\\vkr\\VKR-server\\JWT\\AuthOptions.cs",
-              "RelativeToolTip": "JWT\\AuthOptions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T13:12:01.039Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 17,
               "Title": "UserDto.cs",
               "DocumentMoniker": "D:\\vkr\\VKR-server\\Dto\\UserDto.cs",
@@ -212,7 +127,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "ApplicationContext.cs",
               "DocumentMoniker": "D:\\vkr\\VKR-server\\DB\\ApplicationContext.cs",
               "RelativeDocumentMoniker": "DB\\ApplicationContext.cs",
@@ -224,7 +139,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "Group.cs",
               "DocumentMoniker": "D:\\vkr\\VKR-server\\DB\\Entities\\Group.cs",
               "RelativeDocumentMoniker": "DB\\Entities\\Group.cs",
@@ -236,19 +151,121 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 4,
               "Title": "EstimationController.cs",
               "DocumentMoniker": "D:\\vkr\\VKR-server\\Controllers\\EstimationController.cs",
               "RelativeDocumentMoniker": "Controllers\\EstimationController.cs",
               "ToolTip": "D:\\vkr\\VKR-server\\Controllers\\EstimationController.cs",
               "RelativeToolTip": "Controllers\\EstimationController.cs",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAAAEAAAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAABcAAAAAAAAAAADwv0AAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-30T21:08:32.316Z"
+              "WhenOpened": "2025-05-30T21:08:32.316Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 3,
+              "Title": "FileController.cs",
+              "DocumentMoniker": "D:\\vkr\\VKR-server\\Controllers\\FileController.cs",
+              "RelativeDocumentMoniker": "Controllers\\FileController.cs",
+              "ToolTip": "D:\\vkr\\VKR-server\\Controllers\\FileController.cs",
+              "RelativeToolTip": "Controllers\\FileController.cs",
+              "ViewState": "AgIAAJgAAAAAAAAAAAAIwEEAAABqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-30T20:41:42.207Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "D:\\vkr\\VKR-server\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
+              "ToolTip": "D:\\vkr\\VKR-server\\Controllers\\UserController.cs",
+              "RelativeToolTip": "Controllers\\UserController.cs",
+              "ViewState": "AgIAAKkAAAAAAAAAAAAzwMUAAABdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-30T20:41:48.944Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Estimation.cs",
+              "DocumentMoniker": "D:\\vkr\\VKR-server\\DB\\Entities\\Estimation.cs",
+              "RelativeDocumentMoniker": "DB\\Entities\\Estimation.cs",
+              "ToolTip": "D:\\vkr\\VKR-server\\DB\\Entities\\Estimation.cs",
+              "RelativeToolTip": "DB\\Entities\\Estimation.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAqwA8AAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-01T17:45:48.987Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "File.cs",
+              "DocumentMoniker": "D:\\vkr\\VKR-server\\DB\\Entities\\File.cs",
+              "RelativeDocumentMoniker": "DB\\Entities\\File.cs",
+              "ToolTip": "D:\\vkr\\VKR-server\\DB\\Entities\\File.cs",
+              "RelativeToolTip": "DB\\Entities\\File.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-31T04:40:34.281Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "D:\\vkr\\VKR-server\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
+              "ToolTip": "D:\\vkr\\VKR-server\\Controllers\\AccountController.cs*",
+              "RelativeToolTip": "Controllers\\AccountController.cs*",
+              "ViewState": "AgIAAM4AAAAAAAAAAAAqwIoAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-30T20:41:47.326Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AuthOptions.cs",
+              "DocumentMoniker": "D:\\vkr\\VKR-server\\JWT\\AuthOptions.cs",
+              "RelativeDocumentMoniker": "JWT\\AuthOptions.cs",
+              "ToolTip": "D:\\vkr\\VKR-server\\JWT\\AuthOptions.cs",
+              "RelativeToolTip": "JWT\\AuthOptions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-05T13:12:01.039Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "JwtData.cs",
+              "DocumentMoniker": "D:\\vkr\\VKR-server\\JWT\\JwtData.cs",
+              "RelativeDocumentMoniker": "JWT\\JwtData.cs",
+              "ToolTip": "D:\\vkr\\VKR-server\\JWT\\JwtData.cs",
+              "RelativeToolTip": "JWT\\JwtData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-05T13:08:51.527Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\vkr\\VKR-server\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\vkr\\VKR-server\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAADwvxoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-05T17:43:10.254Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "User.cs",
               "DocumentMoniker": "D:\\vkr\\VKR-server\\DB\\Entities\\User.cs",
               "RelativeDocumentMoniker": "DB\\Entities\\User.cs",
@@ -260,19 +277,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "File.cs",
-              "DocumentMoniker": "D:\\vkr\\VKR-server\\DB\\Entities\\File.cs",
-              "RelativeDocumentMoniker": "DB\\Entities\\File.cs",
-              "ToolTip": "D:\\vkr\\VKR-server\\DB\\Entities\\File.cs",
-              "RelativeToolTip": "DB\\Entities\\File.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-31T04:40:34.281Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 13,
               "Title": "Role.cs",
               "DocumentMoniker": "D:\\vkr\\VKR-server\\DB\\Entities\\Role.cs",
               "RelativeDocumentMoniker": "DB\\Entities\\Role.cs",

@@ -63,7 +63,7 @@ namespace VKR_server.Controllers
             //Include явно загружает связанные данные
             var user = _context.Users.Include(u => u.Role).Include(u => u.Group).FirstOrDefault(u => u.Id == user_id);
 
-            if (user == null) return BadRequest("User doesnt exists");
+            if (user == null) return BadRequest("Пользователь не существует");
             return Ok(new UserResponseDto
             {
                 UserId = user_id,
@@ -157,7 +157,7 @@ namespace VKR_server.Controllers
             if (jwt.RoleName != "Admin") return BadRequest("Invalide role");
 
             var user = _context.Users.Find(id);
-            if (user == null) return BadRequest("Not-existent user");
+            if (user == null) return BadRequest("Пользователя не существует");
             
             user.RoleId = idNewRole;
             _context.Users.Update(user);
@@ -172,7 +172,7 @@ namespace VKR_server.Controllers
             var jwt = GetJwtData(HttpContext.Request.Headers.Authorization.ToString().Split()[1]);
 
             var user = _context.Users.Find(user_id);
-            if (user == null) return BadRequest("Not-existent user");
+            if (user == null) return BadRequest("Пользователя не существует");
 
             var files = _context.Files.Where(f => f.UserId == user_id);
             _context.Users.Remove(user);

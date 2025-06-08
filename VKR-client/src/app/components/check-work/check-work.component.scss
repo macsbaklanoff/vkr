@@ -27,6 +27,7 @@
       border-radius: 32px;
       height: 100%;
       place-items: center;
+      color: var(--mat-sys-on-surface);
       &__file {
         display: grid;
         grid-template-columns: 1fr;
