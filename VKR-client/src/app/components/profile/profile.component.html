@@ -126,13 +126,16 @@
       </mat-tab>
       @if (authData?.roleName == 'Student') {
         <mat-tab label="Работы">
+          <mat-form-field subscriptSizing="dynamic" class="profile__info__search">
+            <input matInput placeholder="Поиск" [(ngModel)]="searchTerm">
+          </mat-form-field>
           <div class="profile__info__files">
             @if (filesData.length == 0) {
               <mat-icon>sentiment_dissatisfied</mat-icon>
               К сожалению, у вас отсутствуют учебные работы. <a routerLink="/check-work">Загрузите
                 работу</a>чтобы увидеть результаты.
             } @else {
-              @for (file of filesData; track file) {
+              @for (file of filesDataVisual; track file) {
                 <div class="profile__info__files__item"
                      [ngStyle]="{'--color': getColor(file.estContent + file.estRelevance + file.estStylistic)}"
                 >

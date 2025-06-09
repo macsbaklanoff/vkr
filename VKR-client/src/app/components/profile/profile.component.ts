@@ -4,7 +4,7 @@ import {MatButton} from '@angular/material/button';
 import {AuthService} from '../../services/auth.service';
 import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {toSignal} from '@angular/core/rxjs-interop';
+import {toObservable, toSignal} from '@angular/core/rxjs-interop';
 import {IUpdateUserData} from '../../interfaces/update-user-data';
 import {UserService} from '../../services/user.service';
 import {MatDialog} from '@angular/material/dialog';
@@ -22,6 +22,7 @@ import {DeleteAccountDialogComponent} from '../dialogs/delete-account-dialog/del
 import {RouterLink} from '@angular/router';
 import {ThemeService} from '../../services/theme.service';
 import {MatButtonToggle, MatButtonToggleGroup} from '@angular/material/button-toggle';
+import {debounceTime} from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -54,6 +55,7 @@ export class ProfileComponent {
 
   public authData = this._authService.authData();
   public filesData: IInfoFileEstimationResponse[] = [];
+  public filesDataVisual: IInfoFileEstimationResponse[] = [];
 
   public estimationData: IEstimationProfile = {
     countWorks: 0,
@@ -69,6 +71,11 @@ export class ProfileComponent {
   public email: string | undefined = this.authData?.email;
   public groupName: string | null = this.authData!.groupName!;
 
+  public searchTerm = signal<string>("");
+  private searchTerm$ = toObservable(this.searchTerm).pipe(
+    debounceTime(300)
+  );
+
   private readonly dialog = inject(MatDialog);
 
   public isEditable: boolean = false;
@@ -79,6 +86,21 @@ export class ProfileComponent {
         this.estimationData = profile;
         },
     })
+    effect(() => {
+      if (this.searchTerm() == '') {
+        this.load()
+      }
+      this.searchTerm$.subscribe(term => {
+        this.filesDataVisual = this.filesData.filter(file =>
+          file.fileName.toLowerCase().includes(term.toLowerCase()) ||
+          file.topicWork.toLowerCase().includes(term.toLowerCase()) ||
+          file.academicSubject.toLowerCase().includes(term.toLowerCase())
+        );
+      })
+    });
+  }
+
+  public load() : void {
     this._fileService.getFileEstimation(this.authData!.userId).subscribe({
       next: (filesData: IInfoFileEstimationResponse[]) => {
         this.filesData = filesData;
@@ -86,6 +108,7 @@ export class ProfileComponent {
       }
     })
   }
+
   public getColor(estimation: number) : string {
     if (estimation >= 81) return '#45a85b';
     else if (estimation >= 61 && estimation < 81) return '#dbd765';
