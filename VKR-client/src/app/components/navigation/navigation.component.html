@@ -13,12 +13,12 @@
         </span>
       </a>
       @if (authData?.roleName == 'Student') {
-      <a mat-list-item routerLink="/check-work">
+        <a mat-list-item routerLink="/check-work">
         <span class="nav-list-desktop__item">
           <mat-icon>library_books</mat-icon>
           <span class="nav-list-desktop__item__text">Проверить работу</span>
         </span>
-      </a>
+        </a>
       }
       @if (authData?.roleName == "Admin") {
         <a mat-list-item routerLink="/users">
@@ -60,12 +60,21 @@
               <mat-icon class="nav-list-phone__item__icon">home</mat-icon>
             </span>
           </a>
-          <a mat-list-item routerLink="/check-work">
+          @if (authData?.roleName == "Admin") {
+            <a mat-list-item routerLink="/users">
             <span class="nav-list-phone__item">
-              <mat-icon class="nav-list-phone__item__icon">library_books</mat-icon>
+              <mat-icon class="nav-list-phone__item__icon">person</mat-icon>
             </span>
-          </a>
-          <a mat-list-item  (click)="openDialog('0ms', '0ms')">
+            </a>
+          }
+          @if (authData?.roleName == "Teacher") {
+            <a mat-list-item routerLink="/students">
+            <span class="nav-list-phone__item">
+              <mat-icon class="nav-list-phone__item__icon">person</mat-icon>
+            </span>
+            </a>
+          }
+          <a mat-list-item (click)="openDialog('0ms', '0ms')">
             <span class="nav-list-phone__item">
               <mat-icon class="nav-list-phone__item__icon">logout</mat-icon>
             </span>
@@ -83,22 +92,22 @@
           <a mat-list-item routerLink="/main-page">
         <span class="nav-list-tablet__item">
           <mat-icon>home</mat-icon>
-          <span class="nav-list-tablet__item__text">Main Page</span>
+          <span class="nav-list-tablet__item__text">Главная</span>
         </span>
           </a>
           @if (authData?.roleName == 'Student') {
-          <a mat-list-item routerLink="/check-work">
+            <a mat-list-item routerLink="/check-work">
         <span class="nav-list-tablet__item">
           <mat-icon>library_books</mat-icon>
-          <span class="nav-list-tablet__item__text">Check work</span>
+          <span class="nav-list-tablet__item__text">Проверить работу</span>
         </span>
-          </a>
+            </a>
           }
           @if (authData?.roleName == "Admin") {
             <a mat-list-item routerLink="/users">
         <span class="nav-list-tablet__item">
           <mat-icon>group</mat-icon>
-          <span class="nav-list-tablet__item__text">Users</span>
+          <span class="nav-list-tablet__item__text">Польз.</span>
         </span>
             </a>
           }
@@ -106,20 +115,20 @@
             <a mat-list-item routerLink="/students">
               <span class="nav-list-tablet__item">
                 <mat-icon>school</mat-icon>
-              <span class="nav-list-tablet__item__text">Students</span>
+              <span class="nav-list-tablet__item__text">Студенты</span>
               </span>
             </a>
           }
           <a mat-list-item routerLink="/profile">
         <span class="nav-list-tablet__item">
           <mat-icon>person</mat-icon>
-          <span class="nav-list-tablet__item__text">Profile</span>
+          <span class="nav-list-tablet__item__text">Профиль</span>
         </span>
           </a>
           <a mat-list-item (click)="openDialog('0ms', '0ms')">
         <span class="nav-list-tablet__item">
           <mat-icon>logout</mat-icon>
-          <span class="nav-list-tablet__item__text">Sign-out</span>
+          <span class="nav-list-tablet__item__text">Выход</span>
         </span>
           </a>
         </mat-nav-list>

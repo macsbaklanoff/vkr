@@ -3,6 +3,7 @@
   height: 100%;
   grid-template-columns: 200px 1fr;
   column-gap: 64px;
+
   &__group {
     display: grid;
     grid-auto-rows: min-content;
@@ -10,22 +11,26 @@
     background-color: var(--mat-sys-surface-container-low);
     border-radius: 16px;
     padding: 16px;
+
     &__headline {
       color: var(--mat-sys-on-surface);
       padding: 8px;
     }
   }
+
   &__table {
     &__input {
       width: 100%;
       height: 50px;
     }
+
     padding: 16px;
     width: 100%;
     background-color: var(--mat-sys-surface-container-low);
     border-radius: 16px;
   }
 }
+
 .example-radio-group {
   display: grid;
   grid-template-columns: 1fr;
@@ -52,4 +57,23 @@
 .demo-row-is-clicked {
   font-weight: bold;
 }
+
+@media (max-width: 1000px) {
+  .students {
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+
+    &__group {
+      grid-template-columns: min-content;
+      padding: 16px;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .email-column {
+    display: none;
+  }
+}
+
 

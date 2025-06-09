@@ -3,7 +3,7 @@
     <button mat-flat-button (click)="fileInput.click()">Выбрать файл</button>
     <input type="file" #fileInput style="display: none" (change)="onFileSelected($event)">
   </div>
-    <div class="check-work__content">
+  <div class="check-work__content">
     <input
       class="check-work__content__input"
       matInput
@@ -18,60 +18,61 @@
       [(ngModel)]="academicSubject"
       placeholder="Название предмета"
     >
-      @if (inProgressChecking()) {
-        <mat-spinner></mat-spinner>
-      }@else {
-    <div class="check-work__content__form"
-         (drop)="onDrop($event)"
-         (dragover)="onDragOver($event)"
-         (dragleave)="onDragLeave($event)"
-         [class.drag-over]="isDragOver">
-      @if (file == undefined) {
-        <p>Перетащите работу сюда (только pdf)</p>
-      } @else {
-        <div class="check-work__content__form__file">
-          <div class="check-work__content__form__file__upper">
-            <p>Имя файла: {{ file.name }}</p>
-            <p>Размер файла: {{ formatFileSize(file.size) }}</p>
+    @if (inProgressChecking()) {
+      <mat-spinner></mat-spinner>
+    } @else {
+      <div class="check-work__content__form"
+           (drop)="onDrop($event)"
+           (dragover)="onDragOver($event)"
+           (dragleave)="onDragLeave($event)"
+           [class.drag-over]="isDragOver">
+        @if (file == undefined) {
+          <p>Перетащите работу сюда (только pdf)</p>
+        } @else {
+          <div class="check-work__content__form__file">
+            <div class="check-work__content__form__file__upper">
+              <p>Имя файла: {{ file.name }}</p>
+              <p>Размер файла: {{ formatFileSize(file.size) }}</p>
+            </div>
+            <div class="check-work__content__form__file__lower">
+              <button mat-flat-button (click)="uploadFile()">Отправить</button>
+              <button mat-flat-button (click)="removeFile()" class="deleteFile">Удалить работу</button>
+            </div>
           </div>
-          <div class="check-work__content__form__file__lower">
-            <button mat-flat-button (click)="uploadFile()">Отправить</button>
-            <button mat-flat-button (click)="removeFile()" class="deleteFile">Удалить работу</button>
-          </div>
-        </div>
-      }
-    </div>
-      }
+        }
+      </div>
+    }
   </div>
   @if (resultEstimation != undefined) {
-  <div class="check-work__footer">
-    <h4>Результаты проверки:</h4>
-    <p>Итоговый балл: {{resultEstimation.estContent+resultEstimation.estRelevance+resultEstimation.estStylistic}}</p>
-    <div class="check-work__footer__doughnuts">
-      <app-estimation-check-work-doughnut
-        [name]="'Оценка содержания: '"
-        [result]="resultEstimation.estContent"
-        [estimationFrom]="50"
-      >
-      </app-estimation-check-work-doughnut>
-      <app-estimation-check-work-doughnut
-        [name]="'Оценка актуальности: '"
-        [result]="resultEstimation.estRelevance"
-        [estimationFrom]="25"
-      >
-      </app-estimation-check-work-doughnut>
-      <app-estimation-check-work-doughnut
-        [name]="'Оценка стилистики: '"
-        [result]="resultEstimation.estStylistic"
-        [estimationFrom]="25"
-      >
-      </app-estimation-check-work-doughnut>
+    <div class="check-work__footer">
+      <h4>Результаты проверки:</h4>
+      <p>Итоговый
+        балл: {{ resultEstimation.estContent + resultEstimation.estRelevance + resultEstimation.estStylistic }}</p>
+      <div class="check-work__footer__doughnuts">
+        <app-estimation-check-work-doughnut
+          [name]="'Оценка содержания: '"
+          [result]="resultEstimation.estContent"
+          [estimationFrom]="50"
+        >
+        </app-estimation-check-work-doughnut>
+        <app-estimation-check-work-doughnut
+          [name]="'Оценка актуальности: '"
+          [result]="resultEstimation.estRelevance"
+          [estimationFrom]="25"
+        >
+        </app-estimation-check-work-doughnut>
+        <app-estimation-check-work-doughnut
+          [name]="'Оценка стилистики: '"
+          [result]="resultEstimation.estStylistic"
+          [estimationFrom]="25"
+        >
+        </app-estimation-check-work-doughnut>
 
+      </div>
+      <div class="check-work__footer__recommendations">
+        <h4>Рекомендации к улучшению:</h4>
+        <p>{{ resultEstimation?.estRecommendations }}</p>
+      </div>
     </div>
-    <div class="check-work__footer__recommendations">
-      <h4>Рекомендации к улучшению:</h4>
-      <p>{{resultEstimation?.estRecommendations}}</p>
-    </div>
-  </div>
   }
 </div>

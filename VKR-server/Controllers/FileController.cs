@@ -48,7 +48,6 @@ namespace VKR_server.Controllers
             Console.WriteLine(uploadFile.UserId);
             Console.WriteLine(uploadFile.TopicWork);
             Console.WriteLine(uploadFile.AcademicSubject);
-            
             var textContent = ReadPdfFile(uploadFile.File);
             var chatResult = await _kernel.InvokePromptAsync($"Представь что ты преподаватель с многолетним стажем. " +
                 $"Тебе нужно оценить работу по трем критериям: " +

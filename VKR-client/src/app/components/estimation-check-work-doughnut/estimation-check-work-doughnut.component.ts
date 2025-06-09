@@ -26,12 +26,13 @@ export class EstimationCheckWorkDoughnutComponent {
 
   ngAfterViewInit() {
     this.remain = this.estimationFrom - this.result;
-    console.log(this.result);
+    // console.log(this.result);
     this.doughnutChartMethod();
   }
 
   public getColor(estimation: number) : [string, string] {
-    if (estimation >= 0.81) return ['rgba(69, 168, 91, 0,5)', 'rgba(69, 168, 91, 1)'];
+    console.log(estimation);
+    if (estimation >= 0.81) return ['rgba(69, 168, 91, 0.5)', 'rgba(69, 168, 91, 1)'];
     else if (estimation >= 0.61 && estimation < 0.81) return ['rgba(219, 215, 101, 0.5)', 'rgba(219, 215, 101, 1)'];
     else if (estimation >= 0.41 && estimation < 0.61) return ['rgba(235, 161, 52, 0.5)', 'rgba(235, 161, 52, 1)'];
     return ['rgba(219, 66, 66, 0.5)', 'rgba(219, 66, 66, 1)'];

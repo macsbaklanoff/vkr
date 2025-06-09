@@ -56,7 +56,7 @@ export class NavigationComponent {
       map(result => result.matches),
       shareReplay()
     );
-  isPhone$: Observable<boolean> = this.breakpointObserver.observe('(max-width: 400px)')
+  isPhone$: Observable<boolean> = this.breakpointObserver.observe('(max-width: 510px)')
     .pipe(
       map(result => result.matches),
       shareReplay()
