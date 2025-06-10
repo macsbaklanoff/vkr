@@ -9,7 +9,6 @@ import {IUpdateUserData} from '../../interfaces/update-user-data';
 import {UserService} from '../../services/user.service';
 import {MatDialog} from '@angular/material/dialog';
 import {SignOutDialogComponent} from '../dialogs/sign-out-dialog/sign-out-dialog.component';
-import {UpdateUserDataComponent} from '../dialogs/update-user-data/update-user-data.component';
 import {EstimationService} from '../../services/estimation.service';
 import {IEstimationProfile} from '../../interfaces/estimation-profile-response';
 import {MatTab, MatTabGroup} from '@angular/material/tabs';
@@ -23,6 +22,7 @@ import {RouterLink} from '@angular/router';
 import {ThemeService} from '../../services/theme.service';
 import {MatButtonToggle, MatButtonToggleGroup} from '@angular/material/button-toggle';
 import {debounceTime} from 'rxjs';
+import {ResponseDialogComponent} from '../dialogs/response-dialog/response-dialog.component';
 
 @Component({
   selector: 'app-profile',
@@ -92,7 +92,6 @@ export class ProfileComponent {
       }
       this.searchTerm$.subscribe(term => {
         this.filesDataVisual = this.filesData.filter(file =>
-          file.fileName.toLowerCase().includes(term.toLowerCase()) ||
           file.topicWork.toLowerCase().includes(term.toLowerCase()) ||
           file.academicSubject.toLowerCase().includes(term.toLowerCase())
         );
@@ -149,20 +148,22 @@ export class ProfileComponent {
       next: result => {
         this.authData = this._authService.authData();
         this.isEditable = !this.isEditable;
-        this.dialog.open(UpdateUserDataComponent, {
+        this.dialog.open(ResponseDialogComponent, {
           width: '250px',
           data: {
+            name: 'Изменение данных',
             success: true,
             message: 'Данные успешно обновлены!'
           }
         });
       },
       error: err => {
-        this.dialog.open(UpdateUserDataComponent, {
+        this.dialog.open(ResponseDialogComponent, {
           width: '250px',
           data: {
+            name: 'Изменение данных',
             success: false,
-            message: `${err.error}`
+            message: `Данные не обновлены. ${err.error}`
           }
         });
       this.firstName = this.authData?.firstName;

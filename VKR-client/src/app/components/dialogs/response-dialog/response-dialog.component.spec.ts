@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UpdateUserDataComponent } from './update-user-data.component';
+import { ResponseDialogComponent } from './response-dialog.component';
 
-describe('UpdateUserDataComponent', () => {
-  let component: UpdateUserDataComponent;
-  let fixture: ComponentFixture<UpdateUserDataComponent>;
+describe('ResponseDialogComponent', () => {
+  let component: ResponseDialogComponent;
+  let fixture: ComponentFixture<ResponseDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UpdateUserDataComponent]
+      imports: [ResponseDialogComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(UpdateUserDataComponent);
+    fixture = TestBed.createComponent(ResponseDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

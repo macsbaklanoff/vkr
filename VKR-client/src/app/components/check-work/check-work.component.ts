@@ -12,6 +12,9 @@ import {
   EstimationCheckWorkDoughnutComponent
 } from '../estimation-check-work-doughnut/estimation-check-work-doughnut.component';
 import {Router} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {ResponseDialogComponent} from '../dialogs/response-dialog/response-dialog.component';
+import {DeleteAccountDialogComponent} from '../dialogs/delete-account-dialog/delete-account-dialog.component';
 
 @Component({
   selector: 'app-check-work',
@@ -50,6 +53,9 @@ export class CheckWorkComponent {
 
   private router = inject(Router);
 
+  private readonly dialog = inject(MatDialog);
+
+
   onDragOver(event: DragEvent) {
     event.preventDefault(); //фикс открытия файла при его перетаскивании
     event.stopPropagation();
@@ -68,15 +74,29 @@ export class CheckWorkComponent {
     this.isDragOver = false;
 
     if (event.dataTransfer?.files && event.dataTransfer.files.length > 0) {
-      if (event.dataTransfer.files[0].type != 'application/pdf') return;
+      if (event.dataTransfer.files[0].type != 'application/pdf') {
+        const dialogRef = this.dialog.open(ResponseDialogComponent, {data: {
+            name: 'Не правильный тип файла',
+            success: false,
+            message: 'Разрешена загрузка только PDF.'
+          }})
+        return
+      }
+      else if (event.dataTransfer.files[0].size > 10000000) {
+        const dialogRef = this.dialog.open(ResponseDialogComponent, {data: {
+            name: 'Большой размер файла',
+            success: false,
+            message: 'Загрузите файл размером меньше 10МБ.'
+          }})
+      }
       this.file = event.dataTransfer?.files[0];
     }
   }
 
-  public getColor(estimation: number) : string {
+  public getColor(estimation: number): string {
     if (estimation >= 81) return '#45a85b';
     else if (estimation >= 61 && estimation < 81) return '#dbd765';
-    else if (estimation >=41 && estimation < 61) return '#EBA134';
+    else if (estimation >= 41 && estimation < 61) return '#EBA134';
     return '#DB4242';
   }
 
@@ -116,13 +136,14 @@ export class CheckWorkComponent {
         this.resultEstimation = result;
       },
       error: (err) => {
-        if (err.status === 400) {
-          alert("Повторите попытку!")
-          this.inProgressChecking.set(false);
-          this.topicWork = ''
-          this.academicSubject = ''
-          this.file = undefined;
-        }
+        const dialogRef = this.dialog.open(ResponseDialogComponent, {data: {
+            name: 'Проверка работы',
+            success: false,
+            message: 'Произошла ошибка. Повторите попытку'
+          }})
+        dialogRef.afterClosed().subscribe((result) => {
+          window.location.reload();
+        })
       },
       complete: () => {
         this.inProgressChecking.set(false);
