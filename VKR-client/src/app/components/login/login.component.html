@@ -9,17 +9,17 @@
           <mat-label>Email</mat-label>
           <input matInput formControlName="email"/>
           @if (email.hasError('required')) {
-            <mat-error>Email is <strong>required</strong></mat-error>
+            <mat-error>Email <strong>обязательное поле</strong></mat-error>
           }
           @if (email.hasError('email')) {
-            <mat-error>Email is not valid</mat-error>
+            <mat-error>Некорректный email</mat-error>
           }
         </mat-form-field>
         <mat-form-field>
           <mat-label>Пароль</mat-label>
           <input matInput formControlName="password" type="password"/>
           @if (password.hasError('required')) {
-            <mat-error>Password is <strong>required</strong></mat-error>
+            <mat-error>Пароль <strong>обязательное поле</strong></mat-error>
           }
         </mat-form-field>
       </div>
