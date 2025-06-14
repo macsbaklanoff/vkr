@@ -2,7 +2,6 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {IEstimationProfile} from '../interfaces/estimation-profile-response';
 import {Observable} from 'rxjs';
-import {IEstsAllGroups} from '../interfaces/ests-all-groups';
 import {IInfoFileEstimationResponse} from '../interfaces/info-file-estimation-response';
 
 @Injectable({

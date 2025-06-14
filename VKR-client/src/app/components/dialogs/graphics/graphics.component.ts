@@ -2,7 +2,6 @@ import {Component, ElementRef, inject, Inject, ViewChild} from '@angular/core';
 import Chart, {ChartTypeRegistry} from 'chart.js/auto';
 import {MAT_DIALOG_DATA, MatDialogClose} from '@angular/material/dialog';
 import {EstimationService} from '../../../services/estimation.service';
-import {IEstsAllGroups} from '../../../interfaces/ests-all-groups';
 import {IGroupResponse} from '../../../interfaces/group-response';
 import {MatButton} from '@angular/material/button';
 

@@ -1,11 +1,8 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IUserResponse} from '../interfaces/user-response';
 import {AuthService} from './auth.service';
-import {IUpdateUserData} from '../interfaces/update-user-data';
-import {IAuthData} from '../interfaces/auth-data';
-import {IAuthResponse} from '../interfaces/auth-response';
 import {IGroupResponse} from '../interfaces/group-response';
 import {IRoleResponse} from '../interfaces/role-response';
 

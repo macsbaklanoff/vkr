@@ -62,21 +62,24 @@ export class AuthService {
       .pipe(
         map(authResponse => {
           this._accessToken.set(authResponse.accessToken);
-          this.router.navigate(['/main-page']).then(() =>{
+          this.router.navigate(['/main-page']).then(() => {
           });
         })
       );
   }
+
   public register(user: IRegisterRequest): Observable<void> {
     return this._httpClient.post<IAuthResponse>(`${this._apiPath}/sign-up`, JSON.stringify(user), {headers: this.headers})
       .pipe(
         map(authResponse => {
           this._accessToken.set(authResponse.accessToken);
-          this.router.navigate(['/main-page']).then(() =>{});
+          this.router.navigate(['/main-page']).then(() => {
+          });
         })
       )
   }
-  public updateUserData(newUserData: IUpdateUserData) : Observable<void> {
+
+  public updateUserData(newUserData: IUpdateUserData): Observable<void> {
     let headers1 = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
@@ -90,8 +93,9 @@ export class AuthService {
       );
   }
 
-  public signOut() : void {
+  public signOut(): void {
     this._accessToken.set('');
-    this.router.navigate(['auth','sign-in']).then(()=>{});
+    this.router.navigate(['auth', 'sign-in']).then(() => {
+    });
   }
 }
