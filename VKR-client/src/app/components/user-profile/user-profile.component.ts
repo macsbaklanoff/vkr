@@ -59,7 +59,7 @@ export class UserProfileComponent {
         this.estimationData = profile;
       },
     })
-    this._fileService.getFileEstimation(user_id).subscribe({
+    this._estimationService.getFileEstimation(user_id).subscribe({
       next: (data: IInfoFileEstimationResponse[]) => {
         this.fileEstimationData = data;
       }

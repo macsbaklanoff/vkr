@@ -28,8 +28,4 @@ export class FileService {
     formData.append('file', uploadFile.file);
     return this._httpClient.post<IInfoFileEstimationResponse>(`${this._apiPath}/upload-file`, formData, {headers: this._headers});
   }
-  public getFileEstimation(userId: number) : Observable<IInfoFileEstimationResponse[]> {
-    return this._httpClient.get<IInfoFileEstimationResponse[]>(`${this._apiPath}/get-info-file-estimation/${userId}`, {headers: this._headers});
-  }
-
 }

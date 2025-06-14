@@ -8,6 +8,7 @@
           <p class="profile__main__main-info-user__block__left__text">Email:</p>
           <p class="profile__main__main-info-user__block__left__text">Роль:</p>
           <p class="profile__main__main-info-user__block__left__text">Группа:</p>
+          <p class="profile__main__main-info-user__block__left__text">Дата рег.</p>
         </div>
         <div class="profile__main__main-info-user__block__right">
           <p
@@ -19,6 +20,7 @@
           } @else {
             <p class="profile__main__main-info-user__block__right__text">...</p>
           }
+          <p class="profile__main__main-info-user__block__right__text">{{ authData?.createdAt }}</p>
         </div>
       </div>
     </div>

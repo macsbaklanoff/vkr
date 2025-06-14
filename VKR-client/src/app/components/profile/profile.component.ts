@@ -100,7 +100,7 @@ export class ProfileComponent {
   }
 
   public load() : void {
-    this._fileService.getFileEstimation(this.authData!.userId).subscribe({
+    this._estimationService.getFileEstimation(this.authData!.userId).subscribe({
       next: (filesData: IInfoFileEstimationResponse[]) => {
         this.filesData = filesData;
         console.log(this.filesData);

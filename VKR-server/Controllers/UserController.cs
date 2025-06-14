@@ -74,6 +74,7 @@ namespace VKR_server.Controllers
                 CountWorks = user.Files.Count(),
                 RoleName = user.Role.RoleName,
                 GroupName = user.Group?.GroupName,
+                CreatedAt = user.CreationDate.ToString(),
             });
         }
         [HttpGet("roles", Name = "GetRoles")]

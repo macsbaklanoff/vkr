@@ -37,6 +37,30 @@ namespace VKR_server.Controllers
 
             return Ok(response);
         }
+
+        //метаданные файла и оценки
+        [HttpGet("get-info-file-estimation/{user_id}", Name = "GetInfoFileEstimation")]
+        [Authorize]
+        public async Task<IActionResult> GetInfoFileEstimation(int user_id)
+        {
+            var files = from f in _context.Files
+                        where f.UserId == user_id
+                        join e in _context.Estimations
+                        on f.EstimationId equals e.EstimationId
+                        select new
+                        {
+                            fileName = f.FileName,
+                            academicSubject = f.AcademicSubject,
+                            topicWork = f.TopicWork,
+                            estContent = e.EstContent,
+                            estRelevance = e.EstRelevance,
+                            estStylistic = e.EstStylistic,
+                            estRecommendations = e.EstRecommedations
+                        };
+
+            return Ok(files.ToList());
+        }
+
         [Authorize]
         [HttpGet("get-estimations-all-groups", Name = "GetEstimationsAllGroups")]
         public IActionResult GetEstimationsAllGroups()

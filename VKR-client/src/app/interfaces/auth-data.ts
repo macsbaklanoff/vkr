@@ -6,4 +6,5 @@ export interface IAuthData {
   lastName: string,
   roleName: string,
   groupName?: string,
+  createdAt: string,
 }

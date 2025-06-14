@@ -44,11 +44,12 @@ export class AuthService {
       lastName: this._accessTokenPayload().LastName,
       roleName: this._accessTokenPayload().RoleName,
       groupName: this._accessTokenPayload().GroupName ?? null,
+      createdAt: this._accessTokenPayload().CreatedAt,
     }
   })
 
   public authData = computed(() => {
-    // console.log(this._authData());
+    console.log(this._authData());
     return this._authData();
   })
 

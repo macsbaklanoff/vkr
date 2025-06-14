@@ -18,5 +18,6 @@ namespace VKR_server.Dto
         public string? GroupName { get; set; }
 
         public int CountWorks { get; set; }
+        public string? CreatedAt { get; set; }
     }
 }

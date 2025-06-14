@@ -224,6 +224,7 @@ namespace VKR_server.Controllers
 					new Claim("FirstName", $"{user.FirstName}"),
 					new Claim("LastName", $"{user.LastName}"),
 					new Claim("RoleName", userRole.RoleName),
+					new Claim("CreatedAt", $"{user.CreationDate.ToString()}"),
 				};
 			if (userGroup != null)
 			{

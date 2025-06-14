@@ -7,4 +7,5 @@ export interface IUserResponse {
   countWorks: string;
   groupName?: string;
   patronymic?: string;
+  createdAt: string;
 }
