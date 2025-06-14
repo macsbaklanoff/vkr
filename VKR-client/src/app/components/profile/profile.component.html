@@ -142,6 +142,7 @@
                      [ngStyle]="{'--color': getColor(file.estContent + file.estRelevance + file.estStylistic)}"
                 >
                   <div class="profile__info__files__item__left">
+                    <p class="profile__info__files__item__left__text">Имя файла: {{ file.fileName }}</p>
                     <p class="profile__info__files__item__left__text">Предмет: {{ file.academicSubject }}</p>
                     <p class="profile__info__files__item__left__text">Тема работы: {{ file.topicWork }}</p>
                     <p class="profile__info__files__item__left__text">Оценка содержания

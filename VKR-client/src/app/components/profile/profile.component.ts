@@ -93,7 +93,8 @@ export class ProfileComponent {
       this.searchTerm$.subscribe(term => {
         this.filesDataVisual = this.filesData.filter(file =>
           file.topicWork.toLowerCase().includes(term.toLowerCase()) ||
-          file.academicSubject.toLowerCase().includes(term.toLowerCase())
+          file.academicSubject.toLowerCase().includes(term.toLowerCase()) ||
+          file.fileName.toLowerCase().includes(term.toLowerCase())
         );
       })
     });

@@ -50,11 +50,15 @@
       <mat-icon>sentiment_dissatisfied</mat-icon>
       К сожалению, у пользователя отсутствуют учебные работы
     }
-    @for (file of fileEstimationData; track file) {
+    <mat-form-field subscriptSizing="dynamic" class="profile__info__search">
+      <input matInput placeholder="Поиск" [(ngModel)]="searchTerm">
+    </mat-form-field>
+    @for (file of fileEstimationDataVisual; track file) {
       <div class="profile__info__item"
            [ngStyle]="{'--color': getColor(file.estContent + file.estRelevance + file.estStylistic)}"
       >
         <div class="profile__info__item__left">
+          <p class="profile__info__item__left__text">Имя файла: {{ file.fileName }}</p>
           <p class="profile__info__item__left__text">Предмет: {{ file.academicSubject }}</p>
           <p class="profile__info__item__left__text">Тема работы: {{ file.topicWork }}</p>
           <p class="profile__info__item__left__text">Оценка содержания (0-50): {{ file.estContent }}</p>
