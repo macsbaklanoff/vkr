@@ -1,6 +1,4 @@
-﻿using VKR_server.Interfaces;
-
-namespace VKR_server.Dto
+﻿namespace VKR_server.Dto
 {
     public class UpdateUserDto
     {

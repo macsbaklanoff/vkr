@@ -1,8 +1,7 @@
-﻿using VKR_server.Interfaces;
-
+﻿
 namespace VKR_server.JWT
 {
-    public class JwtData : IJWTData
+    public class JwtData
     {
         public string Email { get; set; }
         public string FirstName { get; set; }
