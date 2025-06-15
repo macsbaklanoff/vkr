@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
+﻿
 namespace VKR_server.Dto
 {
     public class UserResponseDto

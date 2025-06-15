@@ -7,7 +7,6 @@ import {
   MatDialogRef,
   MatDialogTitle
 } from "@angular/material/dialog";
-import {UserService} from '../../../services/user.service';
 
 @Component({
   selector: 'app-delete-dialog',

@@ -1,5 +1,4 @@
-﻿using Org.BouncyCastle.Asn1.Mozilla;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VKR_server.DB.Entities
 {

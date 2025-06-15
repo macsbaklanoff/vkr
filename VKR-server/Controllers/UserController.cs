@@ -1,16 +1,8 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography.X509Certificates;
-using System.Text.RegularExpressions;
 using VKR_server.DB;
-using VKR_server.DB.Entities;
 using VKR_server.Dto;
 using VKR_server.JWT;
 
@@ -58,7 +50,7 @@ namespace VKR_server.Controllers
         {
             var jwt = GetJwtData(HttpContext.Request.Headers.Authorization.ToString().Split()[1]);
 
-            if (jwt.RoleName != "Admin") return BadRequest("Invalide role");
+            if (jwt.RoleName != "Admin") return BadRequest("Отсуствуют права");
 
             //Include явно загружает связанные данные
             var user = _context.Users.Include(u => u.Role).Include(u => u.Group).FirstOrDefault(u => u.Id == user_id);
@@ -83,7 +75,7 @@ namespace VKR_server.Controllers
         {
             var jwt = GetJwtData(HttpContext.Request.Headers.Authorization.ToString().Split()[1]);
 
-            if (jwt.RoleName != "Admin") return BadRequest("Invalide role");
+            if (jwt.RoleName != "Admin") return BadRequest("Отсуствуют права");
 
             var roles = _context.Roles.ToList();
             return Ok(roles);
@@ -95,7 +87,7 @@ namespace VKR_server.Controllers
         {
             var jwt = GetJwtData(HttpContext.Request.Headers.Authorization.ToString().Split()[1]);
 
-            if (jwt.RoleName != "Admin") return BadRequest("Invalide role");
+            if (jwt.RoleName != "Admin") return BadRequest("Отсуствуют права");
 
             //Select по умолчанию неявно подгружает связанные сущности
             var users = _context.Users.Where(u => u.RoleId == role_id).Select(s => new UserResponseDto
@@ -118,7 +110,7 @@ namespace VKR_server.Controllers
         {
             var jwt = GetJwtData(HttpContext.Request.Headers.Authorization.ToString().Split()[1]);
 
-            if (jwt.RoleName == "Student") return BadRequest("Invalide role");
+            if (jwt.RoleName == "Student") return BadRequest("Отсуствуют права");
 
             //var students = GetUserByRole("Student");
             var studentsInGroup = _context.Users.Where(s => s.GroupId == groupId);
@@ -142,7 +134,7 @@ namespace VKR_server.Controllers
         {
             var jwt = GetJwtData(HttpContext.Request.Headers.Authorization.ToString().Split()[1]);
 
-            if (jwt.RoleName == "Student") return BadRequest("Invalide role");
+            if (jwt.RoleName == "Student") return BadRequest("Отсуствуют права");
 
             var groups = _context.Groups.Where(g => g.Users.ToList().Count != 0).ToList();
 
@@ -155,7 +147,7 @@ namespace VKR_server.Controllers
         {
             var jwt = GetJwtData(HttpContext.Request.Headers.Authorization.ToString().Split()[1]);
             
-            if (jwt.RoleName != "Admin") return BadRequest("Invalide role");
+            if (jwt.RoleName != "Admin") return BadRequest("Отсуствуют права");
 
             var user = _context.Users.Find(id);
             if (user == null) return BadRequest("Пользователя не существует");

@@ -79,9 +79,7 @@ export class StudentsComponent {
     const dialogRef = this._matDialogRef.open(GetStatsComponent)
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result[1])
       if (!result[0]) return;
-      console.log(this.favoriteGroup())
       const dialogRefGr = this._matDialogRef.open(GraphicsComponent, {
         data: {
           group: result[1],
@@ -122,7 +120,6 @@ export class StudentsComponent {
     this._userService.getStudentsInGroup(this.favoriteGroup()?.groupId).subscribe({
       next: students => {
         this.students.set(students);
-        console.log(this.students());
       },
     })
   }

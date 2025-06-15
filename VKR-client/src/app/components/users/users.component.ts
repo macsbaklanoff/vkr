@@ -75,12 +75,6 @@ export class UsersComponent {
   public users: IUserResponse[]= [];
   public usersVisual: IUserResponse[] = [];
 
-  // public usersVisual = computed(() => {
-  //   return this.users().slice(0,5);
-  // })
-
-
-
   public groups = signal<IGroupResponse[]>([]);
   public favoriteGroup = signal<IGroupResponse | undefined>(undefined);
   public favoriteRole = signal<IRoleResponse | undefined>(undefined);
@@ -101,13 +95,11 @@ export class UsersComponent {
     this._userService.getGroups().subscribe({
       next: groups => {
         this.groups.set(groups)
-        // console.log(groups)
       },
     })
     this._userService.getRoles().subscribe({
       next: roles => {
         this.roles.set(roles)
-        // console.log(this.roles());
       }
     })
     effect(() => {
@@ -146,7 +138,6 @@ export class UsersComponent {
         next: users => {
           this.users = users;
           this.usersVisual = this.users.slice(0, 10);
-          // console.log(this.users());
         },
       })
     }
@@ -162,7 +153,6 @@ export class UsersComponent {
       next: users => {
         this.users = users;
         this.usersVisual = this.users.slice(0, 10);
-        console.log(this.users);
       },
     })
   }
@@ -171,7 +161,6 @@ export class UsersComponent {
       next: users => {
         this.users = users;
         this.usersVisual = this.users.slice(0, 10);
-        // console.log(this.users());
       },
     })
   }
@@ -214,7 +203,6 @@ export class UsersComponent {
   }
 
   public onPageChange($event: PageEvent) {
-    console.log($event);
     this.searchTerm.set('');
     let from = $event.previousPageIndex == undefined ? 0 : $event.previousPageIndex + 1;
     let to = $event.pageIndex + 1;
@@ -227,7 +215,6 @@ export class UsersComponent {
       from = 0;
       to = 1;
     }
-    console.log(from, to);
     this.usersVisual = this.users.slice(from * $event.pageSize, to * $event.pageSize);
   }
 }

@@ -1,11 +1,11 @@
-import {Component, effect, EventEmitter, inject, Output, signal} from '@angular/core';
+import {Component, inject, signal} from '@angular/core';
 import {MatButton} from '@angular/material/button';
 import {NgForOf, NgIf, NgStyle} from '@angular/common';
 import {FileService} from '../../services/file.service';
 import {IUploadFile} from '../../interfaces/upload-file';
 import {AuthService} from '../../services/auth.service';
 import {MatError, MatFormField, MatInput, MatLabel} from "@angular/material/input";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {IInfoFileEstimationResponse} from '../../interfaces/info-file-estimation-response';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {
@@ -14,21 +14,13 @@ import {
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {ResponseDialogComponent} from '../dialogs/response-dialog/response-dialog.component';
-import {DeleteAccountDialogComponent} from '../dialogs/delete-account-dialog/delete-account-dialog.component';
-
 @Component({
   selector: 'app-check-work',
   imports: [
     MatButton,
-    NgForOf,
-    NgIf,
     MatInput,
     ReactiveFormsModule,
     FormsModule,
-    MatError,
-    MatFormField,
-    MatLabel,
-    NgStyle,
     MatProgressSpinner,
     EstimationCheckWorkDoughnutComponent,
   ],
@@ -51,10 +43,7 @@ export class CheckWorkComponent {
 
   isDragOver = false;
 
-  private router = inject(Router);
-
   private readonly dialog = inject(MatDialog);
-
 
   onDragOver(event: DragEvent) {
     event.preventDefault(); //фикс открытия файла при его перетаскивании
@@ -91,13 +80,6 @@ export class CheckWorkComponent {
       }
       this.file = event.dataTransfer?.files[0];
     }
-  }
-
-  public getColor(estimation: number): string {
-    if (estimation >= 81) return '#45a85b';
-    else if (estimation >= 61 && estimation < 81) return '#dbd765';
-    else if (estimation >= 41 && estimation < 61) return '#EBA134';
-    return '#DB4242';
   }
 
   public onFileSelected(event: Event) {

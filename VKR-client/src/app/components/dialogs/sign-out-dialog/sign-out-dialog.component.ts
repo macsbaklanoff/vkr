@@ -3,7 +3,6 @@ import {
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
-  MatDialogRef,
   MatDialogTitle
 } from '@angular/material/dialog';
 import {MatButton} from '@angular/material/button';
@@ -23,8 +22,6 @@ import {AuthService} from '../../../services/auth.service';
   styleUrl: './sign-out-dialog.component.scss'
 })
 export class SignOutDialogComponent {
-  readonly dialogRef = inject(MatDialogRef<SignOutDialogComponent>);
-
   private readonly _authService = inject(AuthService);
 
   public signOut() {

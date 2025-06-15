@@ -26,7 +26,6 @@ export class EstimationCheckWorkDoughnutComponent {
 
   ngAfterViewInit() {
     this.remain = this.estimationFrom - this.result;
-    // console.log(this.result);
     this.doughnutChartMethod();
   }
 
@@ -50,15 +49,10 @@ export class EstimationCheckWorkDoughnutComponent {
             backgroundColor: [
               this.getColor(this.result / this.estimationFrom)[0],
               'rgba(200, 200, 200, 0.5)',
-              // 'rgba(153, 102, 255, 0.2)',
-              // 'rgba(255, 159, 64, 0.2)',
             ],
             borderColor: [
               this.getColor(this.result / this.estimationFrom)[1],
               'rgba(0, 0, 0, 0)',
-
-              // 'rgba(153, 102, 255, 1)',
-              // 'rgba(255, 159, 64, 1)',
             ],
             borderWidth: 2,
           },

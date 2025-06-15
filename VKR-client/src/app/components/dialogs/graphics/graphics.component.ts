@@ -1,5 +1,5 @@
 import {Component, ElementRef, inject, Inject, ViewChild} from '@angular/core';
-import Chart, {ChartTypeRegistry} from 'chart.js/auto';
+import Chart from 'chart.js/auto';
 import {MAT_DIALOG_DATA, MatDialogClose} from '@angular/material/dialog';
 import {EstimationService} from '../../../services/estimation.service';
 import {IGroupResponse} from '../../../interfaces/group-response';
@@ -58,16 +58,12 @@ export class GraphicsComponent {
               'rgba(219, 215, 101, 0.5)',
               'rgba(235, 161, 52, 0.5)',
               'rgba(219, 66, 66, 0.5)',
-              // 'rgba(153, 102, 255, 0.2)',
-              // 'rgba(255, 159, 64, 0.2)',
             ],
             borderColor: [
               'rgba(69, 168, 91, 1)',
               'rgba(219, 215, 101, 1)',
               'rgba(235, 161, 52, 1)',
               'rgba(219, 66, 66, 1)',
-              // 'rgba(153, 102, 255, 1)',
-              // 'rgba(255, 159, 64, 1)',
             ],
             borderWidth: 2,
           },

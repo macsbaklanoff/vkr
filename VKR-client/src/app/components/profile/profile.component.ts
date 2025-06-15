@@ -135,7 +135,6 @@ export class ProfileComponent {
 
   public updateUserData(): void {
     if (!this.isEditable) return;
-    console.log(this.lastName)
     let user: IUpdateUserData = {
       userId: this.authData?.userId ?? null,
       firstName: this.firstName ?? null,

@@ -27,13 +27,13 @@ import {FormsModule} from '@angular/forms';
 })
 export class GetStatsComponent {
   private readonly _dialogRef = inject(MatDialogRef<GetStatsComponent>);
-  public test:[boolean, string] = [false, 'one']
+  public result:[boolean, string] = [false, 'one']
   stats() {
-    this.test[0] = true;
-    this._dialogRef.close(this.test);
+    this.result[0] = true;
+    this._dialogRef.close(this.result);
   }
   cancel() {
-    this.test[0] = false;
-    this._dialogRef.close(this.test);
+    this.result[0] = false;
+    this._dialogRef.close(this.result);
   }
 }

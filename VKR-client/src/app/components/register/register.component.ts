@@ -61,7 +61,6 @@ export class RegisterComponent {
   }
 
   public register() {
-    console.log(this.registerForm.value);
     this._authService.register(this.registerForm.value).subscribe({
       error: err => {alert(err.error.detail)}
     })

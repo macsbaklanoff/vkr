@@ -38,7 +38,7 @@ namespace VKR_server.Controllers
 			
 			if (claimsIdentity == null)
 			{
-				return BadRequest("User dont exists");
+				return BadRequest("Пользователя не существует");
 			}
 
 			var jwt = GetToken(claimsIdentity);
@@ -60,7 +60,7 @@ namespace VKR_server.Controllers
 			var user = _context.Users.FirstOrDefault(u => u.Email == userDto.Email);
 			if (user != null)
 			{
-				return BadRequest("User with this email exist");
+				return BadRequest("Пользователь с таким email уже существует");
 			}
 
 			User new_user = new User();
@@ -120,7 +120,7 @@ namespace VKR_server.Controllers
 			var user = _context.Users.FirstOrDefault(u => u.Id == updateUser.UserId);
 			if (user == null)
 			{
-				return BadRequest("User doesnt exists");
+				return BadRequest("Пользователя не существует");
 			}
 			if (user.Email != updateUser.Email) //условия на обновления email
 			{

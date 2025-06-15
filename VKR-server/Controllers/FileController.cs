@@ -1,14 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
 using VKR_server.DB;
 using VKR_server.Dto;
-using VKR_server.JWT;
 using Microsoft.SemanticKernel;
-using Microsoft.Extensions.AI;
-using Together.Models.ChatCompletions;
-using Together;
 using Together.SemanticKernel.Extensions;
 using System.Text;
 using UglyToad.PdfPig;
@@ -44,10 +38,6 @@ namespace VKR_server.Controllers
         public async Task<IActionResult> UploadFile([FromForm] UploadFileDto uploadFile)
         {
 
-            Console.WriteLine(uploadFile.File.FileName);
-            Console.WriteLine(uploadFile.UserId);
-            Console.WriteLine(uploadFile.TopicWork);
-            Console.WriteLine(uploadFile.AcademicSubject);
             try
             {
                 var textContent = ReadPdfFile(uploadFile.File);
@@ -99,10 +89,6 @@ namespace VKR_server.Controllers
                 };
                 _context.Add(new_file);
                 _context.SaveChanges();
-                Console.WriteLine($"{chatResult}");
-                Console.WriteLine($"Оценка стилистики: {estContent}");
-                Console.WriteLine($"Оценка содержания: {estRelevance}");
-                Console.WriteLine($"Оценка акутальности: {estStylistic}");
 
                 Console.WriteLine(_context.Files.ToArray()[0].FileName);
                 return Ok(new
@@ -124,7 +110,7 @@ namespace VKR_server.Controllers
         private async Task<string> ReadPdfFile(IFormFile file)
         {
             using var memoryStream = new MemoryStream();
-            await file.CopyToAsync(memoryStream); //возможно memory плохая штука
+            await file.CopyToAsync(memoryStream);
             memoryStream.Position = 0;
 
             var pdfText = new StringBuilder();
