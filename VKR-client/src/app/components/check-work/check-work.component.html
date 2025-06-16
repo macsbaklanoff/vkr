@@ -27,7 +27,7 @@
            (dragleave)="onDragLeave($event)"
            [class.drag-over]="isDragOver">
         @if (file == undefined) {
-          <p>Перетащите работу сюда (только pdf)</p>
+          <p>Перетащите работу сюда (только pdf, до 10МБ)</p>
         } @else {
           <div class="check-work__content__form__file">
             <div class="check-work__content__form__file__upper">
