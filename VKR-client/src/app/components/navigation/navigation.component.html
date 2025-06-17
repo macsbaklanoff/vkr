@@ -63,15 +63,22 @@
           @if (authData?.roleName == "Admin") {
             <a mat-list-item routerLink="/users">
             <span class="nav-list-phone__item">
-              <mat-icon class="nav-list-phone__item__icon">person</mat-icon>
+              <mat-icon class="nav-list-phone__item__icon">group</mat-icon>
             </span>
             </a>
           }
           @if (authData?.roleName == "Teacher") {
             <a mat-list-item routerLink="/students">
             <span class="nav-list-phone__item">
-              <mat-icon class="nav-list-phone__item__icon">person</mat-icon>
+              <mat-icon class="nav-list-phone__item__icon">school</mat-icon>
             </span>
+            </a>
+          }
+          @if (authData?.roleName == 'Student') {
+            <a mat-list-item routerLink="/check-work">
+              <span class="nav-list-phone__item">
+                <mat-icon>library_books</mat-icon>
+              </span>
             </a>
           }
           <a mat-list-item (click)="openDialog('0ms', '0ms')">
@@ -99,7 +106,7 @@
             <a mat-list-item routerLink="/check-work">
         <span class="nav-list-tablet__item">
           <mat-icon>library_books</mat-icon>
-          <span class="nav-list-tablet__item__text">Проверить работу</span>
+          <span class="nav-list-tablet__item__text">Проверка</span>
         </span>
             </a>
           }
