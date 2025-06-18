@@ -60,7 +60,7 @@ namespace VKR_server.Controllers
 			var user = _context.Users.FirstOrDefault(u => u.Email == userDto.Email);
 			if (user != null)
 			{
-				return BadRequest("User with this email exist");
+				return BadRequest("Пользователь с таким email уже существует!");
 			}
 
 			User new_user = new User();
@@ -224,7 +224,7 @@ namespace VKR_server.Controllers
 					new Claim("FirstName", $"{user.FirstName}"),
 					new Claim("LastName", $"{user.LastName}"),
 					new Claim("RoleName", userRole.RoleName),
-					new Claim("CreatedAt", $"{user.CreationDate.ToString()}"),
+					new Claim("CreatedAt", $"{user.CreationDate.ToLocalTime().ToString()}")
 				};
 			if (userGroup != null)
 			{

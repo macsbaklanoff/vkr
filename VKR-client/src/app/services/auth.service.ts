@@ -68,6 +68,7 @@ export class AuthService {
       );
   }
   public register(user: IRegisterRequest): Observable<void> {
+    console.log(user)
     return this._httpClient.post<IAuthResponse>(`${this._apiPath}/sign-up`, JSON.stringify(user), {headers: this.headers})
       .pipe(
         map(authResponse => {
