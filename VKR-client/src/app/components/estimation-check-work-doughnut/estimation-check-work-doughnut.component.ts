@@ -16,7 +16,7 @@ import Chart from 'chart.js/auto';
 })
 export class EstimationCheckWorkDoughnutComponent {
   @Input() name: string = '';
-  @Input() result: number = 0;
+  @Input() result: number  = 0;
   @Input() estimationFrom: number = 0;
   @ViewChild('doughnutCanvas') doughnutCanvas: ElementRef | undefined;
   private remain: number = 0;

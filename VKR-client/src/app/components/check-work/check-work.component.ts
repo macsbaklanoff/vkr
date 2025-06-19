@@ -88,6 +88,7 @@ export class CheckWorkComponent {
             success: false,
             message: 'Загрузите файл размером меньше 10МБ.'
           }})
+        return
       }
       this.file = event.dataTransfer?.files[0];
     }
@@ -102,6 +103,26 @@ export class CheckWorkComponent {
 
   public onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
+    if (!input.files || input.files.length === 0) {
+      return;
+    }
+    this.file = input.files[0];
+    if (this.file.type != 'application/pdf') {
+      const dialogRef = this.dialog.open(ResponseDialogComponent, {data: {
+          name: 'Не правильный тип файла',
+          success: false,
+          message: 'Разрешена загрузка только PDF.'
+        }})
+      return
+    }
+    if (this.file.size > 10000000) {
+      const dialogRef = this.dialog.open(ResponseDialogComponent, {data: {
+          name: 'Большой размер файла',
+          success: false,
+          message: 'Загрузите файл размером меньше 10МБ.'
+        }})
+      return
+    }
     if (input.files && input.files.length > 0) {
       this.file = input.files[0];
     }
@@ -134,6 +155,10 @@ export class CheckWorkComponent {
     this._fileService.uploadFile(dataFile).subscribe({
       next: (result) => {
         this.resultEstimation = result;
+        this.inProgressChecking.set(false);
+        this.topicWork = ''
+        this.academicSubject = ''
+        this.file = undefined;
       },
       error: (err) => {
         const dialogRef = this.dialog.open(ResponseDialogComponent, {data: {
