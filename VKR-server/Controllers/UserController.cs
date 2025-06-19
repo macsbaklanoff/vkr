@@ -176,10 +176,18 @@ namespace VKR_server.Controllers
             if (user == null) return BadRequest("Пользователя не существует");
 
             var files = _context.Files.Where(f => f.UserId == user_id);
+            var estimations = from file in files
+                              join estimation in _context.Estimations on file.EstimationId equals estimation.EstimationId
+                              where file.EstimationId == estimation.EstimationId
+                              select estimation;
             _context.Users.Remove(user);
             foreach (var file in files)
             {
                 _context.Files.Remove(file);
+            }
+            foreach (var estimation in estimations)
+            {
+                _context.Estimations.Remove(estimation);
             }
             _context.SaveChanges();
             
